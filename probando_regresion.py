@@ -3,6 +3,15 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
+import sqlite3
+
+conn = sqlite3.connect('database.db')
+cursor = conn.cursor()
+
+cursor.execute("SELECT * FROM clashes WHERE clashes.style = 'mgr' AND clashes.category = '60Kg'")
+clashes = cursor.fetchall()
+
+print(clashes)
 
 data = pd.DataFrame({
     'x': [2,3,4,5,6,7,8,9,10,11],
