@@ -104,5 +104,18 @@ def Get_Clashes_From_Web():
                             'https://uww.org/athletes-results/valizadeh-jamal-185324-profile']
     return my_pyscraper.GetAthletesClashes(athetes_results_urls)
 
+def GetPointsByWin(status):
+    points_by_win = {(5, 0): ['VFA', 'VIN', 'VCA', 'VFO', 'DSQ'],  #referencia a https://www.felucha.com/wp-content/uploads/2023/02/2023_FELODA-Reglamento-Luchas-Olimpicas_cambios-en-color.pdf
+                     (4, 0): ['VSU'],
+                     (4, 1): ['VSU1'],
+                     (3, 0): ['VPO'],
+                     (3, 1): ['VPO1']}
+    
+    status_ = status.replace('by ', '')
+    for key, value in points_by_win.items():
+        if status_ in value:
+            return key[0], key[1]
+    raise Exception('no se encontró el status de victoria ')
+
 #athetes_results_urls = ['https://uww.org/athletes-results/sharshenbekov-zholaman-20714-profile']
 #my_pyscraper.GetAthletesClashes(athetes_results_urls)
