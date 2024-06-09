@@ -2,6 +2,8 @@ import sqlite3
 import pandas as pd
 import data
 import Levenshtein
+import temporales
+import temporales._77kg_temporal
 
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
@@ -31,7 +33,7 @@ cursor = conn.cursor()
 #''')
 #conn.commit()
 
-data_ = data.Get_Clashes_From_Web()
+data_ = temporales._77kg_temporal.GetData()
 for clash in data_:     #clash(style, category, atl1_name, atl2_name, (atl1_points, atl2_points), atl1_name, winning_form, date)
     
     clashes = []

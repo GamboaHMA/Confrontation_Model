@@ -117,7 +117,7 @@ def GetMatrixVersusPlayers(clashes, n):
     dicc_2a2_clashes = {}
 
     min_max = GetMinMaxSMax(clashes)
-    min_date = min_max[0]
+    min_date = date(2010, 1, 1)
     max_date = min_max[1]
     
     for clash in clashes:

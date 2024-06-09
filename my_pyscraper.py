@@ -23,7 +23,8 @@ def GetAthletesClashes(urls):
         wait.until(EC.visibility_of_element_located((By.XPATH, ".//p[contains(@class, 'card-meta-value')]")))
         personal_data = driver.find_elements(By.XPATH, ".//p[contains(@class, 'card-meta-value')]")
         age = personal_data[1].text
-        style = personal_data[3].text
+        #style = personal_data[3].text
+        style = 'gr'
 
 
         wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "tab-anchor")))
@@ -44,20 +45,23 @@ def GetAthletesClashes(urls):
         for tab in tabs_cont_content:
             event_data = tab.find_elements(By.XPATH, ".//span[@class='meta']")
             date = event_data[1].text
-
+            
+            if date == 'Nov 2016':
+                continue
             buttons = tab.find_elements(By.XPATH, ".//button[@class='btn-link']")
 
             for button in buttons:
 
                 driver.execute_script("arguments[0].scrollIntoView();", button)
                 time.sleep(0.5)
-                driver.execute_script("window.scrollBy(0, -100);")
+                driver.execute_script("window.scrollBy(0, -150);")
                 time.sleep(0.5)
 
                 button.click()
 
                 panel = wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='waf-accordion-panel']")))
-                category = panel.find_element(By.XPATH, ".//div[contains(@class, 'content-item')]//div[contains(@class, 'content-wrapper')]//div[contains(@class, 'card-meta')]//span[contains(@class, 'meta')]").text
+                #category = panel.find_element(By.XPATH, ".//div[contains(@class, 'content-item')]//div[contains(@class, 'content-wrapper')]//div[contains(@class, 'card-meta')]//span[contains(@class, 'meta')]").text
+                category = '77 Kg'
                 contents_items = panel.find_elements(By.XPATH, ".//div[contains(@class, 'content-item')]")
                 cards_info = panel.find_elements(By.CLASS_NAME, value='card-label')
                 cards_number =  panel.find_elements(By.CLASS_NAME, value='card-number')

@@ -2,6 +2,7 @@ import pandas as pd
 import sqlite3
 import names_countries
 import my_pyscraper
+import temporales.athletes_urls
 
 class obj():   #este objeto se utilizara para explotar la sintaxix de python, ejemplo obj_.name = ""
     pass
@@ -112,13 +113,13 @@ def Get_Wrestling_Athletes():
     return result
 
 def Get_Clashes_From_Web():
-    athetes_results_urls = []
+    athetes_results_urls = temporales.athletes_urls.GetData()
     return my_pyscraper.GetAthletesClashes(athetes_results_urls)
 
 def GetPointsByWin(status):
-    points_by_win = {(5, 0): ['VFA', 'VIN', 'VCA', 'VFO', 'DSQ'],  #referencia a https://www.felucha.com/wp-content/uploads/2023/02/2023_FELODA-Reglamento-Luchas-Olimpicas_cambios-en-color.pdf
-                     (4, 0): ['VSU'],
-                     (4, 1): ['VSU1'],
+    points_by_win = {(7, 0): ['VFA', 'VIN', 'VCA', 'VFO', 'DSQ'],  #referencia a https://www.felucha.com/wp-content/uploads/2023/02/2023_FELODA-Reglamento-Luchas-Olimpicas_cambios-en-color.pdf
+                     (6, 0): ['VSU'],
+                     (6, 1): ['VSU1'],
                      (3, 0): ['VPO'],
                      (3, 1): ['VPO1']}
     
