@@ -6,6 +6,30 @@ import my_pyscraper
 class obj():   #este objeto se utilizara para explotar la sintaxix de python, ejemplo obj_.name = ""
     pass
 
+class Style:
+    def __init__(self, style):
+        if style == 'mfs':
+            self._57Kg = []
+            self._65Kg = []
+            self._74Kg = []
+            self._86Kg = []
+            self._97Kg = []
+            self._125Kg = []
+        elif style == 'mgr':
+            self._60Kg = []
+            self._67Kg = []
+            self._77Kg = []
+            self._87Kg = []
+            self._97Kg = []
+            self._130Kg = []
+        elif style == 'wfs':
+            self._50Kg = []
+            self._53Kg = []
+            self._57Kg = []
+            self._62Kg = []
+            self._68Kg = []
+            self._76Kg = []
+
 class Player:
     def __init__(self, name, country, style, category, age=0):
         self.name = name
@@ -88,20 +112,7 @@ def Get_Wrestling_Athletes():
     return result
 
 def Get_Clashes_From_Web():
-    athetes_results_urls = ['https://uww.org/athletes-results/cao-liguo-4364-profile',
-                            'https://uww.org/athletes-results/bakhramov-islomjon-2624-profile',
-                            'https://uww.org/athletes-results/mohsen-nejad-mehdi-seifollah-143101-profile',
-                            'https://uww.org/athletes-results/rodriguez-orozco-raiber-jose-151411-profile',
-                            'https://uww.org/athletes-results/de-armas-kevin-5515-profile',
-                            'https://uww.org/athletes-results/fergat-abdelkarim-7056-profile',
-                            'https://uww.org/athletes-results/mahmoud-haythem-mahmoud-ahmed-fahmy-13978-profile',
-                            'https://uww.org/athletes-results/ciobanu-victor-4988-profile',
-                            'https://uww.org/athletes-results/basar-enes-2892-profile',
-                            'https://uww.org/athletes-results/aidos-sultangali-26264-profile',
-                            'https://uww.org/athletes-results/lalaev-sadyk-161871-profile',
-                            'https://uww.org/athletes-results/mammadov-murad-14250-profile',
-                            'https://uww.org/athletes-results/tibilov-georgij-22706-profile',
-                            'https://uww.org/athletes-results/valizadeh-jamal-185324-profile']
+    athetes_results_urls = []
     return my_pyscraper.GetAthletesClashes(athetes_results_urls)
 
 def GetPointsByWin(status):

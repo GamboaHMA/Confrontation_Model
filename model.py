@@ -15,7 +15,7 @@ def Results():
 
     athletes = cursor.execute('SELECT * FROM athletes')
     random.shuffle(athletes)
-    regresion_func = GetRegresionFunction(cursor)
+    regresion_func = GetRegresionFunction()
     enfrentamientos = []
 
     athletes_2a2 = Get_2a2(athletes)

@@ -6,10 +6,10 @@ import Levenshtein
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
 
-#query = ('''UPDATE mgr_60kg
+#query = ('''UPDATE mgr_67kg
 #               SET name =?
 #               WHERE id=?''')
-#cursor.execute(query, ('Haythem Mahmoud Ahmed Fahmy MAHMOUD', 9))
+#cursor.execute(query, ('Mohamed Ibrahim Elsayed Ibrahi ELSAYED', 16))
 #conn.commit()
 
 #cursor.execute('''DROP TABLE IF EXISTS clashes''')
@@ -67,6 +67,7 @@ for clash in data_:     #clash(style, category, atl1_name, atl2_name, (atl1_poin
             atl1_id = int(id)
         if (Levenshtein.distance(name.lower(), atl2_name.lower()) <= 4):
             atl2_id = int(id)
+
 
     if (atl1_id == 0 or atl2_id == 0):
         continue

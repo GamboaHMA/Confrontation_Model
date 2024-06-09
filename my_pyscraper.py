@@ -23,7 +23,6 @@ def GetAthletesClashes(urls):
         wait.until(EC.visibility_of_element_located((By.XPATH, ".//p[contains(@class, 'card-meta-value')]")))
         personal_data = driver.find_elements(By.XPATH, ".//p[contains(@class, 'card-meta-value')]")
         age = personal_data[1].text
-        category = personal_data[2].text
         style = personal_data[3].text
 
 
@@ -52,12 +51,13 @@ def GetAthletesClashes(urls):
 
                 driver.execute_script("arguments[0].scrollIntoView();", button)
                 time.sleep(0.5)
-                driver.execute_script("window.scrollBy(0, -150);")
+                driver.execute_script("window.scrollBy(0, -100);")
                 time.sleep(0.5)
 
                 button.click()
 
                 panel = wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='waf-accordion-panel']")))
+                category = panel.find_element(By.XPATH, ".//div[contains(@class, 'content-item')]//div[contains(@class, 'content-wrapper')]//div[contains(@class, 'card-meta')]//span[contains(@class, 'meta')]").text
                 contents_items = panel.find_elements(By.XPATH, ".//div[contains(@class, 'content-item')]")
                 cards_info = panel.find_elements(By.CLASS_NAME, value='card-label')
                 cards_number =  panel.find_elements(By.CLASS_NAME, value='card-number')
@@ -72,7 +72,7 @@ def GetAthletesClashes(urls):
                     clash = (style, category, atl_1_name, atl_2_name, (atl_1_points, atl_2_points), atl_1_name, winning_form, date)
                     clashes.append(clash)
 
-                    print(clash)
+                    print(f'{clash},')
 
 
 
