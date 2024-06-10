@@ -4,14 +4,57 @@ import data
 import Levenshtein
 import temporales
 import temporales._77kg_temporal
+import model
 
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
+#query = "SELECT * FROM clashes WHERE clashes.category = '60Kg'"
+#cursor.execute(query)
+#clashes_60kg = cursor.fetchall()
+#for clash_60kg in clashes_60kg:
+#    query = f'INSERT OR IGNORE INTO clashes_mgr_60kg(style, category, athlete1_id, athlete2_id, result, state, winner_id, date) VALUES(?,?,?,?,?,?,?,?)'
+#    style,category,athlete1_id,athlete2_id,result,state,winner_id,date = clash_60kg[1],clash_60kg[2],clash_60kg[3],clash_60kg[4],clash_60kg[5],clash_60kg[6],clash_60kg[7],clash_60kg[8]
+#    cursor.execute(query, (style, category, athlete1_id, athlete2_id, result, state, winner_id, date))
+#conn.commit()
+#cursor.execute('''CREATE TABLE IF NOT EXISTS clashes_mgr_60kg(
+#               id INTEGER PRIMARY KEY AUTOINCREMENT,
+#               style TEXT,
+#               category TEXT,
+#               athlete1_id INTEGER NOT NULL,
+#               athlete2_id INTEGER NOT NULL,
+#               result TEXT,
+#               state TEXT,
+#               winner_id INTEGER NOT NULL,
+#               date TEXT NOT NULL,
+#               FOREIGN KEY (athlete1_id) REFERENCES athletes(athlete1_id),
+#               FOREIGN KEY (athlete2_id) REFERENCES athletes(athlete2_id),
+#               FOREIGN KEY (winner_id) REFERENCES athletes(winner_id)
+#)
+#''')
+#conn.commit()
 
-#query = ('''UPDATE mgr_67kg
+arr = [(1, 'Zholaman Sharshenbekov ', 'KGZ', 0, 'mgr', '60kg', 1),
+    (2, 'Kenichiro Fumita ', 'JPN', 0, 'mgr', '60kg', 4),
+    (3, 'Cao Liguo ', 'CHN', 0, 'mgr', '60kg', 2),
+    (4, 'Islomjon Bakhromov ', 'UZB', 0, 'mgr', '60kg',8),
+    (5, 'Mehdi Seifollah MOHSEN NEJAD', 'IRI', 0, 'mgr', '60kg', 7),
+    (6, 'Raiber Jose Rodriguez Orozco', 'VEN', 0, 'mgr', '60kg', 14),
+    (7, 'Kevin de Armas ', 'CUB', 0, 'mgr', '60kg', 47),
+    (8, 'Abdelkarim Fergat ', 'ALG', 0, 'mgr', '60kg', 30),
+    (9, 'Ahmed RABIE', 'EGY', 0, 'mgr', '60kg', 38),
+    (10, 'Victor Ciobanu ', 'MDA', 0, 'mgr', '60kg', 3),
+    (11, 'Enes Başar ', 'TUR', 0, 'mgr', '60kg', 3.5),
+    (12, 'Aidos Sultangali ', 'KAZ', 0, 'mgr', '60kg', 66),
+    (13, 'Ri Se-ung ', 'PRK', 0, 'mgr', '60kg', 41),
+    (14, 'Sadyk Lalaev ', 'AIN', 0, 'mgr', '60kg', 11),
+    (15, 'Murad Mammadov ', 'AZE', 0, 'mgr', '60kg', 1.5),
+    (16, 'Georgii Tibilov ', 'SRB', 0, 'mgr', '60kg', 25),
+    (17, 'Jamal Valizadeh', 'EOR', 0, 'mgr', '60kg', 28)]
+result = model.Results(arr)
+#query = ('''UPDATE mgr_60kg
 #               SET name =?
 #               WHERE id=?''')
-#cursor.execute(query, ('Mohamed Ibrahim Elsayed Ibrahi ELSAYED', 16))
+#cursor.execute(query, ('Ahmed RABIE', 9))
 #conn.commit()
 
 #cursor.execute('''DROP TABLE IF EXISTS clashes''')
@@ -33,7 +76,8 @@ cursor = conn.cursor()
 #''')
 #conn.commit()
 
-data_ = temporales._77kg_temporal.GetData()
+#data_ = temporales._77kg_temporal.GetData()
+data_ = data.Get_Clashes_From_Web()
 for clash in data_:     #clash(style, category, atl1_name, atl2_name, (atl1_points, atl2_points), atl1_name, winning_form, date)
     
     clashes = []

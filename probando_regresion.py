@@ -122,10 +122,10 @@ def GetMatrixVersusPlayers(clashes, n):
     
     for clash in clashes:
 
-        clash_date = GetDateMonthYear(clash[8])
-        if clash_date == max_date:
-            last_clash = clash
-            continue
+        #clash_date = GetDateMonthYear(clash[8])     #implementar luego ultimo combate
+        #if clash_date == max_date:
+        #    last_clash = clash
+        #    continue
 
         a1_id = clash[3]
         a2_id = clash[4]
@@ -156,16 +156,16 @@ def GetMatrixVersusPlayers(clashes, n):
 
             a1_vict = 0
             a2_vict = 0
-            a1_regist = 0    #puntos acumulados con restpecto al otro atleta
+            a1_regist = 0    #puntos acumulados con respecto al otro atleta
             a2_regist = 0
             last_clash = Object()        #aqui vamos a guardar el outcome de cada par de atletas
 
             for clash_2a2 in clashes_2a2:
 
                 clash_date = GetDateMonthYear(clash_2a2[8])
-                if clash_date == data_max:
-                    last_clash = clash_2a2
-                    continue
+                #if clash_date == data_max:
+                #    last_clash = clash_2a2
+                #    continue
 
                 today = date.today()
                 index_ =  ((clash_date.year - min_date.year)*12 + clash_date.month - min_date.month) / ((today.year - min_date.year)*12 + today.month - min_date.month)
@@ -182,11 +182,11 @@ def GetMatrixVersusPlayers(clashes, n):
 
             matrix[i-1][j-1].append(a1_vict)
             matrix[i-1][j-1].append(a1_regist)
-            matrix[i-1][j-1].append(1 if(last_clash[7] == i) else 0)    
+            #matrix[i-1][j-1].append(1 if(last_clash[7] == i) else 0)    
             
             matrix[j-1][i-1].append(a2_vict)      
             matrix[j-1][i-1].append(a2_regist)
-            matrix[j-1][i-1].append(1 if(last_clash[7] == j) else 0)    
+            #matrix[j-1][i-1].append(1 if(last_clash[7] == j) else 0)    
     
     return matrix  
 
@@ -228,5 +228,3 @@ def Pertenece(clash, clashes):
             and clash[5] == clash_[5] and clash[6] == clash_[6] and clash[7] == clash_[7] and clash[8] == clash_[8]):
             return True
     return False
-
-PorDefinir()
