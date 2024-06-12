@@ -5,6 +5,7 @@ import Levenshtein
 import temporales
 import temporales._77kg_temporal
 import model
+import temporales.t_mgr_60kg
 
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
@@ -16,7 +17,7 @@ cursor = conn.cursor()
 #    style,category,athlete1_id,athlete2_id,result,state,winner_id,date = clash_60kg[1],clash_60kg[2],clash_60kg[3],clash_60kg[4],clash_60kg[5],clash_60kg[6],clash_60kg[7],clash_60kg[8]
 #    cursor.execute(query, (style, category, athlete1_id, athlete2_id, result, state, winner_id, date))
 #conn.commit()
-#cursor.execute('''CREATE TABLE IF NOT EXISTS clashes_mgr_60kg(
+#cursor.execute('''CREATE TABLE IF NOT EXISTS t_clashes_mgr_60kg(
 #               id INTEGER PRIMARY KEY AUTOINCREMENT,
 #               style TEXT,
 #               category TEXT,
@@ -33,24 +34,19 @@ cursor = conn.cursor()
 #''')
 #conn.commit()
 
-arr = [(1, 'Zholaman Sharshenbekov ', 'KGZ', 0, 'mgr', '60kg', 1),
-    (2, 'Kenichiro Fumita ', 'JPN', 0, 'mgr', '60kg', 4),
-    (3, 'Cao Liguo ', 'CHN', 0, 'mgr', '60kg', 2),
-    (4, 'Islomjon Bakhromov ', 'UZB', 0, 'mgr', '60kg',8),
-    (5, 'Mehdi Seifollah MOHSEN NEJAD', 'IRI', 0, 'mgr', '60kg', 7),
-    (6, 'Raiber Jose Rodriguez Orozco', 'VEN', 0, 'mgr', '60kg', 14),
-    (7, 'Kevin de Armas ', 'CUB', 0, 'mgr', '60kg', 47),
-    (8, 'Abdelkarim Fergat ', 'ALG', 0, 'mgr', '60kg', 30),
-    (9, 'Ahmed RABIE', 'EGY', 0, 'mgr', '60kg', 38),
-    (10, 'Victor Ciobanu ', 'MDA', 0, 'mgr', '60kg', 3),
-    (11, 'Enes Başar ', 'TUR', 0, 'mgr', '60kg', 3.5),
-    (12, 'Aidos Sultangali ', 'KAZ', 0, 'mgr', '60kg', 66),
-    (13, 'Ri Se-ung ', 'PRK', 0, 'mgr', '60kg', 41),
-    (14, 'Sadyk Lalaev ', 'AIN', 0, 'mgr', '60kg', 11),
-    (15, 'Murad Mammadov ', 'AZE', 0, 'mgr', '60kg', 1.5),
-    (16, 'Georgii Tibilov ', 'SRB', 0, 'mgr', '60kg', 25),
-    (17, 'Jamal Valizadeh', 'EOR', 0, 'mgr', '60kg', 28)]
+#cursor.execute("ALTER TABLE t_mgr_60kg ADD COLUMN ranking TEXT")
+#rank = str(2)
+#query = f'UPDATE t_mgr_60kg SET ranking = {rank} WHERE id = 7'
+#cursor.execute(query)
+#query = "INSERT OR IGNORE INTO t_mgr_60kg(name, country, age, style, category) VALUES(?,?,?,?,?)"
+#cursor.execute("DELETE FROM t_mgr_60kg WHERE id = 17 OR id = 18")
+#cursor.execute(query, ('Armen MELIKYAN', 'ARM', 25, 'mgr', '60kg'))
+#conn.commit()
+
+cursor.execute("SELECT * FROM t_mgr_60kg")
+arr = cursor.fetchall()
 result = model.Results(arr)
+print(result)
 #query = ('''UPDATE mgr_60kg
 #               SET name =?
 #               WHERE id=?''')
@@ -76,8 +72,8 @@ result = model.Results(arr)
 #''')
 #conn.commit()
 
-#data_ = temporales._77kg_temporal.GetData()
-data_ = data.Get_Clashes_From_Web()
+data_ = temporales.t_mgr_60kg.GetData()
+#data_ = data.Get_Clashes_From_Web()
 for clash in data_:     #clash(style, category, atl1_name, atl2_name, (atl1_points, atl2_points), atl1_name, winning_form, date)
     
     clashes = []
@@ -89,7 +85,7 @@ for clash in data_:     #clash(style, category, atl1_name, atl2_name, (atl1_poin
     state = clash[6]
     date = clash[7]
 
-    category = category.replace(" ","")
+    category = category.replace(" ","").lower()
     
     if (style == 'gr'):
         style = 'mgr'
@@ -99,7 +95,7 @@ for clash in data_:     #clash(style, category, atl1_name, atl2_name, (atl1_poin
         style = 'wfs'
     
 
-    table = style + '_' + category
+    table = "t_" + style + '_' + category
     query = f'''SELECT id, name FROM {table}'''
     cursor.execute(query)
     names_ids = cursor.fetchall()
@@ -118,7 +114,7 @@ for clash in data_:     #clash(style, category, atl1_name, atl2_name, (atl1_poin
     if (atl1_id == 0 or atl2_id == 0):
         continue
 
-    query_insert_clash = f'''INSERT OR IGNORE INTO clashes(style, category, athlete1_id, athlete2_id, result, state, winner_id, date) VALUES(?,?,?,?,?,?,?,?)'''
+    query_insert_clash = f'''INSERT OR IGNORE INTO t_clashes_mgr_60kg(style, category, athlete1_id, athlete2_id, result, state, winner_id, date) VALUES(?,?,?,?,?,?,?,?)'''
     cursor.execute(query_insert_clash, (style, category, atl1_id, atl2_id, clash_result, state, atl1_id, date))
 
 
@@ -170,6 +166,18 @@ for clash in data_:     #clash(style, category, atl1_name, atl2_name, (atl1_poin
 #
 #        cursor.execute(query_insert_athlete, (name, country, style, category))
 #        cursor.execute(query_insert_athlet_in_athletes, (name, country, style, category))
+
+#table = 't_mgr_60kg'
+#query_create_table = f'''CREATE TABLE IF NOT EXISTS {table}(
+#    id INTEGER PRIMARY KEY AUTOINCREMENT,
+#    name TEXT NOT NULL,
+#    country TEXT NOT NULL,
+#    age INTEGER DEFAULT 0,
+#    style TEXT,
+#    category TEXT
+#    )'''
+#cursor.execute(query_create_table)
+#conn.commit()
 
 
 def GetAthletes(cursor):

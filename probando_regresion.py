@@ -7,7 +7,6 @@ import sqlite3
 import data
 from datetime import datetime
 from datetime import date
-from data import Style
 import statsmodels.api as sm
 
 class Object():
@@ -25,11 +24,11 @@ def PorDefinir():
     clashes = DeleteDuplicates(clashes)
 
     map_style = ['mfs', 'mgr', 'wfs']
-    mfs = Style('mfs')
+    mfs = data.Style('mfs')
 
-    mgr = Style('mgr')
+    mgr = data.Style('mgr')
 
-    wfs = Style('wfs')
+    wfs = data.Style('wfs')
 
     for clash in clashes:
         if (clash[1] == 'mfs'):
@@ -70,7 +69,7 @@ def PorDefinir():
                         ptos_2vs1.append(matrix[j][i][1])
                         outcome.append(matrix[i][j][2])
 
-    data = {
+    _data = {
         'vict_1vs2': vict_1vs2,
         'vict_2vs1': vict_2vs1,
         'ptos_1vs2': ptos_1vs2,
@@ -78,7 +77,7 @@ def PorDefinir():
         'outcome': outcome
     }
 
-    df = pd.DataFrame(data)
+    df = pd.DataFrame(_data)
 
     X = df[['vict_1vs2', 'vict_2vs1', 'ptos_1vs2', 'ptos_2vs1']]
     y = df['outcome']

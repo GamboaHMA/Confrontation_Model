@@ -17,4 +17,22 @@ def GetData():
                  'https://uww.org/athletes-results/levai-zoltan-183618-profile'
                  ]
     
-    return urls_mgr77kg
+    t_urls_mgr60kg = [#'https://uww.org/athletes-results/fumita-kenichiro-7338-profile',
+                      #'https://uww.org/athletes-results/emelin-sergey-6599-profile',
+                      #'https://uww.org/athletes-results/ainagulov-mirambek-633-profile',
+                      #'https://uww.org/athletes-results/nejati-ali-reza-ayat-ollah-16358-profile',
+                      #'https://uww.org/athletes-results/temirov-lenur-22599-profile',
+                      #'https://uww.org/athletes-results/tasmuradov-elmurat-22448-profile',
+                      #'https://uww.org/athletes-results/orta-sanchez-luis-alberto-17227-profile',
+                      #'https://uww.org/athletes-results/hafizov-ildar-8613-profile',
+                      #'https://uww.org/athletes-results/kamal-kerem-10729-profile',
+                      #'https://uww.org/athletes-results/kinsinger-etienne-11926-profile',
+                      #'https://uww.org/athletes-results/mahmoud-haithem-mahmoud-ahmed-fahmy-13978-profile',
+                      'https://uww.org/athletes-results/fergat-abdelkarim-7056-profile',
+                      #'https://uww.org/athletes-results/sharshenbekov-zholaman-20714-profile',
+                      #'https://uww.org/athletes-results/walihan-sailike-24216-profile',
+                      #'https://uww.org/athletes-results/ciobanu-victor-4988-profile',
+                      #'https://uww.org/athletes-results/melikyan-armen-14921-profile'
+                      ]
+    
+    return t_urls_mgr60kg

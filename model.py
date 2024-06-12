@@ -80,8 +80,8 @@ def Enfrenta(atls_2a2, enfrentamientos, matrix):
             total = atl_1_points + atl_2_points
             porcentaje_atl1 = atl_1_points/total
         else:
-            atl_1_rank = atl_1[6]
-            atl_2_rank = atl_2[6]
+            atl_1_rank = int(atl_1[6])
+            atl_2_rank = int(atl_2[6])
             total_rank = atl_1_rank + atl_2_rank
             porcentaje_atl1 = 1 - (atl_1_rank / total_rank)
 

@@ -7,6 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 import time
+from probando_regresion import GetDateMonthYear
+from datetime import date
 
 def GetAthletesClashes(urls):
 
@@ -44,10 +46,17 @@ def GetAthletesClashes(urls):
 
         for tab in tabs_cont_content:
             event_data = tab.find_elements(By.XPATH, ".//span[@class='meta']")
-            date = event_data[1].text
-            
-            if date == 'Nov 2016':
+            games_tokio_date = date(2021, 7, 1)
+            Date = event_data[1].text
+            Date_ = GetDateMonthYear(Date)
+            if(games_tokio_date.year - Date_.year < 0):              #filtrando los juegos despues de tokio
                 continue
+            if(games_tokio_date.year - Date_.year == 0):
+                if (games_tokio_date.month - Date_.month < 0):
+                    continue
+            
+            #if date == 'Nov 2016':
+            #    continue
             buttons = tab.find_elements(By.XPATH, ".//button[@class='btn-link']")
 
             for button in buttons:
@@ -61,7 +70,7 @@ def GetAthletesClashes(urls):
 
                 panel = wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='waf-accordion-panel']")))
                 #category = panel.find_element(By.XPATH, ".//div[contains(@class, 'content-item')]//div[contains(@class, 'content-wrapper')]//div[contains(@class, 'card-meta')]//span[contains(@class, 'meta')]").text
-                category = '77 Kg'
+                category = '60 Kg'
                 contents_items = panel.find_elements(By.XPATH, ".//div[contains(@class, 'content-item')]")
                 cards_info = panel.find_elements(By.CLASS_NAME, value='card-label')
                 cards_number =  panel.find_elements(By.CLASS_NAME, value='card-number')
@@ -73,7 +82,7 @@ def GetAthletesClashes(urls):
                     atl_1_points = cards_number[i*2].text
                     atl_2_points = cards_number[i*2 + 1].text
                     winning_form = statuses[i].text
-                    clash = (style, category, atl_1_name, atl_2_name, (atl_1_points, atl_2_points), atl_1_name, winning_form, date)
+                    clash = (style, category, atl_1_name, atl_2_name, (atl_1_points, atl_2_points), atl_1_name, winning_form, Date)
                     clashes.append(clash)
 
                     print(f'{clash},')
