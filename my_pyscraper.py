@@ -63,7 +63,7 @@ def GetAthletesClashes(urls):
 
                 panel = wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='waf-accordion-panel']")))
                 #category = panel.find_element(By.XPATH, ".//div[contains(@class, 'content-item')]//div[contains(@class, 'content-wrapper')]//div[contains(@class, 'card-meta')]//span[contains(@class, 'meta')]").text
-                category = '60 Kg'
+                category = '77 Kg'
                 contents_items = panel.find_elements(By.XPATH, ".//div[contains(@class, 'content-item')]")
                 cards_info = panel.find_elements(By.CLASS_NAME, value='card-label')
                 cards_number =  panel.find_elements(By.CLASS_NAME, value='card-number')

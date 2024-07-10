@@ -97,7 +97,7 @@ for url in urls_mgr77kg:
             style = 'wfs'
     
 
-        table = "t_" + style + '_' + category
+        table = style + '_' + category
         query = f'''SELECT id, name FROM {table}'''
         cursor.execute(query)
         names_ids = cursor.fetchall()
@@ -118,8 +118,9 @@ for url in urls_mgr77kg:
 
         query_insert_clash = f'''INSERT OR IGNORE INTO clashes_mgr_77kg(style, category, athlete1_id, athlete2_id, result, state, winner_id, date) VALUES(?,?,?,?,?,?,?,?)'''
         cursor.execute(query_insert_clash, (style, category, atl1_id, atl2_id, clash_result, state, atl1_id, date))
+        conn.commit()
 
-    print('')
+    print(f'Terminado {url}')
 
 data_ = temporales.t_mgr_60kg.GetData()
 #data_ = data.Get_Clashes_From_Web()
