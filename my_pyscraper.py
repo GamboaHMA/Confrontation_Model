@@ -49,14 +49,7 @@ def GetAthletesClashes(urls):
             games_tokio_date = date(2021, 7, 1)
             Date = event_data[1].text
             Date_ = GetDateMonthYear(Date)
-            if(games_tokio_date.year - Date_.year < 0):              #filtrando los juegos despues de tokio
-                continue
-            if(games_tokio_date.year - Date_.year == 0):
-                if (games_tokio_date.month - Date_.month < 0):
-                    continue
             
-            #if date == 'Nov 2016':
-            #    continue
             buttons = tab.find_elements(By.XPATH, ".//button[@class='btn-link']")
 
             for button in buttons:

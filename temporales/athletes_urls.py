@@ -1,5 +1,4 @@
-def GetData():
-    t_urls_mgr60kg = [#'https://uww.org/athletes-results/fumita-kenichiro-7338-profile',
+t_urls_mgr60kg = [#'https://uww.org/athletes-results/fumita-kenichiro-7338-profile',
                       #'https://uww.org/athletes-results/emelin-sergey-6599-profile',
                       #'https://uww.org/athletes-results/ainagulov-mirambek-633-profile',
                       #'https://uww.org/athletes-results/nejati-ali-reza-ayat-ollah-16358-profile',
@@ -17,13 +16,13 @@ def GetData():
                       #'https://uww.org/athletes-results/melikyan-armen-14921-profile'
                       ]
     
-    urls_mgr77kg = [#'https://uww.org/athletes-results/makhmudov-akzhol-14057-profile',
-                 #'https://uww.org/athletes-results/suleymanov-sanan-21913-profile',
-                 #'https://uww.org/athletes-results/amoyan-malkhas-1562-profile',
-                 #'https://uww.org/athletes-results/kusaka-nao-12856-profile',
-                 #'https://uww.org/athletes-results/vardanyan-aram-23785-profile',
-                 #'https://uww.org/athletes-results/pena-flores-yosvanys-17838-profile',
-                 #'https://uww.org/athletes-results/cuero-munoz-jair-alexis-5201-profile',
+urls_mgr77kg = ['https://uww.org/athletes-results/makhmudov-akzhol-14057-profile',
+                 'https://uww.org/athletes-results/suleymanov-sanan-21913-profile',
+                 'https://uww.org/athletes-results/amoyan-malkhas-1562-profile',
+                 'https://uww.org/athletes-results/kusaka-nao-12856-profile',
+                 'https://uww.org/athletes-results/vardanyan-aram-23785-profile',
+                 'https://uww.org/athletes-results/pena-flores-yosvanys-17838-profile',
+                 'https://uww.org/athletes-results/cuero-munoz-jair-alexis-5201-profile',
                  'https://uww.org/athletes-results/ouakali-abd-elkrim-17351-profile',
                  'https://uww.org/athletes-results/abdelrahman-mahmoud-khaled-abdelsatar-99-profile',
                  'https://uww.org/athletes-results/akbudak-burhan-701-profile',
@@ -35,7 +34,7 @@ def GetData():
                  'https://uww.org/athletes-results/levai-zoltan-183618-profile'
                  ]
     
-    mgr87kg = ['https://uww.org/athletes-results/cengiz-ali-4508-profile',
+mgr87kg = ['https://uww.org/athletes-results/cengiz-ali-4508-profile',
                'https://uww.org/athletes-results/losonczi-david-13664-profile',
                'https://uww.org/athletes-results/beleniuk-zhan-3232-profile',
                'https://uww.org/athletes-results/novikov-semen-16695-profile',
@@ -52,7 +51,7 @@ def GetData():
                'https://uww.org/athletes-results/huseynov-rafig-9425-profile',
                'https://uww.org/athletes-results/kulynycz-arkadiusz-marcin-12702-profile']
     
-    mgr97kg = ['https://uww.org/athletes-results/rosillo-kindelan-gabriel-alejandro-19320-profile',
+mgr97kg = ['https://uww.org/athletes-results/rosillo-kindelan-gabriel-alejandro-19320-profile',
                'https://uww.org/athletes-results/aleksanyan-artur-1068-profile',
                'https://uww.org/athletes-results/omarov-artur-17094-profile',
                'https://uww.org/athletes-results/saravi-mohammadhadi-abdollah-20053-profile',
@@ -69,7 +68,7 @@ def GetData():
                'https://uww.org/athletes-results/sargsian-artur-20063-profile',
                'https://uww.org/athletes-results/uzur-dzhuzupbekov-25903-profile']
     
-    mgr130kg = ['https://uww.org/athletes-results/mirzazadeh-amin-mohammadzaman-15237-profile',
+mgr130kg = ['https://uww.org/athletes-results/mirzazadeh-amin-mohammadzaman-15237-profile',
                 'https://uww.org/athletes-results/kayaalp-riza-11205-profile',
                 'https://uww.org/athletes-results/mohamed-abdellatif-mohamed-ahmed-25991-profile',
                 'https://uww.org/athletes-results/pino-hinds-oscar-26064-profile',
@@ -88,7 +87,7 @@ def GetData():
     
     #------------mfs-----------------------------------
 
-    mfs57kg = ['https://uww.org/athletes-results/micic-stevan-andria-15077-profile',
+mfs57kg = ['https://uww.org/athletes-results/micic-stevan-andria-15077-profile',
                'https://uww.org/athletes-results/higuchi-rei-9100-profile',
                'https://uww.org/athletes-results/harutyunyan-arsen-8820-profile',
                'https://uww.org/athletes-results/abakarov-zelimkhan-26965-profile',
@@ -105,7 +104,7 @@ def GetData():
                'https://uww.org/athletes-results/aman-aman-1447-profile',
                'https://uww.org/athletes-results/zou-wanhao-25552-profile']
     
-    mfs65kg = ['https://uww.org/athletes-results/muszukajev-iszmail-15952-profile',
+mfs65kg = ['https://uww.org/athletes-results/muszukajev-iszmail-15952-profile',
                'https://uww.org/athletes-results/rivera-sebastian-c-19136-profile',
                'https://uww.org/athletes-results/mamedov-shamil-14213-profile',
                'https://uww.org/athletes-results/tevanyan-vazgen-22649-profile',
@@ -122,7 +121,7 @@ def GetData():
                'https://uww.org/athletes-results/tumur-ochir-tulga-23286-profile',
                'https://uww.org/athletes-results/retherford-zain-allen-19008-profile']
     
-    mfs74kg = ['https://uww.org/athletes-results/sidakov-zaurbek-21031-profile',
+mfs74kg = ['https://uww.org/athletes-results/sidakov-zaurbek-21031-profile',
                'https://uww.org/athletes-results/dake-kyle-douglas-5305-profile',
                'https://uww.org/athletes-results/cabolov-hetik-23101-profile',
                'https://uww.org/athletes-results/takatani-daichi-26958-profile',
@@ -140,7 +139,7 @@ def GetData():
                'https://uww.org/athletes-results/chermen-valiev-25867-profile',
                'https://uww.org/athletes-results/mahdavi-iman-184044-profile']
     
-    mfs86kg = ['https://uww.org/athletes-results/taylor-iii-david-morris-22503-profile',
+mfs86kg = ['https://uww.org/athletes-results/taylor-iii-david-morris-22503-profile',
                'https://uww.org/athletes-results/yazdanicharati-hassan-aliazam-24666-profile',
                'https://uww.org/athletes-results/amine-myles-nazem-1516-profile',
                'https://uww.org/athletes-results/dauletbekov-azamat-5451-profile',
@@ -157,7 +156,7 @@ def GetData():
                'https://uww.org/athletes-results/magomed-eldarovitch-ramazanov-26961-profile',
                'https://uww.org/athletes-results/vladimeri-gamkrelidze-7490-profile']
     
-    mfs97kg = ['https://uww.org/athletes-results/tazhudinov-akhmed-magomed-o-182427-profile',
+mfs97kg = ['https://uww.org/athletes-results/tazhudinov-akhmed-magomed-o-182427-profile',
                'https://uww.org/athletes-results/magomedov-magomedkhan-magomedovitch-13929-profile',
                'https://uww.org/athletes-results/snyder-kyle-frederick-21379-profile',
                'https://uww.org/athletes-results/givi-matcharashvili-132428-profile',
@@ -174,7 +173,7 @@ def GetData():
                'https://uww.org/athletes-results/baranowski-zbigniew-mateusz-2774-profile',
                'https://uww.org/athletes-results/habila-awusayiman-8589-profile']
     
-    mfs125kg = ['https://uww.org/athletes-results/zare-amir-hossein-abbas-25126-profile',
+mfs125kg = ['https://uww.org/athletes-results/zare-amir-hossein-abbas-25126-profile',
                 'https://uww.org/athletes-results/petriashvili-geno-26026-profile',
                 'https://uww.org/athletes-results/akgul-taha-26079-profile',
                 'https://uww.org/athletes-results/parris-mason-mark-17690-profile',
@@ -191,7 +190,7 @@ def GetData():
                 'https://uww.org/athletes-results/deng-zhiwei-5691-profile',
                 'https://uww.org/athletes-results/ligeti-daniel-13414-profile']
     
-    wfs50kg = ['https://uww.org/athletes-results/susaki-yui-21999-profile',
+wfs50kg = ['https://uww.org/athletes-results/susaki-yui-21999-profile',
                'https://uww.org/athletes-results/dolgorjav-otgonjargal-5981-profile',
                'https://uww.org/athletes-results/feng-ziqi-7047-profile',
                'https://uww.org/athletes-results/hildebrandt-sarah-ann-9103-profile',
@@ -208,7 +207,7 @@ def GetData():
                'https://uww.org/athletes-results/blayvas-anastasia-3618-profile',
                'https://uww.org/athletes-results/stadnik-mariya-21641-profile']
     
-    wfs53kg = ['https://uww.org/athletes-results/fujinami-akari-7321-profile',
+wfs53kg = ['https://uww.org/athletes-results/fujinami-akari-7321-profile',
                'https://uww.org/athletes-results/kaladzinskaya-vanesa-10647-profile',
                'https://uww.org/athletes-results/yepez-guzman-lucia-yamileth-24710-profile',
                'https://uww.org/athletes-results/antim-antim-1726-profile',
@@ -225,7 +224,7 @@ def GetData():
                'https://uww.org/athletes-results/khulan-batkhuyag-36279-profile',
                'https://uww.org/athletes-results/yetgil-zeynep-24787-profile']
     
-    wfs57kg = ['https://uww.org/athletes-results/nichita-anastasia-16489-profile',
+wfs57kg = ['https://uww.org/athletes-results/nichita-anastasia-16489-profile',
                'https://uww.org/athletes-results/sakurai-tsugumi-19786-profile',
                'https://uww.org/athletes-results/adekuoroye-odunayo-folasade-430-profile',
                'https://uww.org/athletes-results/helen-louise-maroulis-27503-profile',
@@ -242,7 +241,7 @@ def GetData():
                'https://uww.org/athletes-results/penalber-giullia-19192-profile',
                'https://uww.org/athletes-results/russo-aurora-19440-profile']
     
-    wfs62kg = ['https://uww.org/athletes-results/tynybekova-aisuluu-25995-profile',
+wfs62kg = ['https://uww.org/athletes-results/tynybekova-aisuluu-25995-profile',
                'https://uww.org/athletes-results/motoki-sakura-15658-profile',
                'https://uww.org/athletes-results/bullen-grace-jacob-4134-profile',
                'https://uww.org/athletes-results/koliadenko-iryna-12183-profile',
@@ -259,7 +258,7 @@ def GetData():
                'https://uww.org/athletes-results/nesrin-bas-26250-profile',
                'https://uww.org/athletes-results/veranika-ivanova-10015-profile']
     
-    wfs68kg = ['https://uww.org/athletes-results/cavusoglu-tosun-buse-22995-profile',
+wfs68kg = ['https://uww.org/athletes-results/cavusoglu-tosun-buse-22995-profile',
                'https://uww.org/athletes-results/enkhsaikhan-delgermaa-6639-profile',
                'https://uww.org/athletes-results/larroque-koumba-selene-fanta-13093-profile',
                'https://uww.org/athletes-results/ringaci-irina-19113-profile',
@@ -276,7 +275,7 @@ def GetData():
                'https://uww.org/athletes-results/zhou-feng-25400-profile',
                'https://uww.org/athletes-results/linda-morais-15556-profile']
     
-    wfs76kg = ['https://uww.org/athletes-results/medet-kyzy-aiperi-14821-profile',
+wfs76kg = ['https://uww.org/athletes-results/medet-kyzy-aiperi-14821-profile',
                'https://uww.org/athletes-results/kagami-yuka-10571-profile',
                'https://uww.org/athletes-results/renteria-renteria-tatiana-18999-profile',
                'https://uww.org/athletes-results/gray-adeline-maria-8224-profile',
@@ -293,4 +292,3 @@ def GetData():
                'https://uww.org/athletes-results/yuliana-vasileva-yaneva-24586-profile',
                'https://uww.org/athletes-results/davaanasan-enkh-amar-6630-profile']
     
-    return t_urls_mgr60kg

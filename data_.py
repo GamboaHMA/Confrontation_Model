@@ -6,6 +6,8 @@ import temporales
 import temporales._77kg_temporal
 import model
 import temporales.t_mgr_60kg
+import my_pyscraper
+from temporales.athletes_urls import *
 
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
@@ -17,13 +19,13 @@ cursor = conn.cursor()
 #    style,category,athlete1_id,athlete2_id,result,state,winner_id,date = clash_60kg[1],clash_60kg[2],clash_60kg[3],clash_60kg[4],clash_60kg[5],clash_60kg[6],clash_60kg[7],clash_60kg[8]
 #    cursor.execute(query, (style, category, athlete1_id, athlete2_id, result, state, winner_id, date))
 #conn.commit()
-#cursor.execute('''CREATE TABLE IF NOT EXISTS t_clashes_mgr_60kg(
+#cursor.execute('''CREATE TABLE IF NOT EXISTS clashes_wfs_50kg(
 #               id INTEGER PRIMARY KEY AUTOINCREMENT,
 #               style TEXT,
 #               category TEXT,
 #               athlete1_id INTEGER NOT NULL,
-#               athlete2_id INTEGER NOT NULL,
-#               result TEXT,
+#              athlete2_id INTEGER NOT NULL,
+#              result TEXT,
 #               state TEXT,
 #               winner_id INTEGER NOT NULL,
 #               date TEXT NOT NULL,
@@ -43,10 +45,10 @@ cursor = conn.cursor()
 #cursor.execute(query, ('Armen MELIKYAN', 'ARM', 25, 'mgr', '60kg'))
 #conn.commit()
 
-cursor.execute("SELECT * FROM t_mgr_60kg")
-arr = cursor.fetchall()
-result = model.Results(arr)
-print(result)
+#cursor.execute("SELECT * FROM t_mgr_60kg")
+#arr = cursor.fetchall()
+#result = model.Results(arr)
+#print(result)
 #query = ('''UPDATE mgr_60kg
 #               SET name =?
 #               WHERE id=?''')
@@ -72,50 +74,55 @@ print(result)
 #''')
 #conn.commit()
 
+for url in urls_mgr77kg:
+    clashes_ = my_pyscraper.GetAthletesClashes([url])
+    
+    for clash in clashes_:     #clash(style, category, atl1_name, atl2_name, (atl1_points, atl2_points), atl1_name, winning_form, date)
+        clashes = []
+        style = clash[0]
+        category = clash[1]
+        atl1_name = clash[2]
+        atl2_name = clash[3]
+        clash_result = str(clash[4][0]) + '_' + str(clash[4][1])
+        state = clash[6]
+        date = clash[7]
+
+        category = category.replace(" ","").lower()
+    
+        if (style == 'gr'):
+            style = 'mgr'
+        elif(style == 'fs'):
+            style = 'mfs'
+        else:
+            style = 'wfs'
+    
+
+        table = "t_" + style + '_' + category
+        query = f'''SELECT id, name FROM {table}'''
+        cursor.execute(query)
+        names_ids = cursor.fetchall()
+
+        atl1_id = 0
+        atl2_id = 0
+
+        for fila in names_ids:
+            id, name = fila
+            if (Levenshtein.distance(name.lower(), atl1_name.lower()) <= 4):
+                atl1_id = int(id)
+            if (Levenshtein.distance(name.lower(), atl2_name.lower()) <= 4):
+                atl2_id = int(id)
+
+
+        if (atl1_id == 0 or atl2_id == 0):
+            continue
+
+        query_insert_clash = f'''INSERT OR IGNORE INTO clashes_mgr_77kg(style, category, athlete1_id, athlete2_id, result, state, winner_id, date) VALUES(?,?,?,?,?,?,?,?)'''
+        cursor.execute(query_insert_clash, (style, category, atl1_id, atl2_id, clash_result, state, atl1_id, date))
+
+    print('')
+
 data_ = temporales.t_mgr_60kg.GetData()
 #data_ = data.Get_Clashes_From_Web()
-for clash in data_:     #clash(style, category, atl1_name, atl2_name, (atl1_points, atl2_points), atl1_name, winning_form, date)
-    
-    clashes = []
-    style = clash[0]
-    category = clash[1]
-    atl1_name = clash[2]
-    atl2_name = clash[3]
-    clash_result = str(clash[4][0]) + '_' + str(clash[4][1])
-    state = clash[6]
-    date = clash[7]
-
-    category = category.replace(" ","").lower()
-    
-    if (style == 'gr'):
-        style = 'mgr'
-    elif(style == 'fs'):
-        style = 'mfs'
-    else:
-        style = 'wfs'
-    
-
-    table = "t_" + style + '_' + category
-    query = f'''SELECT id, name FROM {table}'''
-    cursor.execute(query)
-    names_ids = cursor.fetchall()
-
-    atl1_id = 0
-    atl2_id = 0
-
-    for fila in names_ids:
-        id, name = fila
-        if (Levenshtein.distance(name.lower(), atl1_name.lower()) <= 4):
-            atl1_id = int(id)
-        if (Levenshtein.distance(name.lower(), atl2_name.lower()) <= 4):
-            atl2_id = int(id)
-
-
-    if (atl1_id == 0 or atl2_id == 0):
-        continue
-
-    query_insert_clash = f'''INSERT OR IGNORE INTO t_clashes_mgr_60kg(style, category, athlete1_id, athlete2_id, result, state, winner_id, date) VALUES(?,?,?,?,?,?,?,?)'''
-    cursor.execute(query_insert_clash, (style, category, atl1_id, atl2_id, clash_result, state, atl1_id, date))
 
 
 #cursor.execute('''DROP TABLE IF EXISTS athletes''')
