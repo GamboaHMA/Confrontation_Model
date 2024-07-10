@@ -8,6 +8,7 @@ import data
 from datetime import datetime
 from datetime import date
 import statsmodels.api as sm
+import copy
 
 class Object():
     def __init__(self):
@@ -103,7 +104,8 @@ def PorDefinir():
     print(coef)
     print(intercept)
 
-def GetMatrixVersusPlayers(clashes, n):  
+def GetMatrixVersusPlayers(clashes, athletes):
+    n = len(athletes)  
     if len(clashes) == 0:
         return None  
     matrix = []
@@ -113,7 +115,7 @@ def GetMatrixVersusPlayers(clashes, n):
             fila.append([])  #aniadir columna
         matrix.append(fila)
 
-    dicc_2a2_clashes = {}
+    dicc_2a2_clashes = {} #almacen de enfrentamientos
 
     min_max = GetMinMaxSMax(clashes)
     min_date = date(2010, 1, 1)
@@ -135,9 +137,12 @@ def GetMatrixVersusPlayers(clashes, n):
         
         if ((a1_id, a2_id) not in dicc_2a2_clashes):
             dicc_2a2_clashes[(a1_id, a2_id)] = []
+            dicc_2a2_clashes[(a2_id, a1_id)] = []
             dicc_2a2_clashes[(a1_id, a2_id)].append(clash)
+            dicc_2a2_clashes[(a2_id, a1_id)].append(clash)
         else:
             dicc_2a2_clashes[(a1_id, a2_id)].append(clash)
+            dicc_2a2_clashes[(a2_id, a1_id)].append(clash)
 
     
     for i in range(1, n):
@@ -146,7 +151,7 @@ def GetMatrixVersusPlayers(clashes, n):
                 continue
 
             clashes_2a2 = dicc_2a2_clashes[(i, j)]
-            if len(clashes_2a2) == 1:
+            if len(clashes_2a2) == 0:
                 continue
 
             data_min_max = GetMinMaxSMax(clashes_2a2)
@@ -185,10 +190,32 @@ def GetMatrixVersusPlayers(clashes, n):
             
             matrix[j-1][i-1].append(a2_vict)      
             matrix[j-1][i-1].append(a2_regist)
-            #matrix[j-1][i-1].append(1 if(last_clash[7] == j) else 0)    
+            #matrix[j-1][i-1].append(1 if(last_clash[7] == j) else 0) 
+
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            if matrix[i][j] is None:
+                matrix[i][j] = AthletesInterception(matrix, i, j, n)
+
+            else:
+                continue   
     
     return matrix  
 
+def AthletesInterception(matrix, athl1, athl2, n):
+    athl1_set = {}  #atletas a los que se ha enfrentado athl1
+    athl2_set = {}  #atletas a los que se ha enfrentado athl2
+    for i in range(n):
+        if i + 1 != athl1:
+            athl1_set[i + 1] = matrix[athl1][i] / matrix[athl1][i] + matrix[i][athl1]  #o sea guarda la prob que tiene athl1 de ganarle a i 
+
+    for j in range(n):
+        if j + 1 != athl2:
+            athl2_set[athl2] = matrix[athl2][j] / matrix[athl2][j] + matrix[j][athl2]
+
+    
+        
 
 def GetDateMonthYear(Date: str):
     month_mapping = {

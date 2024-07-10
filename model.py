@@ -15,14 +15,14 @@ def Results(style_category):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    #query = f'SELECT * FROM {style_category}'
+    query = f'SELECT * FROM {style_category}'
     #cursor.execute(query)
-    athletes = style_category   #cursor.fetchall()
-    query = f'SELECT * FROM clashes_{athletes[0][4]}_{athletes[0][5].lower()}'  #aqui construimos clashes_mgr_60g
+    athletes = cursor.fetchall()
+    query = f'SELECT * FROM clashes_{style_category}'  #aqui construimos clashes_mgr_60g
     cursor.execute(query)
     clashes = cursor.fetchall()
 
-    matrix = probando_regresion.GetMatrixVersusPlayers(clashes, len(athletes))  #matriz de probabilidades
+    matrix = probando_regresion.GetMatrixVersusPlayers(clashes, athletes)  #matriz de probabilidades
 
     iterations = 1000
     medallero = [[0,0,0,0] for i in range(len(athletes))]
@@ -238,3 +238,4 @@ def RellenarMedallero(athletes, bronce, plata, oro, medallero):
         else:
             medallero[athlete[0] - 1][3] += 1
     return
+
