@@ -196,7 +196,7 @@ def GetMatrixVersusPlayers(clashes, athletes):
     for i in range(n):
         for j in range(i + 1, n):
             if matrix[i][j] is None:
-                matrix[i][j] = AthletesInterception(matrix, i, j, n)
+                AthletesInterception(matrix, i, j, n)
 
             else:
                 continue   
@@ -214,7 +214,40 @@ def AthletesInterception(matrix, athl1, athl2, n):
         if j + 1 != athl2:
             athl2_set[athl2] = matrix[athl2][j] / matrix[athl2][j] + matrix[j][athl2]
 
+    prob_athl1_athl2 = 0
+    prob_athl2_athl1 = 0
+    for athl, prob_a1 in athl1_set: #probabilidad que tiene athl1 contra athl
+        if athl in athl2_set.keys:
+            prob_a2 = athl2_set[athl] #prob que tiene athl2 contra atleta athl
+
+            if prob_a1 > 0.5 and prob_a2 > 0.5:    #los dos le ganaron a athl
+                if prob_a1 > prob_a2: 
+                    prob_athl1_athl2 += (prob_a1 - prob_a2)*0.6
+                    prob_athl2_athl1 += (prob_a1 - prob_a2)*0.4
+                else:
+                    prob_athl2_athl1 += (prob_a2 - prob_a1)*0.6
+                    prob_athl1_athl2 += (prob_a2 - prob_a1)*0.4
+            
+            elif prob_a1 > 0.5 and prob_a2 < 0.5:  # a1 le gano a athl y a2 perdio contra athl
+                prob_athl1_athl2 += (prob_a1 - prob_a2)*0.85
+                prob_athl2_athl1 += (prob_a1 - prob_a2)*0.15
+            
+            elif prob_a1 < 0.5 and prob_a2 < 0.5:  # ambos perdieron contra athl
+                if prob_a1 > prob_a2: 
+                    prob_athl1_athl2 += (prob_a1 - prob_a2)*0.4
+                    prob_athl2_athl1 += (prob_a1 - prob_a2)*0.6
+                else:
+                    prob_athl2_athl1 += (prob_a2 - prob_a1)*0.4
+                    prob_athl1_athl2 += (prob_a2 - prob_a1)*0.6
     
+    matrix[athl1][athl2] = prob_athl1_athl2 / prob_athl1_athl2 + prob_athl2_athl1
+    matrix[athl2][athl1] = prob_athl2_athl1 / prob_athl1_athl2 + prob_athl2_athl1
+
+
+
+
+
+
         
 
 def GetDateMonthYear(Date: str):
