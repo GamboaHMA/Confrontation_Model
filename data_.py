@@ -74,7 +74,7 @@ cursor = conn.cursor()
 #''')
 #conn.commit()
 
-for url in mfs97kg:
+for url in wfs50kg:
     clashes_ = my_pyscraper.GetAthletesClashes([url])
     
     for clash in clashes_:     #clash(style, category, atl1_name, atl2_name, (atl1_points, atl2_points), atl1_name, winning_form, date)
@@ -116,7 +116,7 @@ for url in mfs97kg:
         if (atl1_id == 0 or atl2_id == 0):
             continue
 
-        clash_table = 'clashes_mfs_97kg'
+        clash_table = 'clashes_wfs_50kg'
         verify_query = f'''SELECT * FROM {clash_table} WHERE athlete1_id = ? AND athlete2_id = ? AND result = ? AND date = ?'''
         cursor.execute(verify_query, (atl1_id, atl2_id, clash_result, date))
         verify_exists = cursor.fetchall()
