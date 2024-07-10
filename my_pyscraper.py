@@ -24,9 +24,10 @@ def GetAthletesClashes(urls):
 
         wait.until(EC.visibility_of_element_located((By.XPATH, ".//p[contains(@class, 'card-meta-value')]")))
         personal_data = driver.find_elements(By.XPATH, ".//p[contains(@class, 'card-meta-value')]")
-        age = personal_data[1].text
+        #age = personal_data[1].text
         #style = personal_data[3].text
-        style = 'gr'
+        style = 'fs'
+        category = '97 Kg'
 
 
         wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "tab-anchor")))
@@ -42,7 +43,8 @@ def GetAthletesClashes(urls):
                 continue
                 
         tab_cont = wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='tab-item tab-item-result']")))
-        tabs_cont_content = tab_cont.find_elements(By.XPATH, ".//div[@class='tabs-container-content']")
+        tab_cont_groups = tab_cont.find_elements(By.XPATH, ".//div[@class='tabs-container-group']")
+        tabs_cont_content = EliminateTabDuplicates(tab_cont_groups)
 
         for tab in tabs_cont_content:
             event_data = tab.find_elements(By.XPATH, ".//span[@class='meta']")
@@ -63,7 +65,6 @@ def GetAthletesClashes(urls):
 
                 panel = wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='waf-accordion-panel']")))
                 #category = panel.find_element(By.XPATH, ".//div[contains(@class, 'content-item')]//div[contains(@class, 'content-wrapper')]//div[contains(@class, 'card-meta')]//span[contains(@class, 'meta')]").text
-                category = '77 Kg'
                 contents_items = panel.find_elements(By.XPATH, ".//div[contains(@class, 'content-item')]")
                 cards_info = panel.find_elements(By.CLASS_NAME, value='card-label')
                 cards_number =  panel.find_elements(By.CLASS_NAME, value='card-number')
@@ -101,4 +102,23 @@ def GetAthletesClashes(urls):
     driver.quit()
     return clashes
 
+def EliminateTabDuplicates(tabs_cont_groups):
+    notGlobalDuplicatedTabs = []
 
+    for tab_cont_group in tabs_cont_groups:
+        tabs_cont_content = tab_cont_group.find_elements(By.XPATH, ".//div[@class='tabs-container-content']")
+
+        notDuplicatedTexts = []
+        notDuplicatedTabs = []
+
+        for tab in tabs_cont_content:
+            card = tab.find_element(By.XPATH, ".//div[@class='card-info']")
+            span = card.find_element(By.XPATH, ".//span[@class='text']")
+            text = span.text
+            if text not in notDuplicatedTexts:
+                notDuplicatedTexts.append(text)
+                notDuplicatedTabs.append(tab)
+        
+        notGlobalDuplicatedTabs.extend(notDuplicatedTabs)
+
+    return notGlobalDuplicatedTabs

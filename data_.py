@@ -74,7 +74,7 @@ cursor = conn.cursor()
 #''')
 #conn.commit()
 
-for url in urls_mgr77kg:
+for url in mfs97kg:
     clashes_ = my_pyscraper.GetAthletesClashes([url])
     
     for clash in clashes_:     #clash(style, category, atl1_name, atl2_name, (atl1_points, atl2_points), atl1_name, winning_form, date)
@@ -116,9 +116,15 @@ for url in urls_mgr77kg:
         if (atl1_id == 0 or atl2_id == 0):
             continue
 
-        query_insert_clash = f'''INSERT OR IGNORE INTO clashes_mgr_77kg(style, category, athlete1_id, athlete2_id, result, state, winner_id, date) VALUES(?,?,?,?,?,?,?,?)'''
-        cursor.execute(query_insert_clash, (style, category, atl1_id, atl2_id, clash_result, state, atl1_id, date))
-        conn.commit()
+        clash_table = 'clashes_mfs_97kg'
+        verify_query = f'''SELECT * FROM {clash_table} WHERE athlete1_id = ? AND athlete2_id = ? AND result = ? AND date = ?'''
+        cursor.execute(verify_query, (atl1_id, atl2_id, clash_result, date))
+        verify_exists = cursor.fetchall()
+
+        if len(verify_exists) == 0:
+            query_insert_clash = f'''INSERT OR IGNORE INTO {clash_table}(style, category, athlete1_id, athlete2_id, result, state, winner_id, date) VALUES(?,?,?,?,?,?,?,?)'''
+            cursor.execute(query_insert_clash, (style, category, atl1_id, atl2_id, clash_result, state, atl1_id, date))
+            conn.commit()
 
     print(f'Terminado {url}')
 

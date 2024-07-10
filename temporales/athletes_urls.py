@@ -16,13 +16,13 @@ t_urls_mgr60kg = [#'https://uww.org/athletes-results/fumita-kenichiro-7338-profi
                       #'https://uww.org/athletes-results/melikyan-armen-14921-profile'
                       ]
     
-urls_mgr77kg = ['https://uww.org/athletes-results/makhmudov-akzhol-14057-profile',
-                 'https://uww.org/athletes-results/suleymanov-sanan-21913-profile',
-                 'https://uww.org/athletes-results/amoyan-malkhas-1562-profile',
-                 'https://uww.org/athletes-results/kusaka-nao-12856-profile',
-                 'https://uww.org/athletes-results/vardanyan-aram-23785-profile',
-                 'https://uww.org/athletes-results/pena-flores-yosvanys-17838-profile',
-                 'https://uww.org/athletes-results/cuero-munoz-jair-alexis-5201-profile',
+urls_mgr77kg = [#'https://uww.org/athletes-results/makhmudov-akzhol-14057-profile',
+                 #'https://uww.org/athletes-results/suleymanov-sanan-21913-profile',
+                 #'https://uww.org/athletes-results/amoyan-malkhas-1562-profile',
+                 #'https://uww.org/athletes-results/kusaka-nao-12856-profile',
+                 #'https://uww.org/athletes-results/vardanyan-aram-23785-profile',
+                 #'https://uww.org/athletes-results/pena-flores-yosvanys-17838-profile',
+                 #'https://uww.org/athletes-results/cuero-munoz-jair-alexis-5201-profile', #(pendiente)
                  'https://uww.org/athletes-results/ouakali-abd-elkrim-17351-profile',
                  'https://uww.org/athletes-results/abdelrahman-mahmoud-khaled-abdelsatar-99-profile',
                  'https://uww.org/athletes-results/akbudak-burhan-701-profile',
@@ -68,15 +68,15 @@ mgr97kg = ['https://uww.org/athletes-results/rosillo-kindelan-gabriel-alejandro-
                'https://uww.org/athletes-results/sargsian-artur-20063-profile',
                'https://uww.org/athletes-results/uzur-dzhuzupbekov-25903-profile']
     
-mgr130kg = ['https://uww.org/athletes-results/mirzazadeh-amin-mohammadzaman-15237-profile',
-                'https://uww.org/athletes-results/kayaalp-riza-11205-profile',
-                'https://uww.org/athletes-results/mohamed-abdellatif-mohamed-ahmed-25991-profile',
-                'https://uww.org/athletes-results/pino-hinds-oscar-26064-profile',
-                'https://uww.org/athletes-results/meng-lingzhe-14971-profile',
-                'https://uww.org/athletes-results/schultz-cohlton-26145-profile',
-                'https://uww.org/athletes-results/acosta-fernandez-yasmani-401-profile',
-                'https://uww.org/athletes-results/guennichi-amine-8354-profile',
-                'https://uww.org/athletes-results/assad-oussama-67344-profile',
+mgr130kg = [#'https://uww.org/athletes-results/mirzazadeh-amin-mohammadzaman-15237-profile',
+                #'https://uww.org/athletes-results/kayaalp-riza-11205-profile',
+                #'https://uww.org/athletes-results/mohamed-abdellatif-mohamed-ahmed-25991-profile',
+                #'https://uww.org/athletes-results/pino-hinds-oscar-26064-profile',
+                #'https://uww.org/athletes-results/meng-lingzhe-14971-profile',
+                #'https://uww.org/athletes-results/schultz-cohlton-26145-profile',
+                #'https://uww.org/athletes-results/acosta-fernandez-yasmani-401-profile',
+                #'https://uww.org/athletes-results/guennichi-amine-8354-profile',   #pendiente de arreglar
+                #'https://uww.org/athletes-results/assad-oussama-67344-profile', #pendiente
                 'https://uww.org/athletes-results/krahmer-jello-12469-profile',
                 'https://uww.org/athletes-results/semenov-sergei-20402-profile',
                 'https://uww.org/athletes-results/lee-seungchan-13238-profile',
@@ -87,13 +87,13 @@ mgr130kg = ['https://uww.org/athletes-results/mirzazadeh-amin-mohammadzaman-1523
     
     #------------mfs-----------------------------------
 
-mfs57kg = ['https://uww.org/athletes-results/micic-stevan-andria-15077-profile',
-               'https://uww.org/athletes-results/higuchi-rei-9100-profile',
-               'https://uww.org/athletes-results/harutyunyan-arsen-8820-profile',
-               'https://uww.org/athletes-results/abakarov-zelimkhan-26965-profile',
-               'https://uww.org/athletes-results/uguev-zavur-26093-profile',
-               'https://uww.org/athletes-results/roman-guillermo-bravo-young-142459-profile',
-               'https://uww.org/athletes-results/cruz-darian-toi-5172-profile',
+mfs57kg = [#'https://uww.org/athletes-results/micic-stevan-andria-15077-profile',
+               #'https://uww.org/athletes-results/higuchi-rei-9100-profile',
+               #'https://uww.org/athletes-results/harutyunyan-arsen-8820-profile',
+               'https://uww.org/athletes-results/abakarov-zelimkhan-26965-profile', #pendiente
+               #'https://uww.org/athletes-results/uguev-zavur-26093-profile',
+               #'https://uww.org/athletes-results/roman-guillermo-bravo-young-142459-profile',
+               #'https://uww.org/athletes-results/cruz-darian-toi-5172-profile',
                'https://uww.org/athletes-results/mohamed-gamal-abdelnaser-hanafy-15357-profile',
                'https://uww.org/athletes-results/iuna-fafe-diamantino-9936-profile',
                'https://uww.org/athletes-results/rzazade-aliabbas-27696-profile',
