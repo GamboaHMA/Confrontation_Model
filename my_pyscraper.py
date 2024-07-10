@@ -27,7 +27,7 @@ def GetAthletesClashes(urls):
         #age = personal_data[1].text
         #style = personal_data[3].text
         style = 'wfs'
-        category = '50 Kg'
+        category = '76 Kg'
 
 
         wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "tab-anchor")))
