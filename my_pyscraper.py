@@ -26,8 +26,8 @@ def GetAthletesClashes(urls):
         personal_data = driver.find_elements(By.XPATH, ".//p[contains(@class, 'card-meta-value')]")
         #age = personal_data[1].text
         #style = personal_data[3].text
-        style = 'wfs'
-        category = '76 Kg'
+        style = 'gr'
+        category = '67 Kg'
 
 
         wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "tab-anchor")))

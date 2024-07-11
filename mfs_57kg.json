@@ -1,0 +1,67 @@
+{
+  "name": "77 kg",
+  "name_en": "67 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Wanhao ZOU",
+          "name_en": "Wanhao ZOU",
+          "country_domain": "CHN",
+          "status": 0
+        },
+        "2": {
+          "name": "Gamal Abdelnaser Hanafy MOHAMED",
+          "name_en": "Gamal Abdelnaser Hanafy MOHAMED",
+          "country_domain": "EGY",
+          "status": 0
+        },
+        "3": {
+          "name": "Aman AMAN",
+          "name_en": "Aman AMAN",
+          "country_domain": "IND",
+          "status": 0
+        },
+        "4": {
+          "name": "Roman Guillermo BRAVO YOUNG",
+          "name_en": "Roman Guillermo BRAVO YOUNG",
+          "country_domain": "MEX",
+          "status": 0
+        },
+        "5": {
+          "name": "Stevan Andria MICIC",
+          "name_en": "Stevan Andria MICIC",
+          "country_domain": "SRB",
+          "status": 0
+        },
+        "6": {
+          "name": "Aryan TSIUTRYN",
+          "name_en": "Aryan TSIUTRYN",
+          "country_domain": "AIN",
+          "status": 0
+        },
+        "7": {
+          "name": "Rei HIGUCHI",
+          "name_en": "Rei HIGUCHI",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "8": {
+          "name": "Zavur UGUEV",
+          "name_en": "Rei HIGUCHI",
+          "country_domain": "JPN",
+          "status": 0
+        }
+      }
+    }
+  }
+}

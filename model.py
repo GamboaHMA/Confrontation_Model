@@ -5,6 +5,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 import probando_regresion
+import json
 
 class Object:
     def __init__(self):
@@ -24,8 +25,8 @@ def Results(style_category):
 
     matrix = probando_regresion.GetMatrixVersusPlayers(clashes, athletes)  #matriz de probabilidades
 
-    iterations = 1000
-    medallero = [[0,0,0,0] for i in range(len(athletes))]
+    iterations = 10000
+    medallero = [[0,0,0,0,0,0,0,0,0] for i in range(len(athletes))]
 
     for i in range(iterations):
         athletes = DistCuadrosEnfrentamientos(athletes)
@@ -41,11 +42,18 @@ def Results(style_category):
         athletes_2a2 = Get_2a2(winners)
         oro, plata = Enfrenta(athletes_2a2, enfrentamientos, matrix)
 
-        bronces_quintos = Repechaje(athletes, enfrentamientos, oro, plata, semi, matrix)
-        bronce = (bronces_quintos[0], bronces_quintos[1])
-        quinto = (bronces_quintos[2], bronces_quintos[3])        
+        other_places = Repechaje(athletes, enfrentamientos, oro, plata, semi, matrix)
+        bronce = (other_places[0], other_places[1])
+        quinto = (other_places[2], other_places[3])
+        septimo, octavo, noveno, decimo = other_places[4], other_places[5], other_places[6], other_places[7]
+        rest_of_places = other_places[8]
 
-        RellenarMedallero(athletes, bronce, plata, oro, quinto, medallero)
+        RellenarMedallero(athletes, bronce, plata, oro, quinto, septimo, octavo, noveno, decimo, rest_of_places, medallero)
+    
+    json_ = json.dumps(ReturnJson(athletes, medallero))
+    with open(f'{style_category}.json', 'w') as archivo_json:
+        archivo_json.write(json_)
+
     print(medallero)
 
 
@@ -225,19 +233,19 @@ def Repechaje(athletes, enfrentamientos, oro, plata, semi, matrix):
                 else:
                     not_semifinalist_sc.append(enfrentamiento[0])
     
-    atl1bronce_atl1_6to = Enfrenta([(not_semifinalist_c[0], not_semifinalist_c[1])], enfrentamientos, matrix)
-    sexto1 = atl1bronce_atl1_6to[0]
-    quinto1_bronce1 = Enfrenta([(atl1bronce_atl1_6to[1][0], semifinalist_c[0])], enfrentamientos, matrix)
+    atl1bronce_atl1_7mo = Enfrenta([(not_semifinalist_c[0], not_semifinalist_c[1])], enfrentamientos, matrix)
+    septimo = atl1bronce_atl1_7mo[0]
+    quinto1_bronce1 = Enfrenta([(atl1bronce_atl1_7mo[1][0], semifinalist_c[0])], enfrentamientos, matrix)
     quinto1 = quinto1_bronce1[0]
     bronce1 = quinto1_bronce1[1]
     
-    atl2bronce_atl2_6to = Enfrenta([(not_semifinalist_sc[0], not_semifinalist_sc[1])], enfrentamientos, matrix)
-    sexto2 = atl2bronce_atl2_6to[0]
-    quinto2_bronce2 = Enfrenta([(atl2bronce_atl2_6to[1][0], semifinalist_sc[0])], enfrentamientos, matrix)
+    atl2bronce_atl2_8vo = Enfrenta([(not_semifinalist_sc[0], not_semifinalist_sc[1])], enfrentamientos, matrix)
+    octavo = atl2bronce_atl2_8vo[0]
+    quinto2_bronce2 = Enfrenta([(atl2bronce_atl2_8vo[1][0], semifinalist_sc[0])], enfrentamientos, matrix)
     quinto2 = quinto2_bronce2[0]
     bronce2 = quinto2_bronce2[1]
 
-    athletesToRemove = [oro[0], plata[0], bronce1[0], bronce2[0], quinto1[0], quinto2[0], sexto1[0], sexto2[0]]
+    athletesToRemove = [oro[0], plata[0], bronce1[0], bronce2[0], quinto1[0], quinto2[0], septimo[0], octavo[0]]
     toRemoveFromAthletes.extend(athletesToRemove)
 
     for athlet in toRemoveFromAthletes:
@@ -254,8 +262,12 @@ def Repechaje(athletes, enfrentamientos, oro, plata, semi, matrix):
             if athletes_[i][0] == enfrentamiento[2][0]:
                 last_places_wins[athletes_[i][0]] += 1
         Ubicate(last_places_ordered, athletes_[i], last_places_wins)
+    noveno = [last_places_ordered[0]]
+    last_places_ordered.remove(last_places_ordered[0])
+    decimo = [last_places_ordered[0]]
+    last_places_ordered.remove(last_places_ordered[0])
 
-    return (bronce1, bronce2, quinto1, quinto2, sexto1, sexto2)  #bronces, quintos lugares y 7mo y 8vo lugares
+    return (bronce1, bronce2, quinto1, quinto2, septimo, octavo, noveno, decimo, last_places_ordered)  #bronces, quintos lugares y 7mo y 8vo lugares
 
 def Ubicate(list, athlete, last_places_wins):
     ubicado = False
@@ -275,7 +287,7 @@ def Ubicate(list, athlete, last_places_wins):
         list.append(athlete)
 
 
-def RellenarMedallero(athletes, bronce, plata, oro, quinto, medallero):
+def RellenarMedallero(athletes, bronce, plata, oro, quinto, septimo, octavo, noveno, decimo, others, medallero):
     for athlete in athletes:
         if athlete in oro:
             medallero[athlete[0] - 1][0] += 1
@@ -285,7 +297,151 @@ def RellenarMedallero(athletes, bronce, plata, oro, quinto, medallero):
             medallero[athlete[0] - 1][2] += 1
         elif athlete in quinto[0] or athlete in quinto[1]:
             medallero[athlete[0] - 1][3] += 1
+        elif athlete in septimo:
+            medallero[athlete[0] - 1][4] += 1
+        elif athlete in octavo:
+            medallero[athlete[0] - 1][5] += 1
+        elif athlete in noveno:
+            medallero[athlete[0] - 1][6] += 1
+        elif athlete in decimo:
+            medallero[athlete[0] - 1][7] += 1
         else:
-            medallero[athlete[0] - 1][3] += 1
+            medallero[athlete[0] - 1][8] += 1
     return
 
+def ReturnJson(athletes, medallero):
+    medallero_masc = [False for i in range(len(medallero))]
+
+    max = float('-inf')
+    first_place = None
+    for i in range(len(medallero)):
+        if medallero[i][0] > max and not medallero_masc[i]:
+            max = medallero[i][0]
+            first_place, index = athletes[i], i
+    medallero_masc[index] = True
+    
+    max = float('-inf')
+    second_place = None
+    for i in range(len(medallero)):
+        if medallero[i][1] > max and not medallero_masc[i]:
+            max = medallero[i][1]
+            second_place, index = athletes[i], i
+    medallero_masc[index] = True
+
+    max = float('-inf')
+    third_place = None
+    for i in range(len(medallero)):
+        if medallero[i][2] > max and not medallero_masc[i]:
+            max = medallero[i][2]
+            third_place, index = athletes[i], i
+    medallero_masc[index] = True
+
+    max = float('-inf')
+    fourth_place = None
+    for i in range(len(medallero)):
+        if medallero[i][2] > max and not medallero_masc[i]:
+            max = medallero[i][2]
+            fourth_place, index = athletes[i], i
+    medallero_masc[index] = True
+
+    max = float('-inf')
+    fifth_place = None
+    for i in range(len(medallero)):
+        if medallero[i][3] > max and not medallero_masc[i]:
+            max = medallero[i][3]
+            fifth_place, index = athletes[i], i
+    medallero_masc[index] = True
+
+    max = float('-inf')
+    sixth_place = None
+    for i in range(len(medallero)):
+        if medallero[i][3] > max and not medallero_masc[i]:
+            max = medallero[i][3]
+            sixth_place, index = athletes[i], i
+    medallero_masc[index] = True
+
+    max = float('-inf')
+    seventh_place = None
+    for i in range(len(medallero)):
+        if medallero[i][4] > max and not medallero_masc[i]:
+            max = medallero[i][4]
+            seventh_place, index = athletes[i], i
+    medallero_masc[index] = True
+
+    max = float('-inf')
+    eighth_place = None
+    for i in range(len(medallero)):
+        if medallero[i][5] > max and not medallero_masc[i]:
+            max = medallero[i][5]
+            eighth_place, index = athletes[i], i
+    medallero_masc[index] = True
+
+    datos = {
+        "name": "77 kg",
+        "name_en": "67 kg",
+        "type": "single",
+        "sport": "luc",
+        "sex": {
+            "male": {
+                    "date": "2024/08/08",
+                    "date_pred": None,
+                    "finished": False,
+                    "previa": [],
+                    "analysis": [],
+                    "previa_en": [],
+                    "analysis_en": [],
+                    "prediction": {
+                        "1": {
+                            "name": f'{first_place[1]}',
+                            "name_en": f'{first_place[1]}',
+                            "country_domain": f'{first_place[2]}',
+                            "status": 0
+                        },
+                        "2": {
+                            "name": f'{second_place[1]}',
+                            "name_en": f'{second_place[1]}',
+                            "country_domain": f'{second_place[2]}',
+                            "status": 0
+                        },
+                        "3": {
+                            "name": f'{third_place[1]}',
+                            "name_en": f'{third_place[1]}',
+                            "country_domain": f'{third_place[2]}',
+                            "status": 0
+                        },
+                        "4": {
+                            "name": f'{fourth_place[1]}',
+                            "name_en": f'{fourth_place[1]}',
+                            "country_domain": f'{fourth_place[2]}',
+                            "status": 0
+                        },
+                        "5": {
+                            "name": f'{fifth_place[1]}',
+                            "name_en": f'{fifth_place[1]}',
+                            "country_domain": f'{fifth_place[2]}',
+                            "status": 0
+                        },
+                        "6": {
+                            "name": f'{sixth_place[1]}',
+                            "name_en": f'{sixth_place[1]}',
+                            "country_domain": f'{sixth_place[2]}',
+                            "status": 0
+                        },
+                        "7": {
+                            "name": f'{seventh_place[1]}',
+                            "name_en": f'{seventh_place[1]}',
+                            "country_domain": f'{seventh_place[2]}',
+                            "status": 0
+                        },
+                        "8": {
+                            "name": f'{eighth_place[1]}',
+                            "name_en": f'{seventh_place[1]}',
+                            "country_domain": f'{seventh_place[2]}',
+                            "status": 0
+                        }
+                    },
+            }
+        }
+    }
+
+    return datos
