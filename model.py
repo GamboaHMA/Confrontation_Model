@@ -24,6 +24,10 @@ def Results(style_category):
     clashes = cursor.fetchall()
 
     matrix = probando_regresion.GetMatrixVersusPlayers(clashes, athletes)  #matriz de probabilidades
+    for i in range(len(matrix)):    #mijain
+        if i == 3:
+            continue
+        matrix[3][i][1] = 1
 
     iterations = 10000
     medallero = [[0,0,0,0,0,0,0,0,0] for i in range(len(athletes))]
@@ -114,7 +118,7 @@ def Enfrenta(atls_2a2, enfrentamientos, matrix):
             atl_1_points = matrix[atl_1[0] - 1][atl_2[0] - 1][1]    #atl1_0 es el id del atleta 1, la matriz en i,j [1] es la cantidad de puntos
             atl_2_points = matrix[atl_2[0] - 1][atl_1[0] - 1][1]
             total = atl_1_points + atl_2_points
-            porcentaje_atl1 = atl_1_points/total
+            porcentaje_atl1 = atl_1_points/total           
         else:
             atl_1_rank = atl_1[6]
             atl_2_rank = atl_2[6]

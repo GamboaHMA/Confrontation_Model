@@ -1,0 +1,67 @@
+{
+  "name": "77 kg",
+  "name_en": "67 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Pavel HLINCHUK",
+          "name_en": "Pavel HLINCHUK",
+          "country_domain": "AIN",
+          "status": 0
+        },
+        "2": {
+          "name": "Abdellatif Mohamed Ahmed MOHAMED",
+          "name_en": "Abdellatif Mohamed Ahmed MOHAMED",
+          "country_domain": "EGY",
+          "status": 0
+        },
+        "3": {
+          "name": "Alin ALEXUC CIURARIU",
+          "name_en": "Alin ALEXUC CIURARIU",
+          "country_domain": "ROU",
+          "status": 0
+        },
+        "4": {
+          "name": "Jello KRAHMER",
+          "name_en": "Jello KRAHMER",
+          "country_domain": "GER",
+          "status": 0
+        },
+        "5": {
+          "name": "Yasmani ACOSTA FERNANDEZ",
+          "name_en": "Yasmani ACOSTA FERNANDEZ",
+          "country_domain": "CHI",
+          "status": 0
+        },
+        "6": {
+          "name": "Sergei SEMENOV",
+          "name_en": "Sergei SEMENOV",
+          "country_domain": "AIN",
+          "status": 0
+        },
+        "7": {
+          "name": "Seungchan LEE",
+          "name_en": "Seungchan LEE",
+          "country_domain": "KOR",
+          "status": 0
+        },
+        "8": {
+          "name": "Alimkhan SYZDYKOV",
+          "name_en": "Seungchan LEE",
+          "country_domain": "KOR",
+          "status": 0
+        }
+      }
+    }
+  }
+}
