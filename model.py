@@ -16,7 +16,7 @@ def Results(style_category):
     cursor = conn.cursor()
 
     query = f'SELECT * FROM {style_category}'
-    #cursor.execute(query)
+    cursor.execute(query)
     athletes = cursor.fetchall()
     query = f'SELECT * FROM clashes_{style_category}'  #aqui construimos clashes_mgr_60g
     cursor.execute(query)
@@ -40,9 +40,12 @@ def Results(style_category):
         semi, winners = Enfrenta(athletes_2a2, enfrentamientos, matrix)
         athletes_2a2 = Get_2a2(winners)
         oro, plata = Enfrenta(athletes_2a2, enfrentamientos, matrix)
-        bronce = Repechaje(enfrentamientos, oro, plata, semi, matrix)        
 
-        RellenarMedallero(athletes, bronce, plata, oro, medallero)
+        bronces_quintos = Repechaje(athletes, enfrentamientos, oro, plata, semi, matrix)
+        bronce = (bronces_quintos[0], bronces_quintos[1])
+        quinto = (bronces_quintos[2], bronces_quintos[3])        
+
+        RellenarMedallero(athletes, bronce, plata, oro, quinto, medallero)
     print(medallero)
 
 
@@ -181,7 +184,7 @@ def DistCuadrosEnfrentamientos(athletes):       #arreglar al final
 
     return result
 
-def Repechaje(enfrentamientos, oro, plata, semi, matrix):
+def Repechaje(athletes, enfrentamientos, oro, plata, semi, matrix):
     lossers_by_campeon = []
     lossers_by_subcampeon = []
     not_semifinalist_c = []
@@ -189,9 +192,12 @@ def Repechaje(enfrentamientos, oro, plata, semi, matrix):
     not_semifinalist_sc = []
     semifinalist_sc = []
 
+    athletes_ = copy.deepcopy(athletes)
+    toRemoveFromAthletes = []
+
     for enfrentamiento in enfrentamientos:
-        if enfrentamiento[0] in oro:
-            if enfrentamiento[1] not in plata:
+        if enfrentamiento[0] in oro:  #fue derrotado por el oro
+            if enfrentamiento[1] not in plata:   #no es el plata
                 lossers_by_campeon.append(enfrentamiento[1])
                 if enfrentamiento[1] in semi:
                     semifinalist_c.append(enfrentamiento[1])
@@ -219,15 +225,57 @@ def Repechaje(enfrentamientos, oro, plata, semi, matrix):
                 else:
                     not_semifinalist_sc.append(enfrentamiento[0])
     
-    atl1_por_bronce = Enfrenta([(not_semifinalist_c[0], not_semifinalist_c[1])], enfrentamientos, matrix)[1]
-    bronce1 = Enfrenta([(atl1_por_bronce[0], semifinalist_c[0])], enfrentamientos, matrix)[1]
+    atl1bronce_atl1_6to = Enfrenta([(not_semifinalist_c[0], not_semifinalist_c[1])], enfrentamientos, matrix)
+    sexto1 = atl1bronce_atl1_6to[0]
+    quinto1_bronce1 = Enfrenta([(atl1bronce_atl1_6to[1][0], semifinalist_c[0])], enfrentamientos, matrix)
+    quinto1 = quinto1_bronce1[0]
+    bronce1 = quinto1_bronce1[1]
     
-    atl2_por_bronce = Enfrenta([(not_semifinalist_sc[0], not_semifinalist_sc[1])], enfrentamientos, matrix)[1]
-    bronce2 = Enfrenta([(atl2_por_bronce[0], semifinalist_sc[0])], enfrentamientos, matrix)[1]
+    atl2bronce_atl2_6to = Enfrenta([(not_semifinalist_sc[0], not_semifinalist_sc[1])], enfrentamientos, matrix)
+    sexto2 = atl2bronce_atl2_6to[0]
+    quinto2_bronce2 = Enfrenta([(atl2bronce_atl2_6to[1][0], semifinalist_sc[0])], enfrentamientos, matrix)
+    quinto2 = quinto2_bronce2[0]
+    bronce2 = quinto2_bronce2[1]
 
-    return (bronce1, bronce2)
+    athletesToRemove = [oro[0], plata[0], bronce1[0], bronce2[0], quinto1[0], quinto2[0], sexto1[0], sexto2[0]]
+    toRemoveFromAthletes.extend(athletesToRemove)
 
-def RellenarMedallero(athletes, bronce, plata, oro, medallero):
+    for athlet in toRemoveFromAthletes:
+        for i in range(len(athletes_)):
+            if athletes_[i][0] == athlet[0]:
+                athletes_.remove(athletes_[i])
+                break
+
+    last_places_wins = {}
+    last_places_ordered = []
+    for i in range(len(athletes_)):
+        last_places_wins[athletes_[i][0]] = 0
+        for enfrentamiento in enfrentamientos:
+            if athletes_[i][0] == enfrentamiento[2][0]:
+                last_places_wins[athletes_[i][0]] += 1
+        Ubicate(last_places_ordered, athletes_[i], last_places_wins)
+
+    return (bronce1, bronce2, quinto1, quinto2, sexto1, sexto2)  #bronces, quintos lugares y 7mo y 8vo lugares
+
+def Ubicate(list, athlete, last_places_wins):
+    ubicado = False
+    if len(list) == 0:
+        list.append(athlete)
+        ubicado = True
+    else:
+        for i in range(len(list)):
+            athlete_id = list[i][0]
+            if last_places_wins[athlete_id] > last_places_wins[athlete[0]]:
+                continue
+            else:
+                list.insert(i, athlete)
+                ubicado = True
+                break
+    if not ubicado:
+        list.append(athlete)
+
+
+def RellenarMedallero(athletes, bronce, plata, oro, quinto, medallero):
     for athlete in athletes:
         if athlete in oro:
             medallero[athlete[0] - 1][0] += 1
@@ -235,6 +283,8 @@ def RellenarMedallero(athletes, bronce, plata, oro, medallero):
             medallero[athlete[0] - 1][1] += 1
         elif athlete in bronce[0] or athlete in bronce[1]:
             medallero[athlete[0] - 1][2] += 1
+        elif athlete in quinto[0] or athlete in quinto[1]:
+            medallero[athlete[0] - 1][3] += 1
         else:
             medallero[athlete[0] - 1][3] += 1
     return

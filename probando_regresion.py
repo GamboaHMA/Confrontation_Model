@@ -130,10 +130,6 @@ def GetMatrixVersusPlayers(clashes, athletes):
 
         a1_id = clash[3]
         a2_id = clash[4]
-        if(a1_id > a2_id):
-            id_ = a1_id
-            a1_id = a2_id
-            a2_id = id_
         
         if ((a1_id, a2_id) not in dicc_2a2_clashes):
             dicc_2a2_clashes[(a1_id, a2_id)] = []
@@ -185,63 +181,104 @@ def GetMatrixVersusPlayers(clashes, athletes):
 
 
             matrix[i-1][j-1].append(a1_vict)
-            matrix[i-1][j-1].append(a1_regist)
+            matrix[i-1][j-1].append(a1_regist/(a1_regist+a2_regist))
             #matrix[i-1][j-1].append(1 if(last_clash[7] == i) else 0)    
             
             matrix[j-1][i-1].append(a2_vict)      
-            matrix[j-1][i-1].append(a2_regist)
+            matrix[j-1][i-1].append(a2_regist/(a1_regist+a2_regist))
             #matrix[j-1][i-1].append(1 if(last_clash[7] == j) else 0) 
 
 
-    for i in range(n):
-        for j in range(i + 1, n):
-            if matrix[i][j] is None:
-                AthletesInterception(matrix, i, j, n)
-
-            else:
-                continue   
+    matrix = AthletesInterception(matrix)   
     
     return matrix  
 
-def AthletesInterception(matrix, athl1, athl2, n):
-    athl1_set = {}  #atletas a los que se ha enfrentado athl1
-    athl2_set = {}  #atletas a los que se ha enfrentado athl2
+def AthletesInterception(matrix):
+    n = len(matrix)
+    new_matrix = copy.deepcopy(matrix)
+    noClashes = [] #pares de atletas que no se han enfrentado nunca
+
     for i in range(n):
-        if i + 1 != athl1:
-            athl1_set[i + 1] = matrix[athl1][i] / matrix[athl1][i] + matrix[i][athl1]  #o sea guarda la prob que tiene athl1 de ganarle a i 
+        for j in range(i+1, n):
+            if len(matrix[i][j]) == 0:
+                noClashes.append((i+1,j+1))
 
-    for j in range(n):
-        if j + 1 != athl2:
-            athl2_set[athl2] = matrix[athl2][j] / matrix[athl2][j] + matrix[j][athl2]
+    while(len(noClashes) != 0):         #mientras queden pares de luchadores sin tener una probabilidad
+        change = False
+        athl1, athl2 = noClashes[0]
+        noClashes.remove(noClashes[0])
 
-    prob_athl1_athl2 = 0
-    prob_athl2_athl1 = 0
-    for athl, prob_a1 in athl1_set: #probabilidad que tiene athl1 contra athl
-        if athl in athl2_set.keys:
-            prob_a2 = athl2_set[athl] #prob que tiene athl2 contra atleta athl
+        athl1_set = {}  #atletas a los que se ha enfrentado athl1 
+        athl2_set = {}  #atletas a los que se ha enfrentado athl2
+        for i in range(n):
+            if i + 1 != athl1:
+                if len(matrix[athl1-1][i]) != 0:       #matrix[at-1][i][1] accede al porciento de ganarle at a i(id de athl)
+                    p_a1_i = matrix[athl1-1][i][1]
+                    athl1_set[i+1] = p_a1_i  #o sea guarda la prob que tiene athl1 de ganarle a i(id de algun atleta) 
 
-            if prob_a1 > 0.5 and prob_a2 > 0.5:    #los dos le ganaron a athl
-                if prob_a1 > prob_a2: 
-                    prob_athl1_athl2 += (prob_a1 - prob_a2)*0.6
-                    prob_athl2_athl1 += (prob_a1 - prob_a2)*0.4
-                else:
-                    prob_athl2_athl1 += (prob_a2 - prob_a1)*0.6
-                    prob_athl1_athl2 += (prob_a2 - prob_a1)*0.4
+        for j in range(n):
+            if j + 1 != athl2:
+                if len(matrix[athl2-1][j]) != 0:
+                    p_a2_j = matrix[athl2-1][j][1]
+                    athl2_set[j+1] = p_a2_j   #o sea guarda la prob que tiene athl1 de ganarle a i(id de algun atleta) 
+
+        prob_athl1_athl2 = 0
+        prob_athl2_athl1 = 0
+        for athl, prob_a1 in athl1_set.items(): #probabilidad que tiene athl1 contra athl
+            if athl in athl2_set.keys():
+                change = True
+                prob_a2 = athl2_set[athl] #prob que tiene athl2 contra atleta athl
+
+                if prob_a1 > 0.5 and prob_a2 > 0.5:    #los dos le ganaron a athl
+                    if prob_a1 > prob_a2: 
+                        prob_athl1_athl2 += (prob_a1 - prob_a2)*0.6
+                        prob_athl2_athl1 += (prob_a1 - prob_a2)*0.4
+                    else:
+                        prob_athl2_athl1 += (prob_a2 - prob_a1)*0.6
+                        prob_athl1_athl2 += (prob_a2 - prob_a1)*0.4
             
-            elif prob_a1 > 0.5 and prob_a2 < 0.5:  # a1 le gano a athl y a2 perdio contra athl
-                prob_athl1_athl2 += (prob_a1 - prob_a2)*0.85
-                prob_athl2_athl1 += (prob_a1 - prob_a2)*0.15
+                elif prob_a1 > 0.5 and prob_a2 < 0.5:  # a1 le gano a athl y a2 perdio contra athl
+                    prob_athl1_athl2 += (prob_a1 - prob_a2)*0.85
+                    prob_athl2_athl1 += (prob_a1 - prob_a2)*0.15
             
-            elif prob_a1 < 0.5 and prob_a2 < 0.5:  # ambos perdieron contra athl
-                if prob_a1 > prob_a2: 
-                    prob_athl1_athl2 += (prob_a1 - prob_a2)*0.4
-                    prob_athl2_athl1 += (prob_a1 - prob_a2)*0.6
-                else:
-                    prob_athl2_athl1 += (prob_a2 - prob_a1)*0.4
-                    prob_athl1_athl2 += (prob_a2 - prob_a1)*0.6
+                elif prob_a1 < 0.5 and prob_a2 < 0.5:  # ambos perdieron contra athl
+                    if prob_a1 > prob_a2: 
+                        prob_athl1_athl2 += (prob_a1 - prob_a2)*0.4
+                        prob_athl2_athl1 += (prob_a1 - prob_a2)*0.6
+                    else:
+                        prob_athl2_athl1 += (prob_a2 - prob_a1)*0.4
+                        prob_athl1_athl2 += (prob_a2 - prob_a1)*0.6
     
-    matrix[athl1][athl2] = prob_athl1_athl2 / prob_athl1_athl2 + prob_athl2_athl1
-    matrix[athl2][athl1] = prob_athl2_athl1 / prob_athl1_athl2 + prob_athl2_athl1
+        if prob_athl1_athl2 != 0 or prob_athl2_athl1 != 0:  
+            new_matrix[athl1-1][athl2-1].append(-1)
+            new_matrix[athl1-1][athl2-1].append(prob_athl1_athl2 / (prob_athl1_athl2 + prob_athl2_athl1))
+            new_matrix[athl2-1][athl1-1].append(-1)
+            new_matrix[athl2-1][athl1-1].append(prob_athl2_athl1 / (prob_athl1_athl2 + prob_athl2_athl1))
+        else:
+            new_matrix[athl1-1][athl2-1].append(-1)
+            new_matrix[athl1-1][athl2-1].append(0.5)
+            new_matrix[athl2-1][athl1-1].append(-1)
+            new_matrix[athl2-1][athl1-1].append(0.5)
+        print("hi")           
+
+    return new_matrix
+
+
+    #if len(noClashes) != 0:
+    #    for par in noClashes:
+    #        athl1 = par[0]
+    #        athl2 = par[1]
+
+    #        matrix[athl1-1][athl2-1].append(0)
+    #        matrix[athl1-1][athl2-1].append(0.5)
+
+    #        matrix[athl2-1][athl1-1].append(0)
+    #        matrix[athl2-1][athl1-1].append(0.5)
+
+            
+            
+
+    
 
 
 
