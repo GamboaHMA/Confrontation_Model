@@ -11,8 +11,8 @@ from temporales.athletes_urls import *
 
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
-cursor.execute('DELETE FROM clashes_mgr_130kg WHERE athlete1_id = ? OR athlete2_id = ?', (4,4))
-conn.commit()
+#cursor.execute('DELETE FROM clashes_mgr_60kg')
+#conn.commit()
 #query = "SELECT * FROM clashes WHERE clashes.category = '60Kg'"
 #cursor.execute(query)
 #clashes_60kg = cursor.fetchall()
@@ -76,7 +76,7 @@ conn.commit()
 #''')
 #conn.commit()
 
-for url in mgr130kg:
+for url in mgr60kg:
     clashes_ = my_pyscraper.GetAthletesClashes([url])
     
     for clash in clashes_:     #clash(style, category, atl1_name, atl2_name, (atl1_points, atl2_points), atl1_name, winning_form, date)
@@ -118,7 +118,7 @@ for url in mgr130kg:
         if (atl1_id == 0 or atl2_id == 0):
             continue
 
-        clash_table = 'clashes_mgr_130kg'
+        clash_table = 'clashes_mgr_60kg'
         verify_query = f'''SELECT * FROM {clash_table} WHERE athlete1_id = ? AND athlete2_id = ? AND result = ? AND date = ?'''
         cursor.execute(verify_query, (atl1_id, atl2_id, clash_result, date))
         verify_exists = cursor.fetchall()

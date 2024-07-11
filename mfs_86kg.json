@@ -1,1 +1,67 @@
-{"name": "77 kg", "name_en": "67 kg", "type": "single", "sport": "luc", "sex": {"male": {"date": "2024/08/08", "date_pred": null, "finished": false, "previa": [], "analysis": [], "previa_en": [], "analysis_en": [], "prediction": {"1": {"name": "Bat Erdene BYAMBASUREN", "name_en": "Bat Erdene BYAMBASUREN", "country_domain": "MGL", "status": 0}, "2": {"name": "Alexander Robert MOORE", "name_en": "Alexander Robert MOORE", "country_domain": "CAN", "status": 0}, "3": {"name": "Ethan Adrian RAMOS", "name_en": "Ethan Adrian RAMOS", "country_domain": "PUR", "status": 0}, "4": {"name": "Osman NURMAGOMEDOV", "name_en": "Osman NURMAGOMEDOV", "country_domain": "AZE", "status": 0}, "5": {"name": "Dauren KURUGLIEV", "name_en": "Dauren KURUGLIEV", "country_domain": "GRE", "status": 0}, "6": {"name": "Jayden Alexander LAWRENCE", "name_en": "Jayden Alexander LAWRENCE", "country_domain": "AUS", "status": 0}, "7": {"name": "Myles Nazem AMINE", "name_en": "Myles Nazem AMINE", "country_domain": "SMR", "status": 0}, "8": {"name": "Javrail SHAPIEV", "name_en": "Myles Nazem AMINE", "country_domain": "SMR", "status": 0}}}}}
+{
+  "name": "86 kg",
+  "name_en": "86 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Hassan YAZDANI",
+          "name_en": "Hassan YAZDANI",
+          "country_domain": "IRI",
+          "status": 0
+        },
+        "2": {
+          "name": "David TAYLOR",
+          "name_en": "David TAYLOR",
+          "country_domain": "USA",
+          "status": 0
+        },
+        "3": {
+          "name": "Artur NAIFONOV",
+          "name_en": "Artur NAIFONOV",
+          "country_domain": "AIN",
+          "status": 0
+        },
+        "4": {
+          "name": "Hayato ISHIGURO",
+          "name_en": "Hayato ISHIGURO",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "5": {
+          "name": "Azamat DAULETBEKOV",
+          "name_en": "Azamat DAULETBEKOV",
+          "country_domain": "KAZ",
+          "status": 0
+        },
+        "6": {
+          "name": "Alexander Robert MOORE",
+          "name_en": "Alexander Robert MOORE",
+          "country_domain": "CAN",
+          "status": 0
+        },
+        "7": {
+          "name": "Ethan Adrian RAMOS",
+          "name_en": "Ethan Adrian RAMOS",
+          "country_domain": "PUR",
+          "status": 0
+        },
+        "8": {
+          "name": "Bat Erdene BYAMBASUREN",
+          "name_en": "Bat Erdene BYAMBASUREN",
+          "country_domain": "MGL",
+          "status": 0
+        }
+      }
+    }
+  }
+}

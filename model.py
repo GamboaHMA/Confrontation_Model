@@ -24,20 +24,21 @@ def Results(style_category):
     clashes = cursor.fetchall()
 
     matrix = probando_regresion.GetMatrixVersusPlayers(clashes, athletes)  #matriz de probabilidades
-    for i in range(len(matrix)):    #mijain
-        if i == 3:
-            continue
-        matrix[3][i][1] = 1
+    #for i in range(len(matrix)):    #mijain
+    #    if i == 3:
+    #        continue
+    #    matrix[3][i][1] = 1
 
     iterations = 10000
     medallero = [[0,0,0,0,0,0,0,0,0] for i in range(len(athletes))]
 
+    athletes_ = copy.deepcopy(athletes)
     for i in range(iterations):
-        athletes = DistCuadrosEnfrentamientos(athletes)
+        athletes_ = DistCuadrosEnfrentamientos(athletes_)
 
         enfrentamientos = []
 
-        athletes_2a2 = Get_2a2(athletes)
+        athletes_2a2 = Get_2a2(athletes_)
         octavos, winners = Enfrenta(athletes_2a2, enfrentamientos, matrix)
         athletes_2a2 = Get_2a2(winners)
         cuartos, winners = Enfrenta(athletes_2a2, enfrentamientos, matrix)
@@ -52,7 +53,7 @@ def Results(style_category):
         septimo, octavo, noveno, decimo = other_places[4], other_places[5], other_places[6], other_places[7]
         rest_of_places = other_places[8]
 
-        RellenarMedallero(athletes, bronce, plata, oro, quinto, septimo, octavo, noveno, decimo, rest_of_places, medallero)
+        RellenarMedallero(athletes_, bronce, plata, oro, quinto, septimo, octavo, noveno, decimo, rest_of_places, medallero)
     
     json_ = json.dumps(ReturnJson(athletes, medallero))
     with open(f'{style_category}.json', 'w') as archivo_json:
@@ -439,8 +440,8 @@ def ReturnJson(athletes, medallero):
                         },
                         "8": {
                             "name": f'{eighth_place[1]}',
-                            "name_en": f'{seventh_place[1]}',
-                            "country_domain": f'{seventh_place[2]}',
+                            "name_en": f'{eighth_place[1]}',
+                            "country_domain": f'{eighth_place[2]}',
                             "status": 0
                         }
                     },

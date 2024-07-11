@@ -1,1 +1,67 @@
-{"name": "77 kg", "name_en": "67 kg", "type": "single", "sport": "luc", "sex": {"male": {"date": "2024/08/08", "date_pred": null, "finished": false, "previa": [], "analysis": [], "previa_en": [], "analysis_en": [], "prediction": {"1": {"name": "Sebastian C RIVERA", "name_en": "Sebastian C RIVERA", "country_domain": "PUR", "status": 0}, "2": {"name": "Tulga TUMUR-OCHIR", "name_en": "Tulga TUMUR-OCHIR", "country_domain": "MGL", "status": 0}, "3": {"name": "Shamil MAMEDOV", "name_en": "Shamil MAMEDOV", "country_domain": "AIN", "status": 0}, "4": {"name": "Gaku AKAZAWA", "name_en": "Gaku AKAZAWA", "country_domain": "SAM", "status": 0}, "5": {"name": "Goderdzi DZEBISASHVILI", "name_en": "Goderdzi DZEBISASHVILI", "country_domain": "GEO", "status": 0}, "6": {"name": "Haji ALIYEV", "name_en": "Haji ALIYEV", "country_domain": "AZE", "status": 0}, "7": {"name": "Georgii OKOROKOV", "name_en": "Georgii OKOROKOV", "country_domain": "AUS", "status": 0}, "8": {"name": "Austin Klee GOMEZ", "name_en": "Georgii OKOROKOV", "country_domain": "AUS", "status": 0}}}}}
+{
+  "name": "65 kg",
+  "name_en": "65 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Alejandro Enrique VALDES TOBIER",
+          "name_en": "Alejandro Enrique VALDES TOBIER",
+          "country_domain": "CUB",
+          "status": 0
+        },
+        "2": {
+          "name": "Vazgen TEVANYAN",
+          "name_en": "Vazgen TEVANYAN",
+          "country_domain": "ARM",
+          "status": 0
+        },
+        "3": {
+          "name": "Iszmail MUSZUKAJEV",
+          "name_en": "Iszmail MUSZUKAJEV",
+          "country_domain": "HUN",
+          "status": 0
+        },
+        "4": {
+          "name": "Rahman Mousa AMOUZADKHALILI",
+          "name_en": "Rahman Mousa AMOUZADKHALILI",
+          "country_domain": "IRI",
+          "status": 0
+        },
+        "5": {
+          "name": "Haji ALIYEV",
+          "name_en": "Haji ALIYEV",
+          "country_domain": "AZE",
+          "status": 0
+        },
+        "6": {
+          "name": "Kotaro KIYOOKA",
+          "name_en": "Kotaro KIYOOKA",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "7": {
+          "name": "Georgii OKOROKOV",
+          "name_en": "Georgii OKOROKOV",
+          "country_domain": "AUS",
+          "status": 0
+        },
+        "8": {
+          "name": "Islam DUDAEV",
+          "name_en": "Islam DUDAEV",
+          "country_domain": "ALB",
+          "status": 0
+        }
+      }
+    }
+  }
+}

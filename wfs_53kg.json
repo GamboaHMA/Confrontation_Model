@@ -1,1 +1,67 @@
-{"name": "77 kg", "name_en": "67 kg", "type": "single", "sport": "luc", "sex": {"male": {"date": "2024/08/08", "date_pred": null, "finished": false, "previa": [], "analysis": [], "previa_en": [], "analysis_en": [], "prediction": {"1": {"name": "Dominique Olivia PARRISH", "name_en": "Dominique Olivia PARRISH", "country_domain": "USA", "status": 0}, "2": {"name": "Khulan BATKHUYAG", "name_en": "Khulan BATKHUYAG", "country_domain": "MGL", "status": 0}, "3": {"name": "Christianah Tolulope OGUNSANYA", "name_en": "Christianah Tolulope OGUNSANYA", "country_domain": "NGR", "status": 0}, "4": {"name": "Mia Lahnee Ramos AQUINO", "name_en": "Mia Lahnee Ramos AQUINO", "country_domain": "GUM", "status": 0}, "5": {"name": "Akari FUJINAMI", "name_en": "Akari FUJINAMI", "country_domain": "JPN", "status": 0}, "6": {"name": "Betzabeth Angelica ARGUELLO VILLEGAS", "name_en": "Betzabeth Angelica ARGUELLO VILLEGAS", "country_domain": "VEN", "status": 0}, "7": {"name": "Andreea Beatrice ANA", "name_en": "Andreea Beatrice ANA", "country_domain": "ROU", "status": 0}, "8": {"name": "Emma Jonna Denise MALMGREN", "name_en": "Andreea Beatrice ANA", "country_domain": "ROU", "status": 0}}}}}
+{
+  "name": "53 kg",
+  "name_en": "53 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Vanesa KALADZINSKAYA",
+          "name_en": "Vanesa KALADZINSKAYA",
+          "country_domain": "AIN",
+          "status": 0
+        },
+        "2": {
+          "name": "Akari FUJINAMI",
+          "name_en": "Akari FUJINAMI",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "3": {
+          "name": "Emma Jonna Denise MALMGREN",
+          "name_en": "Emma Jonna Denise MALMGREN",
+          "country_domain": "SWE",
+          "status": 0
+        },
+        "4": {
+          "name": "Antim ANTIM",
+          "name_en": "Antim ANTIM",
+          "country_domain": "IND",
+          "status": 0
+        },
+        "5": {
+          "name": "Lucia Yamileth YEPEZ GUZMAN",
+          "name_en": "Lucia Yamileth YEPEZ GUZMAN",
+          "country_domain": "ECU",
+          "status": 0
+        },
+        "6": {
+          "name": "Andreea Beatrice ANA",
+          "name_en": "Andreea Beatrice ANA",
+          "country_domain": "ROU",
+          "status": 0
+        },
+        "7": {
+          "name": "Mariana DRAGUTAN",
+          "name_en": "Mariana DRAGUTAN",
+          "country_domain": "MDA",
+          "status": 0
+        },
+        "8": {
+          "name": "Khulan BATKHUYAG",
+          "name_en": "Khulan BATKHUYAG",
+          "country_domain": "MGL",
+          "status": 0
+        }
+      }
+    }
+  }
+}

@@ -1,1 +1,67 @@
-{"name": "77 kg", "name_en": "67 kg", "type": "single", "sport": "luc", "sex": {"male": {"date": "2024/08/08", "date_pred": null, "finished": false, "previa": [], "analysis": [], "previa_en": [], "analysis_en": [], "prediction": {"1": {"name": "Yones Aliakbar EMAMICHOGHAEI", "name_en": "Yones Aliakbar EMAMICHOGHAEI", "country_domain": "IRI", "status": 0}, "2": {"name": "Iman MAHDAVI", "name_en": "Iman MAHDAVI", "country_domain": "EOR", "status": 0}, "3": {"name": "Bekzod ABDURAKHMONOV", "name_en": "Bekzod ABDURAKHMONOV", "country_domain": "UZB", "status": 0}, "4": {"name": "Hetik CABOLOV", "name_en": "Hetik CABOLOV", "country_domain": "SRB", "status": 0}, "5": {"name": "Zaurbek SIDAKOV", "name_en": "Zaurbek SIDAKOV", "country_domain": "AIN", "status": 0}, "6": {"name": "Tajmuraz Mairbekovic SALKAZANOV", "name_en": "Tajmuraz Mairbekovic SALKAZANOV", "country_domain": "SVK", "status": 0}, "7": {"name": "Kyle DAKE", "name_en": "Kyle DAKE", "country_domain": "USA", "status": 0}, "8": {"name": "Mahamedkhabib KADZIMAHAMEDAU", "name_en": "Kyle DAKE", "country_domain": "USA", "status": 0}}}}}
+{
+  "name": "74 kg",
+  "name_en": "74 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Zaurbek SIDAKOV",
+          "name_en": "Zaurbek SIDAKOV",
+          "country_domain": "AIN",
+          "status": 0
+        },
+        "2": {
+          "name": "Kyle DAKE",
+          "name_en": "Kyle DAKE",
+          "country_domain": "USA",
+          "status": 0
+        },
+        "3": {
+          "name": "Hetik CABOLOV",
+          "name_en": "Hetik CABOLOV",
+          "country_domain": "SRB",
+          "status": 0
+        },
+        "4": {
+          "name": "Mahamedkhabib KADZIMAHAMEDAU",
+          "name_en": "Mahamedkhabib KADZIMAHAMEDAU",
+          "country_domain": "AIN",
+          "status": 0
+        },
+        "5": {
+          "name": "Yones Aliakbar EMAMICHOGHAEI",
+          "name_en": "Yones Aliakbar EMAMICHOGHAEI",
+          "country_domain": "IRI",
+          "status": 0
+        },
+        "6": {
+          "name": "Geandry GARZON CABALLERO",
+          "name_en": "Geandry GARZON CABALLERO",
+          "country_domain": "CUB",
+          "status": 0
+        },
+        "7": {
+          "name": "Turan BAYRAMOV",
+          "name_en": "Turan BAYRAMOV",
+          "country_domain": "AZE",
+          "status": 0
+        },
+        "8": {
+          "name": "Tajmuraz Mairbekovic SALKAZANOV",
+          "name_en": "Tajmuraz Mairbekovic SALKAZANOV",
+          "country_domain": "SVK",
+          "status": 0
+        }
+      }
+    }
+  }
+}

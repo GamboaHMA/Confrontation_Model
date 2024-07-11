@@ -1,0 +1,67 @@
+{
+  "name": "60 kg",
+  "name_en": "60 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Kenichiro FUMITA",
+          "name_en": "Kenichiro FUMITA",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "2": {
+          "name": "Zholaman SHARSHENBEKOV",
+          "name_en": "Zholaman SHARSHENBEKOV",
+          "country_domain": "KGZ",
+          "status": 0
+        },
+        "3": {
+          "name": "Islomjon BAKHRAMOV",
+          "name_en": "Islomjon BAKHRAMOV",
+          "country_domain": "UZB",
+          "status": 0
+        },
+        "4": {
+          "name": "Aidos SULTANGALI",
+          "name_en": "Aidos SULTANGALI",
+          "country_domain": "KAZ",
+          "status": 0
+        },
+        "5": {
+          "name": "Liguo CAO",
+          "name_en": "Liguo CAO",
+          "country_domain": "CHN",
+          "status": 0
+        },
+        "6": {
+          "name": "Murad MAMMADOV",
+          "name_en": "Murad MAMMADOV",
+          "country_domain": "AZE",
+          "status": 0
+        },
+        "7": {
+          "name": "Georgij TIBILOV",
+          "name_en": "Georgij TIBILOV",
+          "country_domain": "SRB",
+          "status": 0
+        },
+        "8": {
+          "name": "Abdelkarim FERGAT",
+          "name_en": "Abdelkarim FERGAT",
+          "country_domain": "ALG",
+          "status": 0
+        }
+      }
+    }
+  }
+}

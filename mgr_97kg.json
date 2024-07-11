@@ -1,1 +1,67 @@
-{"name": "77 kg", "name_en": "67 kg", "type": "single", "sport": "luc", "sex": {"male": {"date": "2024/08/08", "date_pred": null, "finished": false, "previa": [], "analysis": [], "previa_en": [], "analysis_en": [], "prediction": {"1": {"name": "Rustam ASSAKALOV", "name_en": "Rustam ASSAKALOV", "country_domain": "UZB", "status": 0}, "2": {"name": "Gabriel Alejandro ROSILLO KINDELAN", "name_en": "Gabriel Alejandro ROSILLO KINDELAN", "country_domain": "CUB", "status": 0}, "3": {"name": "Kevin MEJIA CASTILLO", "name_en": "Kevin MEJIA CASTILLO", "country_domain": "HON", "status": 0}, "4": {"name": "Abubakar KHASLAKHANAU", "name_en": "Abubakar KHASLAKHANAU", "country_domain": "AIN", "status": 0}, "5": {"name": "Uzur DZHUZUPBEKOV", "name_en": "Uzur DZHUZUPBEKOV", "country_domain": "KGZ", "status": 0}, "6": {"name": "Seungjun KIM", "name_en": "Seungjun KIM", "country_domain": "KOR", "status": 0}, "7": {"name": "Artur OMAROV", "name_en": "Artur OMAROV", "country_domain": "CZE", "status": 0}, "8": {"name": "Mohammadhadi Abdollah SARAVI", "name_en": "Artur OMAROV", "country_domain": "CZE", "status": 0}}}}}
+{
+  "name": "77 kg",
+  "name_en": "67 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Artur ALEKSANYAN",
+          "name_en": "Artur ALEKSANYAN",
+          "country_domain": "ARM",
+          "status": 0
+        },
+        "2": {
+          "name": "Gabriel Alejandro ROSILLO KINDELAN",
+          "name_en": "Gabriel Alejandro ROSILLO KINDELAN",
+          "country_domain": "CUB",
+          "status": 0
+        },
+        "3": {
+          "name": "Mohammadhadi Abdollah SARAVI",
+          "name_en": "Mohammadhadi Abdollah SARAVI",
+          "country_domain": "IRI",
+          "status": 0
+        },
+        "4": {
+          "name": "Kevin MEJIA CASTILLO",
+          "name_en": "Kevin MEJIA CASTILLO",
+          "country_domain": "HON",
+          "status": 0
+        },
+        "5": {
+          "name": "Rustam ASSAKALOV",
+          "name_en": "Rustam ASSAKALOV",
+          "country_domain": "UZB",
+          "status": 0
+        },
+        "6": {
+          "name": "Artur OMAROV",
+          "name_en": "Artur OMAROV",
+          "country_domain": "CZE",
+          "status": 0
+        },
+        "7": {
+          "name": "Roberti KOBLIASHVILI",
+          "name_en": "Roberti KOBLIASHVILI",
+          "country_domain": "GEO",
+          "status": 0
+        },
+        "8": {
+          "name": "Mindaugas VENCKAITIS",
+          "name_en": "Mindaugas VENCKAITIS",
+          "country_domain": "LTU",
+          "status": 0
+        }
+      }
+    }
+  }
+}

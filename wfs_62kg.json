@@ -1,1 +1,67 @@
-{"name": "77 kg", "name_en": "67 kg", "type": "single", "sport": "luc", "sex": {"male": {"date": "2024/08/08", "date_pred": null, "finished": false, "previa": [], "analysis": [], "previa_en": [], "analysis_en": [], "prediction": {"1": {"name": "Iryna KOLIADENKO", "name_en": "Iryna KOLIADENKO", "country_domain": "UKR", "status": 0}, "2": {"name": "Esther Omolayo KOLAWOLE", "name_en": "Esther Omolayo KOLAWOLE", "country_domain": "NGR", "status": 0}, "3": {"name": "Sakura MOTOKI", "name_en": "Sakura MOTOKI", "country_domain": "JPN", "status": 0}, "4": {"name": "Luisa Helga Gerda NIEMESCH", "name_en": "Luisa Helga Gerda NIEMESCH", "country_domain": "GER", "status": 0}, "5": {"name": "Hyon Gyong MUN", "name_en": "Hyon Gyong MUN", "country_domain": "PRK", "status": 0}, "6": {"name": "Veranika IVANOVA", "name_en": "Veranika IVANOVA", "country_domain": "AIN", "status": 0}, "7": {"name": "SIWAR BOUSETA", "name_en": "SIWAR BOUSETA", "country_domain": "TUN", "status": 0}, "8": {"name": "Bilyana Zhivkova DUDOVA", "name_en": "SIWAR BOUSETA", "country_domain": "TUN", "status": 0}}}}}
+{
+  "name": "62 kg",
+  "name_en": "62 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Aisuluu TYNYBEKOVA",
+          "name_en": "Aisuluu TYNYBEKOVA",
+          "country_domain": "KGZ",
+          "status": 0
+        },
+        "2": {
+          "name": "Sakura MOTOKI",
+          "name_en": "Sakura MOTOKI",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "3": {
+          "name": "Iryna KOLIADENKO",
+          "name_en": "Iryna KOLIADENKO",
+          "country_domain": "UKR",
+          "status": 0
+        },
+        "4": {
+          "name": "Grace Jacob BULLEN",
+          "name_en": "Grace Jacob BULLEN",
+          "country_domain": "NOR",
+          "status": 0
+        },
+        "5": {
+          "name": "Kayla Colleen Kiyoko MIRACLE",
+          "name_en": "Kayla Colleen Kiyoko MIRACLE",
+          "country_domain": "USA",
+          "status": 0
+        },
+        "6": {
+          "name": "Alina KASABIEVA",
+          "name_en": "Alina KASABIEVA",
+          "country_domain": "AIN",
+          "status": 0
+        },
+        "7": {
+          "name": "Esther Omolayo KOLAWOLE",
+          "name_en": "Esther Omolayo KOLAWOLE",
+          "country_domain": "NGR",
+          "status": 0
+        },
+        "8": {
+          "name": "Luisa Helga Gerda NIEMESCH",
+          "name_en": "Luisa Helga Gerda NIEMESCH",
+          "country_domain": "GER",
+          "status": 0
+        }
+      }
+    }
+  }
+}

@@ -1,1 +1,67 @@
-{"name": "77 kg", "name_en": "67 kg", "type": "single", "sport": "luc", "sex": {"male": {"date": "2024/08/08", "date_pred": null, "finished": false, "previa": [], "analysis": [], "previa_en": [], "analysis_en": [], "prediction": {"1": {"name": "Hannah Amuchechi RUEBEN", "name_en": "Hannah Amuchechi RUEBEN", "country_domain": "NGR", "status": 0}, "2": {"name": "Reetika REETIKA", "name_en": "Reetika REETIKA", "country_domain": "IND", "status": 0}, "3": {"name": "Yuka KAGAMI", "name_en": "Yuka KAGAMI", "country_domain": "JPN", "status": 0}, "4": {"name": "Juan WANG", "name_en": "Juan WANG", "country_domain": "CHN", "status": 0}, "5": {"name": "Justina Renay DI STASIO", "name_en": "Justina Renay DI STASIO", "country_domain": "CAN", "status": 0}, "6": {"name": "Bernadett NAGY", "name_en": "Bernadett NAGY", "country_domain": "HUN", "status": 0}, "7": {"name": "Davaanasan ENKH AMAR", "name_en": "Davaanasan ENKH AMAR", "country_domain": "MGL", "status": 0}, "8": {"name": "Aiperi MEDET KYZY", "name_en": "Davaanasan ENKH AMAR", "country_domain": "MGL", "status": 0}}}}}
+{
+  "name": "76 kg",
+  "name_en": "76 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Yuka KAGAMI",
+          "name_en": "Yuka KAGAMI",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "2": {
+          "name": "Yasemin ADAR YIGIT",
+          "name_en": "Yasemin ADAR YIGIT",
+          "country_domain": "TUR",
+          "status": 0
+        },
+        "3": {
+          "name": "Aiperi MEDET KYZY",
+          "name_en": "Aiperi MEDET KYZY",
+          "country_domain": "KGZ",
+          "status": 0
+        },
+        "4": {
+          "name": "Reetika REETIKA",
+          "name_en": "Reetika REETIKA",
+          "country_domain": "IND",
+          "status": 0
+        },
+        "5": {
+          "name": "Milaimy De La Caridad MARIN POTRILLE",
+          "name_en": "Milaimy De La Caridad MARIN POTRILLE",
+          "country_domain": "CUB",
+          "status": 0
+        },
+        "6": {
+          "name": "Genesis Rosangela REASCO VALDEZ",
+          "name_en": "Genesis Rosangela REASCO VALDEZ",
+          "country_domain": "ECU",
+          "status": 0
+        },
+        "7": {
+          "name": "Zaineb SGHAIER",
+          "name_en": "Zaineb SGHAIER",
+          "country_domain": "TUN",
+          "status": 0
+        },
+        "8": {
+          "name": "Catalina AXENTE",
+          "name_en": "Catalina AXENTE",
+          "country_domain": "ROU",
+          "status": 0
+        }
+      }
+    }
+  }
+}

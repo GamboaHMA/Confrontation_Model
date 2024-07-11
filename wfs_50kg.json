@@ -1,1 +1,67 @@
-{"name": "77 kg", "name_en": "67 kg", "type": "single", "sport": "luc", "sex": {"male": {"date": "2024/08/08", "date_pred": null, "finished": false, "previa": [], "analysis": [], "previa_en": [], "analysis_en": [], "prediction": {"1": {"name": "Yusneylis GUZMAN LOPEZ", "name_en": "Yusneylis GUZMAN LOPEZ", "country_domain": "CUB", "status": 0}, "2": {"name": "Sarah Ann HILDEBRANDT", "name_en": "Sarah Ann HILDEBRANDT", "country_domain": "USA", "status": 0}, "3": {"name": "Medani ABDALLA", "name_en": "Medani ABDALLA", "country_domain": "EGY", "status": 0}, "4": {"name": "Alisson Camila CARDOZO REY", "name_en": "Alisson Camila CARDOZO REY", "country_domain": "COL", "status": 0}, "5": {"name": "Vinesh VINESH", "name_en": "Vinesh VINESH", "country_domain": "IND", "status": 0}, "6": {"name": "Otgonjargal DOLGORJAV ", "name_en": "Otgonjargal DOLGORJAV ", "country_domain": "MGL", "status": 0}, "7": {"name": "Ibtissem DOUDOU", "name_en": "Ibtissem DOUDOU", "country_domain": "ALG", "status": 0}, "8": {"name": "Evin DEMIRHAN YAVUZ", "name_en": "Ibtissem DOUDOU", "country_domain": "ALG", "status": 0}}}}}
+{
+  "name": "50 kg",
+  "name_en": "50 kg",
+  "type": "single",
+  "sport": "luc",
+  "sex": {
+    "male": {
+      "date": "2024/08/08",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "Sarah Ann HILDEBRANDT",
+          "name_en": "Sarah Ann HILDEBRANDT",
+          "country_domain": "USA",
+          "status": 0
+        },
+        "2": {
+          "name": "Yui SUSAKI",
+          "name_en": "Yui SUSAKI",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "3": {
+          "name": "Ziqi FENG",
+          "name_en": "Ziqi FENG",
+          "country_domain": "CHN",
+          "status": 0
+        },
+        "4": {
+          "name": "Otgonjargal DOLGORJAV ",
+          "name_en": "Otgonjargal DOLGORJAV ",
+          "country_domain": "MGL",
+          "status": 0
+        },
+        "5": {
+          "name": "Oksana LIVACH",
+          "name_en": "Oksana LIVACH",
+          "country_domain": "UKR",
+          "status": 0
+        },
+        "6": {
+          "name": "Evin DEMIRHAN YAVUZ",
+          "name_en": "Evin DEMIRHAN YAVUZ",
+          "country_domain": "TUR",
+          "status": 0
+        },
+        "7": {
+          "name": "Anastasia BLAYVAS",
+          "name_en": "Anastasia BLAYVAS",
+          "country_domain": "GER",
+          "status": 0
+        },
+        "8": {
+          "name": "Alisson Camila CARDOZO REY",
+          "name_en": "Alisson Camila CARDOZO REY",
+          "country_domain": "COL",
+          "status": 0
+        }
+      }
+    }
+  }
+}

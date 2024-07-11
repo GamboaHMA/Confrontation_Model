@@ -1,5 +1,5 @@
 {
-  "name": "77 kg",
+  "name": "67 kg",
   "name_en": "67 kg",
   "type": "single",
   "sport": "luc",
@@ -20,45 +20,45 @@
           "status": 0
         },
         "2": {
+          "name": "Mohammadreza Abdolhamid GERAEI",
+          "name_en": "Mohammadreza Abdolhamid GERAEI",
+          "country_domain": "IRI",
+          "status": 0
+        },
+        "3": {
+          "name": "Mate NEMES",
+          "name_en": "Mate NEMES",
+          "country_domain": "SRB",
+          "status": 0
+        },
+        "4": {
+          "name": "Parviz NASIBOV",
+          "name_en": "Parviz NASIBOV",
+          "country_domain": "UKR",
+          "status": 0
+        },
+        "5": {
           "name": "Hasrat JAFAROV ",
           "name_en": "Hasrat JAFAROV ",
           "country_domain": "AZE",
           "status": 0
         },
-        "3": {
+        "6": {
+          "name": "Slavik Galstyan ",
+          "name_en": "Slavik Galstyan ",
+          "country_domain": "ARM",
+          "status": 0
+        },
+        "7": {
           "name": "Mamadassa SYLLA",
           "name_en": "Mamadassa SYLLA",
           "country_domain": "FRA",
           "status": 0
         },
-        "4": {
-          "name": "Souleymen NASR",
-          "name_en": "Souleymen NASR",
-          "country_domain": "TUN",
-          "status": 0
-        },
-        "5": {
-          "name": "Ishak GHAIOU",
-          "name_en": "Ishak GHAIOU",
-          "country_domain": "ALG",
-          "status": 0
-        },
-        "6": {
-          "name": "Nestor Evian ALMANZA TRUYOL",
-          "name_en": "Nestor Evian ALMANZA TRUYOL",
-          "country_domain": "CHI",
-          "status": 0
-        },
-        "7": {
-          "name": "Amantur ISMAILOV ",
-          "name_en": "Amantur ISMAILOV ",
-          "country_domain": "KGZ",
-          "status": 0
-        },
         "8": {
-          "name": "Mohammadreza Abdolhamid GERAEI",
-          "name_en": "Amantur ISMAILOV ",
-          "country_domain": "KGZ",
+          "name": "Kyotaro SOGABE ",
+          "name_en": "Kyotaro SOGABE ",
+          "country_domain": "JPN",
           "status": 0
         }
       }
