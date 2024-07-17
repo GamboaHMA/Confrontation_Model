@@ -11,6 +11,18 @@ from temporales.athletes_urls import *
 
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
+
+#table = 'm_t_florete'
+#query_create_table = f'''CREATE TABLE IF NOT EXISTS {table}(
+#    id INTEGER PRIMARY KEY AUTOINCREMENT,
+#    name TEXT NOT NULL,
+#    country TEXT NOT NULL,
+#    ranking INTEGER DEFAULT 0
+#    )'''
+#cursor.execute(query_create_table)
+#conn.commit()
+#print('h')
+
 #cursor.execute('DELETE FROM clashes_mgr_60kg')
 #conn.commit()
 #query = "SELECT * FROM clashes WHERE clashes.category = '60Kg'"
@@ -183,17 +195,6 @@ data_ = temporales.t_mgr_60kg.GetData()
 #        cursor.execute(query_insert_athlete, (name, country, style, category))
 #        cursor.execute(query_insert_athlet_in_athletes, (name, country, style, category))
 
-#table = 't_mgr_60kg'
-#query_create_table = f'''CREATE TABLE IF NOT EXISTS {table}(
-#    id INTEGER PRIMARY KEY AUTOINCREMENT,
-#    name TEXT NOT NULL,
-#    country TEXT NOT NULL,
-#    age INTEGER DEFAULT 0,
-#    style TEXT,
-#    category TEXT
-#    )'''
-#cursor.execute(query_create_table)
-#conn.commit()
 
 
 def GetAthletes(cursor):
