@@ -122,3 +122,4 @@ def EliminateTabDuplicates(tabs_cont_groups):
         notGlobalDuplicatedTabs.extend(notDuplicatedTabs)
 
     return notGlobalDuplicatedTabs
+

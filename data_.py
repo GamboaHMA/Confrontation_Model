@@ -87,63 +87,62 @@ cursor = conn.cursor()
 #)
 #''')
 #conn.commit()
+def LlenarTablasLucha():
+    for url in mgr60kg:
+        clashes_ = my_pyscraper.GetAthletesClashes([url])
+        
+        for clash in clashes_:     #clash(style, category, atl1_name, atl2_name, (atl1_points, atl2_points), atl1_name, winning_form, date)
+            clashes = []
+            style = clash[0]
+            category = clash[1]
+            atl1_name = clash[2]
+            atl2_name = clash[3]
+            clash_result = str(clash[4][0]) + '_' + str(clash[4][1])
+            state = clash[6]
+            date = clash[7]
 
-for url in mgr60kg:
-    clashes_ = my_pyscraper.GetAthletesClashes([url])
-    
-    for clash in clashes_:     #clash(style, category, atl1_name, atl2_name, (atl1_points, atl2_points), atl1_name, winning_form, date)
-        clashes = []
-        style = clash[0]
-        category = clash[1]
-        atl1_name = clash[2]
-        atl2_name = clash[3]
-        clash_result = str(clash[4][0]) + '_' + str(clash[4][1])
-        state = clash[6]
-        date = clash[7]
+            category = category.replace(" ","").lower()
+        
+            if (style == 'gr'):
+                style = 'mgr'
+            elif(style == 'fs'):
+                style = 'mfs'
+            else:
+                style = 'wfs'
+        
 
-        category = category.replace(" ","").lower()
-    
-        if (style == 'gr'):
-            style = 'mgr'
-        elif(style == 'fs'):
-            style = 'mfs'
-        else:
-            style = 'wfs'
-    
+            table = style + '_' + category
+            query = f'''SELECT id, name FROM {table}'''
+            cursor.execute(query)
+            names_ids = cursor.fetchall()
 
-        table = style + '_' + category
-        query = f'''SELECT id, name FROM {table}'''
-        cursor.execute(query)
-        names_ids = cursor.fetchall()
+            atl1_id = 0
+            atl2_id = 0
 
-        atl1_id = 0
-        atl2_id = 0
-
-        for fila in names_ids:
-            id, name = fila
-            if (Levenshtein.distance(name.lower(), atl1_name.lower()) <= 4):
-                atl1_id = int(id)
-            if (Levenshtein.distance(name.lower(), atl2_name.lower()) <= 4):
-                atl2_id = int(id)
+            for fila in names_ids:
+                id, name = fila
+                if (Levenshtein.distance(name.lower(), atl1_name.lower()) <= 4):
+                    atl1_id = int(id)
+                if (Levenshtein.distance(name.lower(), atl2_name.lower()) <= 4):
+                    atl2_id = int(id)
 
 
-        if (atl1_id == 0 or atl2_id == 0):
-            continue
+            if (atl1_id == 0 or atl2_id == 0):
+                continue
 
-        clash_table = 'clashes_mgr_60kg'
-        verify_query = f'''SELECT * FROM {clash_table} WHERE athlete1_id = ? AND athlete2_id = ? AND result = ? AND date = ?'''
-        cursor.execute(verify_query, (atl1_id, atl2_id, clash_result, date))
-        verify_exists = cursor.fetchall()
+            clash_table = 'clashes_mgr_60kg'
+            verify_query = f'''SELECT * FROM {clash_table} WHERE athlete1_id = ? AND athlete2_id = ? AND result = ? AND date = ?'''
+            cursor.execute(verify_query, (atl1_id, atl2_id, clash_result, date))
+            verify_exists = cursor.fetchall()
 
-        if len(verify_exists) == 0:
-            query_insert_clash = f'''INSERT OR IGNORE INTO {clash_table}(style, category, athlete1_id, athlete2_id, result, state, winner_id, date) VALUES(?,?,?,?,?,?,?,?)'''
-            cursor.execute(query_insert_clash, (style, category, atl1_id, atl2_id, clash_result, state, atl1_id, date))
-            conn.commit()
+            if len(verify_exists) == 0:
+                query_insert_clash = f'''INSERT OR IGNORE INTO {clash_table}(style, category, athlete1_id, athlete2_id, result, state, winner_id, date) VALUES(?,?,?,?,?,?,?,?)'''
+                cursor.execute(query_insert_clash, (style, category, atl1_id, atl2_id, clash_result, state, atl1_id, date))
+                conn.commit()
 
-    print(f'Terminado {url}')
+        print(f'Terminado {url}')
 
-data_ = temporales.t_mgr_60kg.GetData()
-#data_ = data.Get_Clashes_From_Web()
+print('finish')
 
 
 #cursor.execute('''DROP TABLE IF EXISTS athletes''')
@@ -158,50 +157,8 @@ data_ = temporales.t_mgr_60kg.GetData()
 #)
 #''')
 
-
-
-#for table in tables_:
-#    table_name = table[0]
-#    cursor.execute("PRAGMA table_info({})".format(table_name))
-#    columns = cursor.fetchall()
-#    print("\nPropiedades de la tabla '{}:'".format(table_name))
-#    for column in columns:
-#        print("Nombre: {}| Tipo de dato: {}| Clave primaria: {}".format(column[1], column[2], "Sí" if column[5] == 1 else "No"))
-
-
-
-#insertando nombre y pais de cada atleta en las tablas de athletas y categorias de peso
-#_data = data.Get_Wrestling_Athletes()
-#tables = vars(_data)
-#for table, values in tables.items():
-#    query_create_table = f'''CREATE TABLE IF NOT EXISTS {table}(
-#    id INTEGER PRIMARY KEY AUTOINCREMENT,
-#    name TEXT NOT NULL,
-#    country TEXT NOT NULL,
-#    age INTEGER DEFAULT 0,
-#    style TEXT,
-#    category TEXT
-#    )'''
-#    cursor.execute(query_create_table)
-#
-#    for value in values:
-#        query_insert_athlete = f'''INSERT OR IGNORE INTO {table} (name, country, style, category) VALUES (?, ?, ?, ?)'''
-#        query_insert_athlet_in_athletes = f'''INSERT OR IGNORE INTO athletes (name, country, style, category) VALUES (?, ?, ?, ?)'''
-#        name = value.name
-#        country = value.country
-#        style = value.style
-#        category = value.category
-#
-#        cursor.execute(query_insert_athlete, (name, country, style, category))
-#        cursor.execute(query_insert_athlet_in_athletes, (name, country, style, category))
-
-
-
-def GetAthletes(cursor):
-    cursor.execute('''SELECT * FROM athletes''')
-    athletes = cursor.fetchall()
-    return athletes
-
-#conn.close()
-print('h')
 conn.commit()
+
+def LlenarTablasDeEsgrima():
+    return
+
