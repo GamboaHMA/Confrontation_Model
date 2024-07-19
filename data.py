@@ -129,5 +129,13 @@ def GetPointsByWin(status):
             return key[0], key[1]
     raise Exception('no se encontró el status de victoria ')
 
+def GetPointsByWinE(result):
+    result = result.split('_')
+    atl1_res = int(result[0])
+    atl2_res = int(result[1])
+
+    return (atl1_res, atl2_res)
+
+
 #athetes_results_urls = ['https://uww.org/athletes-results/sharshenbekov-zholaman-20714-profile']
 #my_pyscraper.GetAthletesClashes(athetes_results_urls)

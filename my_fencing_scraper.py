@@ -25,18 +25,21 @@ def GetClashesFromWeb(atl1_id__atl1_idpage, atl_ids__atl_ids_page):
         driver.get(url)
         wait = WebDriverWait(driver, 20)
 
-        wait.until(EC.visibility_of_element_located((By.XPATH, ".//div[contains(@class, 'HeadToHead-match-lines')]")))
-        matches_content = driver.find_element(By.XPATH, ".//div[contains(@class, 'HeadToHead-match-lines')]")
+        try:    
+            wait.until(EC.visibility_of_element_located((By.XPATH, ".//div[contains(@class, 'HeadToHead-match-lines')]")))
+            matches_content = driver.find_element(By.XPATH, ".//div[contains(@class, 'HeadToHead-match-lines')]")
 
-        clashes_group = matches_content.find_elements(By.XPATH, ".//div[contains(@class, 'Grid Grid--alignCenter')]")
-        for clash in clashes_group:
-            data = clash.text
-            atl1_result, atl_result, date = ObtainClashResultAndDate(data)
-            winner_id = atl1_id if atl1_result >= atl_result else atl_id
+            clashes_group = matches_content.find_elements(By.XPATH, ".//div[contains(@class, 'Grid Grid--alignCenter')]")
+            for clash in clashes_group:
+                data = clash.text
+                atl1_result, atl_result, date = ObtainClashResultAndDate(data)
+                winner_id = atl1_id if int(atl1_result) >= int(atl_result) else atl_id
 
-            clashes.append((atl1_id, atl_id, winner_id, date))
+                clashes.append((atl1_id, atl_id, atl1_result+'_'+atl_result, winner_id, date))
 
-            print(clashes[len(clashes)-1])
+                print(clashes[len(clashes)-1])
+        except:
+            continue
 
     driver.quit()
     return clashes

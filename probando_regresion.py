@@ -118,7 +118,7 @@ def GetMatrixVersusPlayers(clashes, athletes):
     dicc_2a2_clashes = {} #almacen de enfrentamientos
 
     min_max = GetMinMaxSMax(clashes)
-    min_date = date(2010, 1, 1)
+    min_date = date(2006, 1, 1)
     max_date = min_max[1]
     
     for clash in clashes:
@@ -128,8 +128,8 @@ def GetMatrixVersusPlayers(clashes, athletes):
         #    last_clash = clash
         #    continue
 
-        a1_id = clash[3]
-        a2_id = clash[4]
+        a1_id = clash[1]     #clash(id, atl1_id, atl2_id, result, winner_id, date)
+        a2_id = clash[2]
         
         if ((a1_id, a2_id) not in dicc_2a2_clashes):
             dicc_2a2_clashes[(a1_id, a2_id)] = []
@@ -161,39 +161,45 @@ def GetMatrixVersusPlayers(clashes, athletes):
             last_clash = Object()        #aqui vamos a guardar el outcome de cada par de atletas
 
             for clash_2a2 in clashes_2a2:
-
-                clash_date = GetDateMonthYear(clash_2a2[8])
+                #clash_date = GetDateMonthYear(clash_2a2[8])
+                clash_date = GetDateMonthYear(clash_2a2[5])
                 #if clash_date == data_max:
                 #    last_clash = clash_2a2
                 #    continue
 
                 today = date.today()
                 index_ =  ((clash_date.year - min_date.year)*12 + clash_date.month - min_date.month) / ((today.year - min_date.year)*12 + today.month - min_date.month)
-                if (clash_2a2[3] == i):
+                if (clash_2a2[4] == i):
                     a1_vict += 1
-                    a1_regist += data.GetPointsByWin(clash_2a2[6])[0] * index_  #puntos que obtiene al ganar el combate, fecha de combate
-                    a2_regist += data.GetPointsByWin(clash_2a2[6])[1] * index_
+                    a1_regist += data.GetPointsByWinE(clash_2a2[3])[0] * index_ * 0.6 #puntos que obtiene al ganar el combate, fecha de combate
+                    a2_regist += data.GetPointsByWinE(clash_2a2[3])[1] * index_ * 0.4
 
                 else:
                     a2_vict += 1
-                    a2_regist += data.GetPointsByWin(clash_2a2[6])[0] * index_
-                    a1_regist += data.GetPointsByWin(clash_2a2[6])[1] * index_
+                    a2_regist += data.GetPointsByWinE(clash_2a2[3])[1] * index_ * 0.6
+                    a1_regist += data.GetPointsByWinE(clash_2a2[3])[0] * index_ * 0.4
 
 
-            matrix[i-1][j-1].append(a1_vict)
-            matrix[i-1][j-1].append(a1_regist/(a1_regist+a2_regist))
+            if (a1_regist + a2_regist == 0):
+                pass
+            else:
+                matrix[i-1][j-1].append(a1_vict)
+                matrix[i-1][j-1].append(a1_regist/(a1_regist+a2_regist))
             #matrix[i-1][j-1].append(1 if(last_clash[7] == i) else 0)    
             
-            matrix[j-1][i-1].append(a2_vict)      
-            matrix[j-1][i-1].append(a2_regist/(a1_regist+a2_regist))
+            if (a1_regist + a2_regist == 0):
+                pass
+            else:
+                matrix[j-1][i-1].append(a2_vict)      
+                matrix[j-1][i-1].append(a2_regist/(a1_regist+a2_regist))
             #matrix[j-1][i-1].append(1 if(last_clash[7] == j) else 0) 
 
 
-    matrix = AthletesInterception(matrix)   
+    matrix = AthletesInterception(matrix, athletes)   
     
     return matrix  
 
-def AthletesInterception(matrix):
+def AthletesInterception(matrix, athletes):
     n = len(matrix)
     new_matrix = copy.deepcopy(matrix)
     noClashes = [] #pares de atletas que no se han enfrentado nunca
@@ -256,10 +262,15 @@ def AthletesInterception(matrix):
             new_matrix[athl2-1][athl1-1].append(prob_athl2_athl1 / (prob_athl1_athl2 + prob_athl2_athl1))
         else:
             new_matrix[athl1-1][athl2-1].append(-1)
+            atl1_rank = athletes[athl1-1][3]
+            atl2_rank = athletes[athl2-1][3]
+            #new_matrix[athl1-1][athl2-1].append(atl2_rank/(atl1_rank+atl2_rank))
             new_matrix[athl1-1][athl2-1].append(0.5)
             new_matrix[athl2-1][athl1-1].append(-1)
+            #new_matrix[athl2-1][athl1-1].append(atl1_rank/(atl1_rank+atl2_rank))
             new_matrix[athl2-1][athl1-1].append(0.5)
-        print("hi")           
+            
+        print("ho")           
 
     return new_matrix
 
@@ -289,21 +300,24 @@ def AthletesInterception(matrix):
 
 def GetDateMonthYear(Date: str):
     month_mapping = {
-    'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4,
-    'May': 5, 'Jun': 6, 'Jul': 7, 'Aug': 8,
-    'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+    'ene': 1, 'feb': 2, 'mar': 3, 'abr': 4,
+    'may': 5, 'jun': 6, 'jul': 7, 'ago': 8,
+    'sep': 9, 'oct': 10, 'nov': 11, 'dic': 12
     }
-
+    Date = Date.replace('.', '')
     date_ = Date.split(' ')
-    month = month_mapping[date_[0]]
-    result = date(int(date_[1]), month, 1)
+    #month = month_mapping[date_[0]]
+    month = month_mapping[date_[1].lower()]
+    #result = date(int(date_[1]), month, 1)
+    result = date(int(date_[2]), month, 1)
     return result
 
-def GetMinMaxSMax(clashes):
+def GetMinMaxSMax(clashes): #clash(id, atl1_id, atl2_id, result, winner_id, date)
     min_date = date.max
     max_date = date.min
     for clash in clashes:
-        clash_date = GetDateMonthYear(clash[8])
+        #clash_date = GetDateMonthYear(clash[8])
+        clash_date = GetDateMonthYear(clash[5])
         if min_date > clash_date:
             min_date = clash_date
         if max_date < clash_date:

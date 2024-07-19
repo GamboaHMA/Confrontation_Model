@@ -8,6 +8,7 @@ import model
 import temporales.t_mgr_60kg
 import my_pyscraper
 from temporales.athletes_urls import *
+import my_fencing_scraper
 
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
@@ -23,7 +24,7 @@ cursor = conn.cursor()
 #conn.commit()
 #print('h')
 
-#cursor.execute('DELETE FROM clashes_mgr_60kg')
+#cursor.execute("DELETE FROM w_i_espada_clashes WHERE result LIKE '%MEDALLAS%'")
 #conn.commit()
 #query = "SELECT * FROM clashes WHERE clashes.category = '60Kg'"
 #cursor.execute(query)
@@ -71,22 +72,20 @@ cursor = conn.cursor()
 
 #cursor.execute('''DROP TABLE IF EXISTS clashes''')
 
-#cursor.execute('''CREATE TABLE IF NOT EXISTS clashes(
+#cursor.execute('''CREATE TABLE IF NOT EXISTS m_i_sable_clashes(
 #               id INTEGER PRIMARY KEY AUTOINCREMENT,
-#               style TEXT,
-#               category TEXT,
-#               athlete1_id INTEGER NOT NULL,
-#               athlete2_id INTEGER NOT NULL,
+#               atl1_id INTEGER NOT NULL,
+#               atl2_id INTEGER NOT NULL,
 #               result TEXT,
-#               state TEXT,
 #               winner_id INTEGER NOT NULL,
 #               date TEXT NOT NULL,
-#               FOREIGN KEY (athlete1_id) REFERENCES athletes(athlete1_id),
-#               FOREIGN KEY (athlete2_id) REFERENCES athletes(athlete2_id),
-#               FOREIGN KEY (winner_id) REFERENCES athletes(winner_id)
+#               FOREIGN KEY (atl1_id) REFERENCES m_i_sable(id),
+#               FOREIGN KEY (atl2_id) REFERENCES m_i_sable(id),
+#               FOREIGN KEY (winner_id) REFERENCES m_i_sable(id)
 #)
 #''')
 #conn.commit()
+
 def LlenarTablasLucha():
     for url in mgr60kg:
         clashes_ = my_pyscraper.GetAthletesClashes([url])
@@ -157,8 +156,49 @@ print('finish')
 #)
 #''')
 
-conn.commit()
+def LlenarTablasDeEsgrima(table):
+    query = f'SELECT * FROM {table}'
+    cursor.execute(query)
+    athletes = cursor.fetchall()
 
-def LlenarTablasDeEsgrima():
+
+                                    #         0     1        2        3        4
+    for i in range(0, len(athletes)):  #athlete(id, name, country, ranking, id_page)
+        atl1_id = athletes[i][0]
+        atl1_id_page = athletes[i][4]
+        other_athletes = []
+        clashes_atl1_atl = []     #registro de clashes entre atl1 y los otros atletas
+        for j in range(i+1, len(athletes)):
+            other_athletes.append((athletes[j][0], athletes[j][4]))  #rellenamos atletas a los que se va a enfrentar atl1, de la forma id, id_page
+
+        clashes_atl1_atl = my_fencing_scraper.GetClashesFromWeb((atl1_id, atl1_id_page), other_athletes)
+        #             0        1        2       3          4     5 
+        #clash(clash_id, atl1_id, atl2_id, result, winner_id, date)
+        for clash in clashes_atl1_atl:
+            query = f'INSERT OR IGNORE INTO {table}_clashes(atl1_id, atl2_id, result, winner_id, date) VALUES(?,?,?,?,?)'
+            cursor.execute(query, (clash[0], clash[1], clash[2], clash[3], clash[4]))
+        conn.commit()
     return
 
+def arreglarTabla(table):
+    cursor.execute(f'SELECT * FROM {table}_clashes')
+    clashes = cursor.fetchall()
+    for clash in clashes:
+        clash_id = clash[0]
+        result = clash[3]
+        result = result.split('_')
+        atl1_res = int(result[0])
+        atl2_res = int(result[1])
+        
+        if atl1_res > atl2_res:
+            query = f"UPDATE {table}_clashes SET winner_id = ? WHERE id = ?"
+            cursor.execute(query, (clash[1], clash_id))
+        else:
+            query = f"UPDATE {table}_clashes SET winner_id = ? WHERE id = ?"
+            cursor.execute(query, (clash[2], clash_id))
+
+table = 'w_i_espada'
+#LlenarTablasDeEsgrima(table)
+#arreglarTabla(table)
+
+conn.commit()

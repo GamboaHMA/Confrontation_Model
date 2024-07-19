@@ -19,15 +19,26 @@ def Results(style_category):
     query = f'SELECT * FROM {style_category}'
     cursor.execute(query)
     athletes = cursor.fetchall()
-    query = f'SELECT * FROM clashes_{style_category}'  #aqui construimos clashes_mgr_60g
+    query = f'SELECT * FROM {style_category}_clashes'  #aqui construimos clashes_mgr_60g
     cursor.execute(query)
     clashes = cursor.fetchall()
 
     matrix = probando_regresion.GetMatrixVersusPlayers(clashes, athletes)  #matriz de probabilidades
-    #for i in range(len(matrix)):    #mijain
-    #    if i == 3:
-    #        continue
-    #    matrix[3][i][1] = 1
+    for i in range(len(matrix)):    #mijain
+        if i == 3:
+            continue
+        matrix[3][i][1] = 1
+        matrix[i][3][1] = 0
+    for i in range(len(matrix)):
+        if i == 10:
+            continue
+        matrix[10][i][1] = 0
+        matrix[i][10][1] = 1
+    for i in range(len(matrix)):
+        if i == 1:
+            continue
+        matrix[1][i][1] = 0
+        matrix[i][1][1] = 1
 
     iterations = 10000
     medallero = [[0,0,0,0,0,0,0,0,0] for i in range(len(athletes))]
@@ -45,7 +56,7 @@ def Results(style_category):
         athletes_2a2 = Get_2a2(winners)
         semi, winners = Enfrenta(athletes_2a2, enfrentamientos, matrix)
         athletes_2a2 = Get_2a2(winners)
-        oro, plata = Enfrenta(athletes_2a2, enfrentamientos, matrix)
+        plata, oro = Enfrenta(athletes_2a2, enfrentamientos, matrix)
 
         other_places = Repechaje(athletes, enfrentamientos, oro, plata, semi, matrix)
         bronce = (other_places[0], other_places[1])
@@ -91,10 +102,7 @@ def Enfrenta(atls_2a2, enfrentamientos, matrix):
             continue
 
         if len(matrix[atl_1[0] - 1][atl_2[0] - 1]) != 0:
-            atl_1_points = matrix[atl_1[0] - 1][atl_2[0] - 1][1]    #atl1_0 es el id del atleta 1, la matriz en i,j [1] es la cantidad de puntos
-            atl_2_points = matrix[atl_2[0] - 1][atl_1[0] - 1][1]
-            total = atl_1_points + atl_2_points
-            porcentaje_atl1 = atl_1_points/total
+            porcentaje_atl1 = matrix[atl_1[0]-1][atl_2[0]-1][1]
         else:
             atl_1_rank = int(atl_1[6])
             atl_2_rank = int(atl_2[6])
@@ -102,6 +110,26 @@ def Enfrenta(atls_2a2, enfrentamientos, matrix):
             porcentaje_atl1 = 1 - (atl_1_rank / total_rank)
 
         r = random.random()
+
+        #######
+        #if matrix[atl_1[0]-1][atl_2[0]-1][1] == 1:
+        #    winners.append(atl_1)
+        #    result_lossers.append(atl_2)
+        #    enfrentamientos.append((atl_1, atl_2, atl_1))
+        #elif matrix[atl_2[0]-1][atl_1[0]-1][1] == 1:
+        #    winners.append(atl_2)
+        #    result_lossers.append(atl_1)
+        #    enfrentamientos.append((atl_1, atl_2, atl_2))
+        #elif matrix[atl_1[0]-1][atl_2[0]-1][1] == 0:
+        #    winners.append(atl_2)
+        #    result_lossers.append(atl_1)
+        #    enfrentamientos.append((atl_1, atl_2, atl_2))
+        #elif matrix[atl_2[0]-1][atl_1[0]-1][1] == 0:
+        #    winners.append(atl_1)
+        #    result_lossers.append(atl_2)
+        #    enfrentamientos.append((atl_1, atl_2, atl_1))
+        #######
+
         if r < porcentaje_atl1:
             winners.append(atl_1)
             result_lossers.append(atl_2)

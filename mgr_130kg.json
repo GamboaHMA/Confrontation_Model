@@ -1,6 +1,6 @@
 {
-  "name": "77 kg",
-  "name_en": "67 kg",
+  "name": "130 kg",
+  "name_en": "130 kg",
   "type": "single",
   "sport": "luc",
   "sex": {
@@ -14,39 +14,39 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Pavel HLINCHUK",
-          "name_en": "Pavel HLINCHUK",
-          "country_domain": "AIN",
+          "name": "Mijain LOPEZ NUNEZ",
+          "name_en": "Mijain LOPEZ NUNEZ",
+          "country_domain": "CUB",
           "status": 0
         },
         "2": {
-          "name": "Abdellatif Mohamed Ahmed MOHAMED",
-          "name_en": "Abdellatif Mohamed Ahmed MOHAMED",
-          "country_domain": "EGY",
+          "name": "Amin Mohammadzaman MIRZAZADEH",
+          "name_en": "Amin Mohammadzaman MIRZAZADEH",
+          "country_domain": "IRI",
           "status": 0
         },
         "3": {
-          "name": "Alin ALEXUC CIURARIU",
-          "name_en": "Alin ALEXUC CIURARIU",
-          "country_domain": "ROU",
+          "name": "Lingzhe MENG",
+          "name_en": "Lingzhe MENG",
+          "country_domain": "CHN",
           "status": 0
         },
         "4": {
-          "name": "Jello KRAHMER",
-          "name_en": "Jello KRAHMER",
-          "country_domain": "GER",
+          "name": "Alimkhan SYZDYKOV",
+          "name_en": "Alimkhan SYZDYKOV",
+          "country_domain": "KAZ",
           "status": 0
         },
         "5": {
-          "name": "Yasmani ACOSTA FERNANDEZ",
-          "name_en": "Yasmani ACOSTA FERNANDEZ",
-          "country_domain": "CHI",
+          "name": "Oussama ASSAD",
+          "name_en": "Oussama ASSAD",
+          "country_domain": "MAR",
           "status": 0
         },
         "6": {
-          "name": "Sergei SEMENOV",
-          "name_en": "Sergei SEMENOV",
-          "country_domain": "AIN",
+          "name": "Abdellatif Mohamed Ahmed MOHAMED",
+          "name_en": "Abdellatif Mohamed Ahmed MOHAMED",
+          "country_domain": "EGY",
           "status": 0
         },
         "7": {
@@ -56,9 +56,9 @@
           "status": 0
         },
         "8": {
-          "name": "Alimkhan SYZDYKOV",
-          "name_en": "Seungchan LEE",
-          "country_domain": "KOR",
+          "name": "Cohlton SCHULTZ",
+          "name_en": "Cohlton SCHULTZ",
+          "country_domain": "USA",
           "status": 0
         }
       }
