@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Zaurbek SIDAKOV",
-          "name_en": "Zaurbek SIDAKOV",
-          "country_domain": "AIN",
-          "status": 0
-        },
-        "2": {
           "name": "Kyle DAKE",
           "name_en": "Kyle DAKE",
           "country_domain": "USA",
+          "status": 0
+        },
+        "2": {
+          "name": "Zaurbek SIDAKOV",
+          "name_en": "Zaurbek SIDAKOV",
+          "country_domain": "AIN",
           "status": 0
         },
         "3": {

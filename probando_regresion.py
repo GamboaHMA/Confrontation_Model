@@ -261,17 +261,15 @@ def AthletesInterception(matrix, athletes):
             new_matrix[athl2-1][athl1-1].append(-1)
             new_matrix[athl2-1][athl1-1].append(prob_athl2_athl1 / (prob_athl1_athl2 + prob_athl2_athl1))
         else:
-            new_matrix[athl1-1][athl2-1].append(-1)
             atl1_rank = athletes[athl1-1][3]
             atl2_rank = athletes[athl2-1][3]
-            #new_matrix[athl1-1][athl2-1].append(atl2_rank/(atl1_rank+atl2_rank))
-            new_matrix[athl1-1][athl2-1].append(0.5)
+            new_matrix[athl1-1][athl2-1].append(-1)
+            new_matrix[athl1-1][athl2-1].append(atl2_rank/(atl1_rank+atl2_rank))
+            #new_matrix[athl1-1][athl2-1].append(0.5)
             new_matrix[athl2-1][athl1-1].append(-1)
-            #new_matrix[athl2-1][athl1-1].append(atl1_rank/(atl1_rank+atl2_rank))
-            new_matrix[athl2-1][athl1-1].append(0.5)
+            new_matrix[athl2-1][athl1-1].append(atl1_rank/(atl1_rank+atl2_rank))
+            #new_matrix[athl2-1][athl1-1].append(0.5)
             
-        print("ho")           
-
     return new_matrix
 
 

@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Anastasia NICHITA",
-          "name_en": "Anastasia NICHITA",
-          "country_domain": "MDA",
-          "status": 0
-        },
-        "2": {
           "name": "Tsugumi SAKURAI",
           "name_en": "Tsugumi SAKURAI",
           "country_domain": "JPN",
+          "status": 0
+        },
+        "2": {
+          "name": "Anastasia NICHITA",
+          "name_en": "Anastasia NICHITA",
+          "country_domain": "MDA",
           "status": 0
         },
         "3": {

@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Yuka KAGAMI",
-          "name_en": "Yuka KAGAMI",
-          "country_domain": "JPN",
-          "status": 0
-        },
-        "2": {
           "name": "Yasemin ADAR YIGIT",
           "name_en": "Yasemin ADAR YIGIT",
           "country_domain": "TUR",
+          "status": 0
+        },
+        "2": {
+          "name": "Yuka KAGAMI",
+          "name_en": "Yuka KAGAMI",
+          "country_domain": "JPN",
           "status": 0
         },
         "3": {

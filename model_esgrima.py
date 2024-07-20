@@ -38,8 +38,18 @@ def Results(table):
     pools_ranking = OrdenarPools(pools_ranking)
 
     #Etapa2: Eliminación Directa
-    
-    
+    #si hay mas de 32, entonces se hace unos combtes preeliminares 
+    preelim_eliminated, preelim_winners = LlevarA32(pools_ranking, matrix)   #cada atleta tiene al lado sus victorias y puntos acumulados en fase de pools
+
+    emparejamiento = EmparejamientoInicial(pools_ranking)
+    #Ronda  de 32
+    _32_lossers, _32_winners = Rondai(emparejamiento, matrix)
+    _16_lossers, _16_winners = Rondai(emparejamiento, matrix)
+    _8_lossers, _8_winners = Rondai(emparejamiento, matrix)
+    _4_lossers, _4_winners = Rondai(emparejamiento, matrix)
+    plata, oro = Rondai(emparejamiento, matrix)
+    bronce_losser, bronce_winner = Rondai(_4_lossers, matrix)
+
     print('h')
 
 
@@ -163,7 +173,7 @@ def EnfrentaPools(groups, matrix): #en matrix esta la probabilidad de los atleta
 
     return result
 
-def OrdenarPools(pools_ranking):
+def OrdenarPools(pools_ranking):   #recibe diccionario y devualve lista ordenada
     new_pools = []      #((atleta como en la base de datos), [puntos, victorias en pools])
     #new_pools_mask = [False for i in range(len(pools_ranking))]  #mascara
 
@@ -194,7 +204,7 @@ def OrdenarPools(pools_ranking):
                     max_atl = atl
                     max_index = i
         
-        results.append((max_atl, (max_dif_puntos, max_vict)))
+        results.append((max_atl, [max_dif_puntos, max_vict]))
         new_pools.remove(new_pools[max_index])
 
     return results
@@ -207,12 +217,205 @@ def GetPoints(prob_vict_a1_a2, desv_estandar):
         random_ = random.random()
         if random_ < prob_vict_a1_a2:
             atl1_points = 5
-            atl2_points = 4 - round(3*(prob_vict_a1_a2 - random_))
+            atl2_points = 4 - round(desv_estandar*(prob_vict_a1_a2 - random_))
             return (atl1_points - atl2_points, atl2_points - atl1_points, 1, 0)    
         
         else:
-            atl1_points = 4 - round(3*(random_ - prob_vict_a1_a2))
+            atl1_points = 4 - round(desv_estandar*(random_ - prob_vict_a1_a2))
             atl2_points = 5
             return (atl1_points - atl2_points, atl2_points - atl1_points, 0, 1)  #los puntos que se acumulan son los que hacen menos los que le hacen
 
+    if desv_estandar == 5:
+        random_ = random.random()
+        if random_ < prob_vict_a1_a2:
+            atl1_points = 15
+            atl2_points = 14 - round(desv_estandar*(prob_vict_a1_a2 - random_))
+            return (atl1_points - atl2_points, atl2_points - atl1_points, 1, 0)    
         
+        else:
+            atl1_points = 14 - round(desv_estandar*(random_ - prob_vict_a1_a2))
+            atl2_points = 15
+            return (atl1_points - atl2_points, atl2_points - atl1_points, 0, 1)  #los puntos que se acumulan son los que hacen menos los que le hacen
+
+
+def LlevarA32(pools_ranking, matrix):
+    len_ = len(pools_ranking)
+
+    if len_ > 32:
+        resto = len_ - 32
+    else:
+        return pools_ranking
+
+    lossers_results = {}
+
+    winners = []
+    winners_results = {}
+
+    for i in range(resto):
+        atl_1 = pools_ranking[len(pools_ranking) - resto*2 + i][0]    #checked
+        atl_1_id = atl_1[0]
+
+        atl_2 = pools_ranking[len(pools_ranking)-1 - i][0]      #checked
+        atl_2_id = atl_2[0]
+
+        prob_vict_a1_a2 = matrix[atl_1_id-1][atl_2_id-1][1] #prob de que atl1 le gane a atl2
+        clash_result = GetPoints(prob_vict_a1_a2, 5)    #clash(atl1_ptos, atl2_ptos, atl1_win? 1:0, atl2_win? 1:0)
+
+        if clash_result[2] == 1:
+            if atl_1 in winners_results:
+                winners_results[atl_1][0] += clash_result[0]
+                winners_results[atl_1][1] += clash_result[2]
+                if atl_2 in lossers_results:
+                    lossers_results[atl_2][0] += clash_result[1]
+                    lossers_results[atl_2][1] += clash_result[3]
+                else:
+                    lossers_results[atl_2] = []
+                    lossers_results[atl_2].append(clash_result[1])
+                    lossers_results[atl_2].append(clash_result[3])
+            else:
+                winners_results[atl_1] = []
+                winners_results[atl_1].append(clash_result[0])
+                winners_results[atl_1].append(clash_result[2])
+                if atl_2 in lossers_results:
+                    lossers_results[atl_2] += clash_result[1]
+                    lossers_results[atl_2] += clash_result[3]
+                else:
+                    lossers_results[atl_2] = []
+                    lossers_results[atl_2].append(clash_result[1])
+                    lossers_results[atl_2].append(clash_result[3])
+
+
+        elif clash_result[3] == 1:
+            if atl_2 in winners_results:
+                winners_results[atl_2][0] += clash_result[1]
+                winners_results[atl_2][1] += clash_result[3]
+                if atl_1 in lossers_results:
+                    lossers_results[atl_1][0] += clash_result[0]
+                    lossers_results[atl_1][1] += clash_result[2]
+                else:
+                    lossers_results[atl_1] = []
+                    lossers_results[atl_1].append(clash_result[0])
+                    lossers_results[atl_1].append(clash_result[2])
+                
+            else:
+                winners_results[atl_2] = []
+                winners_results[atl_2].append(clash_result[1])
+                winners_results[atl_2].append(clash_result[3])
+                if atl_2 in lossers_results:
+                    lossers_results[atl_1] += clash_result[0]
+                    lossers_results[atl_1] += clash_result[2]
+                else:
+                    lossers_results[atl_1] = []
+                    lossers_results[atl_1].append(clash_result[0])
+                    lossers_results[atl_1].append(clash_result[2])
+
+
+    winners = OrdenarPools(winners_results)
+    lossers = OrdenarPools(lossers_results)
+
+    for losser in lossers:
+        for i in range(len(pools_ranking)):
+            if pools_ranking[i][0][0] == losser[0][0]:    #si tienen el mismo id de atleta
+                pools_ranking.remove(pools_ranking[i])
+                break
+
+    return lossers, winners
+
+def Rondai(pools_ranking, matrix):
+    len_ = len(pools_ranking)
+
+    winners = []
+    lossers = []
+
+    for i in range(int(len_ / 2)):
+        atl_1 = pools_ranking[i*2][0]    #checked
+        atl_1_id = atl_1[0]
+
+        atl_2 = pools_ranking[i*2+1][0]      #checked
+        atl_2_id = atl_2[0]
+
+        prob_vict_a1_a2 = matrix[atl_1_id-1][atl_2_id-1][1] #prob de que atl1 le gane a atl2
+        clash_result = GetPoints(prob_vict_a1_a2, 5)    #clash(atl1_ptos, atl2_ptos, atl1_win? 1:0, atl2_win? 1:0)
+
+        if clash_result[2] == 1:
+            pools_ranking[i*2][1][0] += clash_result[0]  #1 winner
+            pools_ranking[i*2][1][1] += clash_result[2]
+            winners.append(pools_ranking[i*2])
+
+            pools_ranking[i*2+1][1][0] += clash_result[1]
+            pools_ranking[i*2+1][1][1] += clash_result[3]
+            lossers.append(pools_ranking[i*2+1])
+
+
+        elif clash_result[3] == 1:
+            pools_ranking[i*2+1][1][0] += clash_result[1]   #2 winner
+            pools_ranking[i*2+1][1][1] += clash_result[3]
+            winners.append(pools_ranking[i*2+1])
+
+            pools_ranking[i*2][1][0] += clash_result[0]  
+            pools_ranking[i*2][1][1] += clash_result[2]
+            lossers.append(pools_ranking[i*2])
+
+
+    winners = OrdenarPoolsArr(winners)
+    lossers = OrdenarPoolsArr(lossers)
+
+    for losser in lossers:
+        for i in range(len(pools_ranking)):
+            if pools_ranking[i][0][0] == losser[0][0]:    #si tienen el mismo id de atleta
+                pools_ranking.remove(pools_ranking[i])
+                break
+
+    return lossers, winners
+
+def EmparejamientoInicial(pools_ranking_):
+    pools_ranking = copy.deepcopy(pools_ranking_)
+    len_pools = len(pools_ranking)
+    result = []
+    if len_pools == 32:
+        for i in range(int(len_pools / 2)):
+            pools_ranking[i][1][0] = 0
+            pools_ranking[i][1][1] = 0
+            result.append(pools_ranking[i])
+
+            pools_ranking[len_pools-1 - i][1][0] = 0
+            pools_ranking[len_pools-1 - i][1][1] = 0
+            result.append(pools_ranking[len_pools -1 - i])
+
+    return result
+
+
+def OrdenarPoolsArr(pools_ranking):     #list(athlete, [points, victs]) 
+    
+    new_pools = pools_ranking.copy()     #((atleta como en la base de datos), [puntos, victorias en pools])
+    #new_pools_mask = [False for i in range(len(pools_ranking))]  #mascara
+
+
+    results = []
+
+    while(len(new_pools) != 0):
+        max_vict = float('-inf')
+        max_dif_puntos = float('-inf')
+        for i in range(len(new_pools)):
+            atl = new_pools[i][0]
+            atl_i_vict = new_pools[i][1][1]
+            atl_i_dif_puntos = new_pools[i][1][0]
+            if atl_i_vict > max_vict:    #si tiene mas victorias
+                max_vict = atl_i_vict
+                max_dif_puntos = atl_i_dif_puntos
+                max_atl = atl
+                max_index = i
+
+            elif atl_i_vict == max_vict:
+                if atl_i_dif_puntos >= max_dif_puntos:
+                    max_vict = atl_i_vict
+                    max_dif_puntos = atl_i_dif_puntos
+                    max_atl = atl
+                    max_index = i
+        
+        results.append((max_atl, [max_dif_puntos, max_vict]))
+        new_pools.remove(new_pools[max_index])
+
+    return results
+
+    

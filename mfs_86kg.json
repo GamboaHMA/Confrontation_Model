@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Hassan YAZDANI",
-          "name_en": "Hassan YAZDANI",
-          "country_domain": "IRI",
-          "status": 0
-        },
-        "2": {
           "name": "David TAYLOR",
           "name_en": "David TAYLOR",
           "country_domain": "USA",
+          "status": 0
+        },
+        "2": {
+          "name": "Hassan YAZDANI",
+          "name_en": "Hassan YAZDANI",
+          "country_domain": "IRI",
           "status": 0
         },
         "3": {

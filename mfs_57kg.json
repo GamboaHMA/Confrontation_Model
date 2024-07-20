@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Rei HIGUCHI",
-          "name_en": "Rei HIGUCHI",
-          "country_domain": "JPN",
-          "status": 0
-        },
-        "2": {
           "name": "Zavur UGUEV",
           "name_en": "Zavur UGUEV",
           "country_domain": "AIN",
+          "status": 0
+        },
+        "2": {
+          "name": "Rei HIGUCHI",
+          "name_en": "Rei HIGUCHI",
+          "country_domain": "JPN",
           "status": 0
         },
         "3": {

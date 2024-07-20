@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Artur ALEKSANYAN",
-          "name_en": "Artur ALEKSANYAN",
-          "country_domain": "ARM",
-          "status": 0
-        },
-        "2": {
           "name": "Gabriel Alejandro ROSILLO KINDELAN",
           "name_en": "Gabriel Alejandro ROSILLO KINDELAN",
           "country_domain": "CUB",
+          "status": 0
+        },
+        "2": {
+          "name": "Artur ALEKSANYAN",
+          "name_en": "Artur ALEKSANYAN",
+          "country_domain": "ARM",
           "status": 0
         },
         "3": {

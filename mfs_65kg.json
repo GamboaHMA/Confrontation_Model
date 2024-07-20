@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Alejandro Enrique VALDES TOBIER",
-          "name_en": "Alejandro Enrique VALDES TOBIER",
-          "country_domain": "CUB",
-          "status": 0
-        },
-        "2": {
           "name": "Vazgen TEVANYAN",
           "name_en": "Vazgen TEVANYAN",
           "country_domain": "ARM",
+          "status": 0
+        },
+        "2": {
+          "name": "Alejandro Enrique VALDES TOBIER",
+          "name_en": "Alejandro Enrique VALDES TOBIER",
+          "country_domain": "CUB",
           "status": 0
         },
         "3": {

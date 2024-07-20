@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Amir Hossein Abbas ZARE",
-          "name_en": "Amir Hossein Abbas ZARE",
-          "country_domain": "IRI",
-          "status": 0
-        },
-        "2": {
           "name": "Mason Mark PARRIS",
           "name_en": "Mason Mark PARRIS",
           "country_domain": "USA",
+          "status": 0
+        },
+        "2": {
+          "name": "Amir Hossein Abbas ZARE",
+          "name_en": "Amir Hossein Abbas ZARE",
+          "country_domain": "IRI",
           "status": 0
         },
         "3": {

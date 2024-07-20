@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Aisuluu TYNYBEKOVA",
-          "name_en": "Aisuluu TYNYBEKOVA",
-          "country_domain": "KGZ",
-          "status": 0
-        },
-        "2": {
           "name": "Sakura MOTOKI",
           "name_en": "Sakura MOTOKI",
           "country_domain": "JPN",
+          "status": 0
+        },
+        "2": {
+          "name": "Aisuluu TYNYBEKOVA",
+          "name_en": "Aisuluu TYNYBEKOVA",
+          "country_domain": "KGZ",
           "status": 0
         },
         "3": {

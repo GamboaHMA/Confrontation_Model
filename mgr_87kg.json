@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "David LOSONCZI",
-          "name_en": "David LOSONCZI",
-          "country_domain": "HUN",
-          "status": 0
-        },
-        "2": {
           "name": "Semen Sergeevich NOVIKOV",
           "name_en": "Semen Sergeevich NOVIKOV",
           "country_domain": "BUL",
+          "status": 0
+        },
+        "2": {
+          "name": "David LOSONCZI",
+          "name_en": "David LOSONCZI",
+          "country_domain": "HUN",
           "status": 0
         },
         "3": {

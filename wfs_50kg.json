@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Sarah Ann HILDEBRANDT",
-          "name_en": "Sarah Ann HILDEBRANDT",
-          "country_domain": "USA",
-          "status": 0
-        },
-        "2": {
           "name": "Yui SUSAKI",
           "name_en": "Yui SUSAKI",
           "country_domain": "JPN",
+          "status": 0
+        },
+        "2": {
+          "name": "Sarah Ann HILDEBRANDT",
+          "name_en": "Sarah Ann HILDEBRANDT",
+          "country_domain": "USA",
           "status": 0
         },
         "3": {

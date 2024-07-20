@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Vanesa KALADZINSKAYA",
-          "name_en": "Vanesa KALADZINSKAYA",
-          "country_domain": "AIN",
-          "status": 0
-        },
-        "2": {
           "name": "Akari FUJINAMI",
           "name_en": "Akari FUJINAMI",
           "country_domain": "JPN",
+          "status": 0
+        },
+        "2": {
+          "name": "Vanesa KALADZINSKAYA",
+          "name_en": "Vanesa KALADZINSKAYA",
+          "country_domain": "AIN",
           "status": 0
         },
         "3": {

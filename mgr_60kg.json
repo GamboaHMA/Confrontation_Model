@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Kenichiro FUMITA",
-          "name_en": "Kenichiro FUMITA",
-          "country_domain": "JPN",
-          "status": 0
-        },
-        "2": {
           "name": "Zholaman SHARSHENBEKOV",
           "name_en": "Zholaman SHARSHENBEKOV",
           "country_domain": "KGZ",
+          "status": 0
+        },
+        "2": {
+          "name": "Kenichiro FUMITA",
+          "name_en": "Kenichiro FUMITA",
+          "country_domain": "JPN",
           "status": 0
         },
         "3": {

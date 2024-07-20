@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Kyle SNYDER",
-          "name_en": "Kyle SNYDER",
-          "country_domain": "USA",
-          "status": 0
-        },
-        "2": {
           "name": "Akhmed Magomed O TAZHUDINOV",
           "name_en": "Akhmed Magomed O TAZHUDINOV",
           "country_domain": "BRN",
+          "status": 0
+        },
+        "2": {
+          "name": "Kyle SNYDER",
+          "name_en": "Kyle SNYDER",
+          "country_domain": "USA",
           "status": 0
         },
         "3": {

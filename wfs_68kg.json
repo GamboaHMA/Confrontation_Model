@@ -14,15 +14,15 @@
       "analysis_en": [],
       "prediction": {
         "1": {
-          "name": "Buse CAVUSOGLU TOSUN",
-          "name_en": "Buse CAVUSOGLU TOSUN",
-          "country_domain": "TUR",
-          "status": 0
-        },
-        "2": {
           "name": "Koumba Selene Fanta LARROQUE",
           "name_en": "Koumba Selene Fanta LARROQUE",
           "country_domain": "FRA",
+          "status": 0
+        },
+        "2": {
+          "name": "Buse CAVUSOGLU TOSUN",
+          "name_en": "Buse CAVUSOGLU TOSUN",
+          "country_domain": "TUR",
           "status": 0
         },
         "3": {
