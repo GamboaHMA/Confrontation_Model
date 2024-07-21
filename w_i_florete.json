@@ -1,11 +1,11 @@
 {
-  "name": "Espada Individual",
-  "name_en": "Individual Ep\u00e9e",
+  "name": "Florete Individual",
+  "name_en": "Individual Foil",
   "type": "single",
   "sport": "esg",
   "sex": {
-    "male": {
-      "date": "2024/07/27",
+    "female": {
+      "date": "2024/07/28",
       "date_pred": null,
       "finished": false,
       "previa": [],

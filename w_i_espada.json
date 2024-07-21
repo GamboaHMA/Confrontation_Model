@@ -1,10 +1,10 @@
 {
   "name": "Espada Individual",
-  "name_en": "Individual Ep\u00e9e",
+  "name_en": "Individual Epée",
   "type": "single",
   "sport": "esg",
   "sex": {
-    "male": {
+    "female": {
       "date": "2024/07/27",
       "date_pred": null,
       "finished": false,
