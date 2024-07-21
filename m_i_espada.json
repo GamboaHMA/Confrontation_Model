@@ -1,0 +1,67 @@
+{
+  "name": "Espada Individual",
+  "name_en": "Individual Ep\u00e9e",
+  "type": "single",
+  "sport": "esg",
+  "sex": {
+    "male": {
+      "date": "2024/07/27",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "BOREL Yannick",
+          "name_en": "BOREL Yannick",
+          "country_domain": "FRA",
+          "status": 0
+        },
+        "2": {
+          "name": "DI VEROLI Davide",
+          "name_en": "DI VEROLI Davide",
+          "country_domain": "ITA",
+          "status": 0
+        },
+        "3": {
+          "name": "MINOBE Kazuyasu",
+          "name_en": "MINOBE Kazuyasu",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "4": {
+          "name": "KANO Koki",
+          "name_en": "KANO Koki",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "5": {
+          "name": "YAMADA Masaru",
+          "name_en": "YAMADA Masaru",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "6": {
+          "name": "CANNONE Romain",
+          "name_en": "CANNONE Romain",
+          "country_domain": "FRA",
+          "status": 0
+        },
+        "7": {
+          "name": "KOCH Mate Tamas",
+          "name_en": "KOCH Mate Tamas",
+          "country_domain": "HUN",
+          "status": 0
+        },
+        "8": {
+          "name": "SIKLOSI Gergely",
+          "name_en": "SIKLOSI Gergely",
+          "country_domain": "HUN",
+          "status": 0
+        }
+      }
+    }
+  }
+}

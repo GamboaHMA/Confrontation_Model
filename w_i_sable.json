@@ -1,0 +1,67 @@
+{
+  "name": "Espada Individual",
+  "name_en": "Individual Ep\u00e9e",
+  "type": "single",
+  "sport": "esg",
+  "sex": {
+    "male": {
+      "date": "2024/07/27",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "KHARLAN Olga",
+          "name_en": "KHARLAN Olga",
+          "country_domain": "UKR",
+          "status": 0
+        },
+        "2": {
+          "name": "MARTON Anna",
+          "name_en": "MARTON Anna",
+          "country_domain": "HUN",
+          "status": 0
+        },
+        "3": {
+          "name": "BALZER Sara",
+          "name_en": "BALZER Sara",
+          "country_domain": "FRA",
+          "status": 0
+        },
+        "4": {
+          "name": "BERDER Cecilia",
+          "name_en": "BERDER Cecilia",
+          "country_domain": "FRA",
+          "status": 0
+        },
+        "5": {
+          "name": "APITHY-BRUNET Manon",
+          "name_en": "APITHY-BRUNET Manon",
+          "country_domain": "FRA",
+          "status": 0
+        },
+        "6": {
+          "name": "PUSZTAI Liza",
+          "name_en": "PUSZTAI Liza",
+          "country_domain": "HUN",
+          "status": 0
+        },
+        "7": {
+          "name": "CRISCIO Martina",
+          "name_en": "CRISCIO Martina",
+          "country_domain": "ITA",
+          "status": 0
+        },
+        "8": {
+          "name": "GKOUNTOURA Theodora",
+          "name_en": "GKOUNTOURA Theodora",
+          "country_domain": "GRE",
+          "status": 0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "name": "Espada Individual",
+  "name_en": "Individual Ep\u00e9e",
+  "type": "single",
+  "sport": "esg",
+  "sex": {
+    "male": {
+      "date": "2024/07/27",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "MARINI Tommaso",
+          "name_en": "MARINI Tommaso",
+          "country_domain": "ITA",
+          "status": 0
+        },
+        "2": {
+          "name": "MASSIALAS Alexander",
+          "name_en": "MASSIALAS Alexander",
+          "country_domain": "USA",
+          "status": 0
+        },
+        "3": {
+          "name": "ITKIN Nick",
+          "name_en": "ITKIN Nick",
+          "country_domain": "USA",
+          "status": 0
+        },
+        "4": {
+          "name": "IIMURA Kazuki",
+          "name_en": "IIMURA Kazuki",
+          "country_domain": "JPN",
+          "status": 0
+        },
+        "5": {
+          "name": "MEINHARDT Gerek",
+          "name_en": "MEINHARDT Gerek",
+          "country_domain": "USA",
+          "status": 0
+        },
+        "6": {
+          "name": "BIANCHI Guillaume",
+          "name_en": "BIANCHI Guillaume",
+          "country_domain": "ITA",
+          "status": 0
+        },
+        "7": {
+          "name": "PAUTY Maxime",
+          "name_en": "PAUTY Maxime",
+          "country_domain": "FRA",
+          "status": 0
+        },
+        "8": {
+          "name": "LEFORT Enzo",
+          "name_en": "LEFORT Enzo",
+          "country_domain": "FRA",
+          "status": 0
+        }
+      }
+    }
+  }
+}

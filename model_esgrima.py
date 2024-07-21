@@ -145,7 +145,10 @@ def DistribuirFasPool(athletes):          #pendiente a revisar pendiente en caso
     
     grupo_permutado = Permuta(grupo_a_aniadir)
     for i in range(len(grupo_permutado)):
-        groups[i].append(grupo_permutado[i])
+        try:
+            groups[i].append(grupo_permutado[i])
+        except:
+            groups[i-1].append(grupo_permutado[i])   #en caso de que sean 37, toma el ultimo y lo aniade al ultimo grupo
 
     return groups
 

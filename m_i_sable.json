@@ -1,0 +1,67 @@
+{
+  "name": "Espada Individual",
+  "name_en": "Individual Ep\u00e9e",
+  "type": "single",
+  "sport": "esg",
+  "sex": {
+    "male": {
+      "date": "2024/07/27",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "OH Sanguk",
+          "name_en": "OH Sanguk",
+          "country_domain": "KOR",
+          "status": 0
+        },
+        "2": {
+          "name": "SZILAGYI Aron",
+          "name_en": "SZILAGYI Aron",
+          "country_domain": "HUN",
+          "status": 0
+        },
+        "3": {
+          "name": "BAZADZE Sandro",
+          "name_en": "BAZADZE Sandro",
+          "country_domain": "GEO",
+          "status": 0
+        },
+        "4": {
+          "name": "GU Bongil",
+          "name_en": "GU Bongil",
+          "country_domain": "KOR",
+          "status": 0
+        },
+        "5": {
+          "name": "HEATHCOCK Colin",
+          "name_en": "HEATHCOCK Colin",
+          "country_domain": "USA",
+          "status": 0
+        },
+        "6": {
+          "name": "APITHY Bolade",
+          "name_en": "APITHY Bolade",
+          "country_domain": "FRA",
+          "status": 0
+        },
+        "7": {
+          "name": "DERSHWITZ Eli",
+          "name_en": "DERSHWITZ Eli",
+          "country_domain": "USA",
+          "status": 0
+        },
+        "8": {
+          "name": "PATRICE Sebastien",
+          "name_en": "PATRICE Sebastien",
+          "country_domain": "FRA",
+          "status": 0
+        }
+      }
+    }
+  }
+}
