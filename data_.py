@@ -24,8 +24,9 @@ cursor = conn.cursor()
 #conn.commit()
 #print('h')
 
-#cursor.execute("DELETE FROM w_i_espada_clashes WHERE result LIKE '%MEDALLAS%'")
-#conn.commit()
+cursor.execute("DELETE FROM m_i_sable_clashes WHERE date LIKE '%MEDALLAS%'")
+conn.commit()
+print('')
 #query = "SELECT * FROM clashes WHERE clashes.category = '60Kg'"
 #cursor.execute(query)
 #clashes_60kg = cursor.fetchall()
@@ -197,8 +198,7 @@ def arreglarTabla(table):
             query = f"UPDATE {table}_clashes SET winner_id = ? WHERE id = ?"
             cursor.execute(query, (clash[2], clash_id))
 
-table = 'w_i_espada'
+table = 'w_i_florete'
 #LlenarTablasDeEsgrima(table)
-#arreglarTabla(table)
 
 conn.commit()

@@ -1,0 +1,67 @@
+{
+  "name": "Espada Individual",
+  "name_en": "Individual Ep\u00e9e",
+  "type": "single",
+  "sport": "esg",
+  "sex": {
+    "male": {
+      "date": "2024/07/27",
+      "date_pred": null,
+      "finished": false,
+      "previa": [],
+      "analysis": [],
+      "previa_en": [],
+      "analysis_en": [],
+      "prediction": {
+        "1": {
+          "name": "CHOI Injeong",
+          "name_en": "CHOI Injeong",
+          "country_domain": "KOR",
+          "status": 0
+        },
+        "2": {
+          "name": "MALLO-BRETON Auriane",
+          "name_en": "MALLO-BRETON Auriane",
+          "country_domain": "FRA",
+          "status": 0
+        },
+        "3": {
+          "name": "CANDASSAMY Marie-Florence",
+          "name_en": "CANDASSAMY Marie-Florence",
+          "country_domain": "FRA",
+          "status": 0
+        },
+        "4": {
+          "name": "KONG Man Wai Vivian",
+          "name_en": "KONG Man Wai Vivian",
+          "country_domain": "HKG",
+          "status": 0
+        },
+        "5": {
+          "name": "RIZZI Giulia",
+          "name_en": "RIZZI Giulia",
+          "country_domain": "ITA",
+          "status": 0
+        },
+        "6": {
+          "name": "FIAMINGO Rossella",
+          "name_en": "FIAMINGO Rossella",
+          "country_domain": "ITA",
+          "status": 0
+        },
+        "7": {
+          "name": "SANTUCCIO Alberta",
+          "name_en": "SANTUCCIO Alberta",
+          "country_domain": "ITA",
+          "status": 0
+        },
+        "8": {
+          "name": "KANG Young Mi",
+          "name_en": "KANG Young Mi",
+          "country_domain": "KOR",
+          "status": 0
+        }
+      }
+    }
+  }
+}

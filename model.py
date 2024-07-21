@@ -24,21 +24,21 @@ def Results(style_category):
     clashes = cursor.fetchall()
 
     matrix = probando_regresion.GetMatrixVersusPlayers(clashes, athletes)  #matriz de probabilidades
-    for i in range(len(matrix)):    #mijain
-        if i == 3:
-            continue
-        matrix[3][i][1] = 1
-        matrix[i][3][1] = 0
-    for i in range(len(matrix)):
-        if i == 10:
-            continue
-        matrix[10][i][1] = 0
-        matrix[i][10][1] = 1
-    for i in range(len(matrix)):
-        if i == 1:
-            continue
-        matrix[1][i][1] = 0
-        matrix[i][1][1] = 1
+    #for i in range(len(matrix)):    #mijain
+    #    if i == 3:
+    #        continue
+    #    matrix[3][i][1] = 1
+    #    matrix[i][3][1] = 0
+    #for i in range(len(matrix)):
+    #    if i == 10:
+    #        continue
+    #    matrix[10][i][1] = 0
+    #    matrix[i][10][1] = 1
+    #for i in range(len(matrix)):
+    #    if i == 1:
+    #        continue
+    #    matrix[1][i][1] = 0
+    #    matrix[i][1][1] = 1
 
     iterations = 10000
     medallero = [[0,0,0,0,0,0,0,0,0] for i in range(len(athletes))]

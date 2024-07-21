@@ -23,7 +23,7 @@ def GetClashesFromWeb(atl1_id__atl1_idpage, atl_ids__atl_ids_page):
 
 
         driver.get(url)
-        wait = WebDriverWait(driver, 20)
+        wait = WebDriverWait(driver, 6)
 
         try:    
             wait.until(EC.visibility_of_element_located((By.XPATH, ".//div[contains(@class, 'HeadToHead-match-lines')]")))

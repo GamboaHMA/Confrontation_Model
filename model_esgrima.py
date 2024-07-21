@@ -26,31 +26,43 @@ def Results(table):
     matrix = probando_regresion.GetMatrixVersusPlayers(clashes, athletes)
 
     iterations = 10000
-    medallero = [[0,0,0,0,0,0,0,0,0] for i in range(len(athletes))]
+    medallero = [[0,0,0,0,0,0,0,0] for i in range(len(athletes))]
 
-    athletes_ = copy.deepcopy(athletes)
-    athletes_ordered = OrdenarPorRanking(athletes_)
+    for i in range(iterations):
+        athletes_ = copy.deepcopy(athletes)
+        athletes_ordered = OrdenarPorRanking(athletes_)
 
-    #Etapa1 Pools: repartir en 6 grupos equilibradamente para hacer los enfrentamientos de pools
-    groups = DistribuirFasPool(athletes_ordered)
+        #Etapa1 Pools: repartir en 6 grupos equilibradamente para hacer los enfrentamientos de pools
+        groups = DistribuirFasPool(athletes_ordered)
 
-    pools_ranking = EnfrentaPools(groups, matrix)
-    pools_ranking = OrdenarPools(pools_ranking)
+        pools_ranking = EnfrentaPools(groups, matrix)
+        pools_ranking = OrdenarPools(pools_ranking)
 
-    #Etapa2: Eliminación Directa
-    #si hay mas de 32, entonces se hace unos combtes preeliminares 
-    preelim_eliminated, preelim_winners = LlevarA32(pools_ranking, matrix)   #cada atleta tiene al lado sus victorias y puntos acumulados en fase de pools
+        #Etapa2: Eliminación Directa
+        #si hay mas de 32, entonces se hace unos combtes preeliminares 
+        preelim_eliminated, preelim_winners = LlevarA32(pools_ranking, matrix)   #cada atleta tiene al lado sus victorias y puntos acumulados en fase de pools
 
-    emparejamiento = EmparejamientoInicial(pools_ranking)
-    #Ronda  de 32
-    _32_lossers, _32_winners = Rondai(emparejamiento, matrix)
-    _16_lossers, _16_winners = Rondai(emparejamiento, matrix)
-    _8_lossers, _8_winners = Rondai(emparejamiento, matrix)
-    _4_lossers, _4_winners = Rondai(emparejamiento, matrix)
-    plata, oro = Rondai(emparejamiento, matrix)
-    bronce_losser, bronce_winner = Rondai(_4_lossers, matrix)
+        emparejamiento = EmparejamientoInicial(pools_ranking)
+        #Ronda  de 32
+        _32_lossers, _32_winners = Rondai(emparejamiento, matrix)
+        #Ronda de 16
+        _16_lossers, _16_winners = Rondai(emparejamiento, matrix)
+        #Ronda de ocatavos
+        _8_lossers, _8_winners = Rondai(emparejamiento, matrix)
+        #Ronda de cuartos
+        _4_lossers, _4_winners = Rondai(emparejamiento, matrix)
+        #Final
+        plata, oro = Rondai(emparejamiento, matrix)
+        #Bronce
+        bronce_losser, bronce_winner = Bronce(_4_lossers, matrix)
 
-    print('h')
+        ActualizarMedallero(medallero, oro, plata, bronce_losser, bronce_winner, _8_lossers)
+
+    json_ = json.dumps(ReturnJson(athletes, medallero))
+    with open(f'{table}.json', 'w') as archivo_json:
+        archivo_json.write(json_)
+
+    print(medallero)
 
 
 
@@ -368,6 +380,55 @@ def Rondai(pools_ranking, matrix):
 
     return lossers, winners
 
+def Bronce(pools_ranking_, matrix):
+    pools_ranking = copy.deepcopy(pools_ranking_)
+    len_ = len(pools_ranking)
+
+    winners = []
+    lossers = []
+
+    for i in range(int(len_ / 2)):
+        atl_1 = pools_ranking[i*2][0]    #checked
+        atl_1_id = atl_1[0]
+
+        atl_2 = pools_ranking[i*2+1][0]      #checked
+        atl_2_id = atl_2[0]
+
+        prob_vict_a1_a2 = matrix[atl_1_id-1][atl_2_id-1][1] #prob de que atl1 le gane a atl2
+        clash_result = GetPoints(prob_vict_a1_a2, 5)    #clash(atl1_ptos, atl2_ptos, atl1_win? 1:0, atl2_win? 1:0)
+
+        if clash_result[2] == 1:
+            pools_ranking[i*2][1][0] += clash_result[0]  #1 winner
+            pools_ranking[i*2][1][1] += clash_result[2]
+            winners.append(pools_ranking[i*2])
+
+            pools_ranking[i*2+1][1][0] += clash_result[1]
+            pools_ranking[i*2+1][1][1] += clash_result[3]
+            lossers.append(pools_ranking[i*2+1])
+
+
+        elif clash_result[3] == 1:
+            pools_ranking[i*2+1][1][0] += clash_result[1]   #2 winner
+            pools_ranking[i*2+1][1][1] += clash_result[3]
+            winners.append(pools_ranking[i*2+1])
+
+            pools_ranking[i*2][1][0] += clash_result[0]  
+            pools_ranking[i*2][1][1] += clash_result[2]
+            lossers.append(pools_ranking[i*2])
+
+
+    winners = OrdenarPoolsArr(winners)
+    lossers = OrdenarPoolsArr(lossers)
+
+    for losser in lossers:
+        for i in range(len(pools_ranking)):
+            if pools_ranking[i][0][0] == losser[0][0]:    #si tienen el mismo id de atleta
+                pools_ranking.remove(pools_ranking[i])
+                break
+
+    return lossers, winners
+
+
 def EmparejamientoInicial(pools_ranking_):
     pools_ranking = copy.deepcopy(pools_ranking_)
     len_pools = len(pools_ranking)
@@ -418,4 +479,142 @@ def OrdenarPoolsArr(pools_ranking):     #list(athlete, [points, victs])
 
     return results
 
+def ActualizarMedallero(medallero, oro, plata, bronce_losser, bronce_winner, _8_lossers):
     
+    primer_id = oro[0][0][0]
+    medallero[primer_id-1][0] += 1
+
+    segundo_id = plata[0][0][0]
+    medallero[segundo_id-1][1] += 1
+
+    tercer_id = bronce_winner[0][0][0]
+    medallero[tercer_id-1][2] += 1
+
+    cuarto_id = bronce_losser[0][0][0]
+    medallero[cuarto_id-1][3] += 1
+
+    quinto_id = _8_lossers[0][0][0]
+    medallero[quinto_id-1][4] += 1
+
+    sexto_id = _8_lossers[1][0][0]
+    medallero[sexto_id-1][5] += 1
+
+    septimo_id = _8_lossers[2][0][0]
+    medallero[septimo_id-1][6] += 1
+
+    octavo_id = _8_lossers[3][0][0]
+    medallero[octavo_id-1][7] += 1
+
+
+def ReturnJson(athletes, medallero):
+    athletes_to_organizate = []
+
+    for i in range(len(medallero)):
+        sum, index = 0, i   #puntos acumulados para cada atleta
+
+        sum += 5 * medallero[i][0] #medallas de oro
+        sum += 3 * medallero[i][1] #medallas de plata
+        sum += 2 * medallero[i][2] #medallas de bronce
+        sum += 1 * medallero[i][3] #cantidad de veces en 4to lugar
+        sum += 0 * medallero[i][4] #cantidad de veces en 5to lugar
+        sum += 0 * medallero[i][5] #cantidad de veces en 6to lugar
+        sum += -1* medallero[i][6] #cantidad de veces en septimo lugar
+        sum += -2* medallero[i][7] #cantidad de veces en octavo lugar
+
+        athletes_to_organizate.append((athletes[i], sum))
+    
+    athletes_to_organizate = OrganizateAthletes(athletes_to_organizate)
+
+    first_place = athletes_to_organizate[0][0]
+    second_place = athletes_to_organizate[1][0]
+    third_place = athletes_to_organizate[2][0]
+    fourth_place = athletes_to_organizate[3][0]
+    fifth_place = athletes_to_organizate[4][0]
+    sixth_place = athletes_to_organizate[5][0]
+    seventh_place = athletes_to_organizate[6][0]
+    eighth_place = athletes_to_organizate[7][0]
+
+    datos = {
+        "name": "Espada Individual",
+        "name_en": "Individual Epée",
+        "type": "single",
+        "sport": "esg",
+        "sex": {
+            "male": {
+                    "date": "2024/07/27",
+                    "date_pred": None,
+                    "finished": False,
+                    "previa": [],
+                    "analysis": [],
+                    "previa_en": [],
+                    "analysis_en": [],
+                    "prediction": {
+                        "1": {
+                            "name": f'{first_place[1]}',
+                            "name_en": f'{first_place[1]}',
+                            "country_domain": f'{first_place[2]}',
+                            "status": 0
+                        },
+                        "2": {
+                            "name": f'{second_place[1]}',
+                            "name_en": f'{second_place[1]}',
+                            "country_domain": f'{second_place[2]}',
+                            "status": 0
+                        },
+                        "3": {
+                            "name": f'{third_place[1]}',
+                            "name_en": f'{third_place[1]}',
+                            "country_domain": f'{third_place[2]}',
+                            "status": 0
+                        },
+                        "4": {
+                            "name": f'{fourth_place[1]}',
+                            "name_en": f'{fourth_place[1]}',
+                            "country_domain": f'{fourth_place[2]}',
+                            "status": 0
+                        },
+                        "5": {
+                            "name": f'{fifth_place[1]}',
+                            "name_en": f'{fifth_place[1]}',
+                            "country_domain": f'{fifth_place[2]}',
+                            "status": 0
+                        },
+                        "6": {
+                            "name": f'{sixth_place[1]}',
+                            "name_en": f'{sixth_place[1]}',
+                            "country_domain": f'{sixth_place[2]}',
+                            "status": 0
+                        },
+                        "7": {
+                            "name": f'{seventh_place[1]}',
+                            "name_en": f'{seventh_place[1]}',
+                            "country_domain": f'{seventh_place[2]}',
+                            "status": 0
+                        },
+                        "8": {
+                            "name": f'{eighth_place[1]}',
+                            "name_en": f'{eighth_place[1]}',
+                            "country_domain": f'{eighth_place[2]}',
+                            "status": 0
+                        }
+                    },
+            }
+        }
+    }
+
+    return datos
+
+
+def OrganizateAthletes(athletes):
+    result = []
+    while(len(athletes) != 0):
+        max_athlete_sum = float('-inf')
+        max_index = 0
+        for i in range(len(athletes)):
+            athlete_sum = athletes[i][1]
+            if athlete_sum > max_athlete_sum:
+                max_athlete_sum = athlete_sum
+                max_index = i
+        result.append(athletes[max_index])
+        athletes.remove(athletes[max_index])
+    return result
