@@ -11,6 +11,44 @@ class Object:
     def __init__(self):
         pass
 
+def TeamResults(table):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    query = f'SELECT * FROM {table}'
+    cursor.execute(query)
+    athletes = cursor.fetchall()
+    
+    query = f'SELECT * FROM {table}_clashes'
+    cursor.execute(query)
+    clashes = cursor.fetchall()
+
+    matrix = probando_regresion.GetMatrixVersusPlayers(clashes, athletes)
+
+    teams = FiltrarEquipos(athletes)  #nike
+
+    iterations = 10000
+    medallero = [[0,0,0,0,0,0,0,0] for i in range(len(teams))]
+
+    for i in range(iterations):
+        teams_ = copy.deepcopy(teams)
+        teams_ = Permuta(teams_)
+
+        _8vo_lossers, _8vo_winners = EnfrentaTeams(teams_, matrix)
+        _4to_lossers, _4to_winners = EnfrentaTeams(_8vo_winners, matrix)
+        segundo, primero = EnfrentaTeams(_4to_winners, matrix)
+        cuarto, tercero = EnfrentaTeams(_4to_lossers, matrix)
+        _8vo_lossers_lossers, _8vo_lossers_winners = EnfrentaTeams(_8vo_lossers, matrix)
+        sexto, quinto = EnfrentaTeams(_8vo_lossers_winners, matrix)
+        octavo, septimo = EnfrentaTeams(_8vo_lossers_lossers, matrix)
+
+        RellenarMedalleroTeams(medallero, primero, segundo, tercero, cuarto, quinto, sexto, septimo, octavo, teams)
+
+
+    print('')
+
+#####################################################
+
 def Results(table):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -233,24 +271,31 @@ def GetPoints(prob_vict_a1_a2, desv_estandar):
         if random_ < prob_vict_a1_a2:
             atl1_points = 5
             atl2_points = 4 - round(desv_estandar*(prob_vict_a1_a2 - random_))
-            return (atl1_points - atl2_points, atl2_points - atl1_points, 1, 0)    
+            #return (atl1_points - atl2_points, atl2_points - atl1_points, 1, 0)    #formato de puntuacion, estoques obtenidos menos estoques permitidos
+            return (atl1_points, atl2_points, 1, 0)     #formato normal de puntos
+
         
         else:
             atl1_points = 4 - round(desv_estandar*(random_ - prob_vict_a1_a2))
             atl2_points = 5
-            return (atl1_points - atl2_points, atl2_points - atl1_points, 0, 1)  #los puntos que se acumulan son los que hacen menos los que le hacen
+            #return (atl1_points - atl2_points, atl2_points - atl1_points, 0, 1)  #los puntos que se acumulan son los que hacen menos los que le hacen
+            return (atl1_points, atl2_points, 0, 1)     #formato normal de puntos
+
 
     if desv_estandar == 5:
         random_ = random.random()
         if random_ < prob_vict_a1_a2:
             atl1_points = 15
             atl2_points = 14 - round(desv_estandar*(prob_vict_a1_a2 - random_))
-            return (atl1_points - atl2_points, atl2_points - atl1_points, 1, 0)    
+            #return (atl1_points - atl2_points, atl2_points - atl1_points, 1, 0)
+            return (atl1_points, atl2_points, 1, 0)    
+            
         
         else:
             atl1_points = 14 - round(desv_estandar*(random_ - prob_vict_a1_a2))
             atl2_points = 15
-            return (atl1_points - atl2_points, atl2_points - atl1_points, 0, 1)  #los puntos que se acumulan son los que hacen menos los que le hacen
+            #return (atl1_points - atl2_points, atl2_points - atl1_points, 0, 1)  #los puntos que se acumulan son los que hacen menos los que le hacen
+            return (atl1_points, atl2_points, 0, 1)  
 
 
 def LlevarA32(pools_ranking, matrix):
@@ -621,3 +666,252 @@ def OrganizateAthletes(athletes):
         result.append(athletes[max_index])
         athletes.remove(athletes[max_index])
     return result
+
+
+
+
+def FiltrarEquipos(athletes):
+    result = []
+
+    while(len(athletes) != 0):
+        atl1 = athletes[0]
+        atl1_country = atl1[2]
+        result.append([atl1])
+        athletes.remove(athletes[0])
+        TieneEquipo = False
+        k = 1
+
+        for i in range(len(athletes)):
+            if k == 3:
+                break
+            atl2 = athletes[i]
+            atl2_country = atl2[2]
+
+            if (atl2_country == atl1_country):
+                TieneEquipo = True
+                k += 1
+                result[len(result)-1].append(atl2)
+            
+        if(not TieneEquipo):
+            result.remove(result[len(result)-1])
+        else:
+            athletes.remove(result[len(result)-1][1])
+            athletes.remove(result[len(result)-1][2])
+
+
+    return result
+
+def EnfrentaTeams(teams, matrix):
+    lossers = []
+    winners = []
+
+    for i in range(int(len(teams)/2)):
+        team1 = teams[i*2]
+        team2 = teams[i*2+1]
+
+        losser, winner = Team_to_Team(team1, team2, matrix)
+        lossers.append(losser)
+        winners.append(winner)
+
+    return lossers, winners
+
+def Team_to_Team(team1, team2, matrix):
+
+    result = []
+    result.append([team1])
+    result.append([team2])
+
+    atl1 = team1[0]
+    atl1_id = atl1[0]
+    atl2 = team2[0]
+    atl2_id = atl2[0]
+
+    prob_1_win = matrix[atl1_id-1][atl2_id-1][1]
+    clash_result = GetPoints(prob_1_win, 3)    #clash_result(atl1_points, atl2_points, 1_wins? 1:0, 2_wins? 1:0)
+
+    result[0].append(clash_result[0])
+    result[1].append(clash_result[1])
+
+    atl1 = team1[1]
+    atl1_id = atl1[0]
+    atl2 = team2[1]
+    atl2_id = atl2[0]
+
+    prob_1_win = matrix[atl1_id-1][atl2_id-1][1]
+    clash_result = GetPoints(prob_1_win, 3)
+
+    result[0][1] += clash_result[0]
+    result[1][1] += clash_result[1]
+
+    atl1 = team1[2]
+    atl1_id = atl1[0]
+    atl2 = team2[1]
+    atl2_id = atl2[0]
+
+    prob_1_win = matrix[atl1_id-1][atl2_id-1][1]
+    clash_result = GetPoints(prob_1_win, 3)
+
+    result[0][1] += clash_result[0]
+    result[1][1] += clash_result[1]
+
+    if result[0][1] > result[1][1]:
+        return result[0][0], result[1][0]
+    else:
+        return result[1][0], result[0][0]
+    
+
+def RellenarMedalleroTeams(medallero, primero, segundo, tercero, cuarto, quinto, sexto, septimo, octavo, teams):
+    primero_country = primero[0][0][2]
+    segundo_country = segundo[0][0][2]
+    tercero_country = tercero[0][0][2]
+    cuarto_country = cuarto[0][0][2]
+    quinto_country = quinto[0][0][2]
+    sexto_country = sexto[0][0][2]
+    septimo_country = septimo[0][0][2]
+    octavo_country = octavo[0][0][2]
+
+    for i in range(len(medallero)):
+        country = teams[i][0][2]
+        if primero_country == country:
+            medallero[i][0] += 1
+            break
+    for i in range(len(medallero)):
+        country = teams[i][0][2]
+        if segundo_country == country:
+            medallero[i][1] += 1
+            break
+
+    for i in range(len(medallero)):
+        country = teams[i][0][2]
+        if tercero_country == country:
+            medallero[i][2] += 1
+            break
+
+    for i in range(len(medallero)):
+        country = teams[i][0][2]
+        if cuarto_country == country:
+            medallero[i][3] += 1
+            break
+
+    for i in range(len(medallero)):
+        country = teams[i][0][2]
+        if quinto_country == country:
+            medallero[i][4] += 1
+            break
+
+
+    for i in range(len(medallero)):
+        country = teams[i][0][2]
+        if sexto_country == country:
+            medallero[i][5] += 1
+            break
+
+    for i in range(len(medallero)):
+        country = teams[i][0][2]
+        if septimo_country == country:
+            medallero[i][6] += 1
+            break
+
+    for i in range(len(medallero)):
+        country = teams[i][0][2]
+        if octavo_country == country:
+            medallero[i][7] += 1
+            break
+
+def ReturnJsonTeam(teams, medallero):
+    teams_to_organizate = []
+
+    for i in range(len(medallero)):
+        sum, index = 0, i   #puntos acumulados para cada atleta
+
+        sum += 5 * medallero[i][0] #medallas de oro
+        sum += 3 * medallero[i][1] #medallas de plata
+        sum += 2 * medallero[i][2] #medallas de bronce
+        sum += 1 * medallero[i][3] #cantidad de veces en 4to lugar
+        sum += 0 * medallero[i][4] #cantidad de veces en 5to lugar
+        sum += 0 * medallero[i][5] #cantidad de veces en 6to lugar
+        sum += -1* medallero[i][6] #cantidad de veces en septimo lugar
+        sum += -2* medallero[i][7] #cantidad de veces en octavo lugar
+
+        teams_to_organizate.append((teams[i], sum))
+    
+    teams_to_organizate = OrganizateAthletes(teams_to_organizate)
+
+    first_place = teams_to_organizate[0][0][2]
+    second_place = teams_to_organizate[1][0][2]
+    third_place = teams_to_organizate[2][0][2]
+    fourth_place = teams_to_organizate[3][0][2]
+    fifth_place = teams_to_organizate[4][0][2]
+    sixth_place = teams_to_organizate[5][0][2]
+    seventh_place = teams_to_organizate[6][0][2]
+    eighth_place = teams_to_organizate[7][0][2]
+
+    datos = {
+        "name": "Espada Individual",
+        "name_en": "Individual Epée",
+        "type": "single",
+        "sport": "esg",
+        "sex": {
+            "male": {
+                    "date": "2024/07/27",
+                    "date_pred": None,
+                    "finished": False,
+                    "previa": [],
+                    "analysis": [],
+                    "previa_en": [],
+                    "analysis_en": [],
+                    "prediction": {
+                        "1": {
+                            "name": f'{first_place[1]}',
+                            "name_en": f'{first_place[1]}',
+                            "country_domain": f'{first_place[2]}',
+                            "status": 0
+                        },
+                        "2": {
+                            "name": f'{second_place[1]}',
+                            "name_en": f'{second_place[1]}',
+                            "country_domain": f'{second_place[2]}',
+                            "status": 0
+                        },
+                        "3": {
+                            "name": f'{third_place[1]}',
+                            "name_en": f'{third_place[1]}',
+                            "country_domain": f'{third_place[2]}',
+                            "status": 0
+                        },
+                        "4": {
+                            "name": f'{fourth_place[1]}',
+                            "name_en": f'{fourth_place[1]}',
+                            "country_domain": f'{fourth_place[2]}',
+                            "status": 0
+                        },
+                        "5": {
+                            "name": f'{fifth_place[1]}',
+                            "name_en": f'{fifth_place[1]}',
+                            "country_domain": f'{fifth_place[2]}',
+                            "status": 0
+                        },
+                        "6": {
+                            "name": f'{sixth_place[1]}',
+                            "name_en": f'{sixth_place[1]}',
+                            "country_domain": f'{sixth_place[2]}',
+                            "status": 0
+                        },
+                        "7": {
+                            "name": f'{seventh_place[1]}',
+                            "name_en": f'{seventh_place[1]}',
+                            "country_domain": f'{seventh_place[2]}',
+                            "status": 0
+                        },
+                        "8": {
+                            "name": f'{eighth_place[1]}',
+                            "name_en": f'{eighth_place[1]}',
+                            "country_domain": f'{eighth_place[2]}',
+                            "status": 0
+                        }
+                    },
+            }
+        }
+    }
+
+    return datos
